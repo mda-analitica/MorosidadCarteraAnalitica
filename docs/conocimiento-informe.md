@@ -60,6 +60,50 @@ Relaciones:
 - `Tipo`: `Riesgo` (cuentas 14xx) o `Mora` (cuentas 84xx).
 - `dm_CuentasIndice` numera los rangos de mora para ordenarlos y cambia "en adelante" por "o más". Hay un reemplazo manual `"4. De 91 a 120"` → `"3. De 91 a 120"` para unificar el orden entre Microcrédito y Comercial. Es un parche frágil.
 
+## 4b. Hallazgos al leer los datos del caché (`cache.abf`)
+
+Se abrió el caché local del modelo (formato Analysis Services con compresión XPress9) con la librería `pbixray`. Es una **copia de los datos cargados en Desktop**, no necesariamente la versión publicada. Todos los valores de abajo son **[Verificado]** contra ese caché.
+
+**Volumen y cobertura**
+- `tb_Balance`: 4.335.629 filas, 4 columnas, de enero a diciembre de 2025 (12 cierres de mes). 172 entidades con datos (`dm_Entidades` tiene 174; las entidades `1271` y `1376` no tienen balance).
+- `Calendario`: 2.190 días (hasta 2028).
+- Cada mes trae 2.180 cuentas distintas por entidad, salvo **diciembre, que trae 3.409**. Es decir, aparecieron unas 1.229 cuentas nuevas en diciembre (catálogo del PUC ampliado). No afectan al catálogo de 75 cuentas del informe.
+
+**Problemas de calidad detectados** (afectan las cifras que muestra el informe)
+1. **Septiembre 2025 está casi vacío:** solo 11 entidades (172 en los demás meses) y el total de cartera cae de ~19 billones a ~0,96 billones. La tasa de mora de ese mes sale 5,15 % en el sector (los demás meses ~6,2 a 6,5 %), un valor falso.
+2. **Septiembre 2025 tiene filas duplicadas:** 10.216 filas pertenecen a 4.222 combinaciones repetidas de fecha, entidad y cuenta (3.834 con valores idénticos, 388 con valores distintos). Todo el duplicado está en septiembre. También hay valores negativos en cuentas de cartera de la entidad `2773`, solo en septiembre.
+3. **Enero 2025 tiene la mora incompleta:** la mora del sector es ~50 % menor que en febrero (Comercial 943 frente a 2.058 miles de millones; Consumo con libranza 2.778 frente a 5.739), mientras que la cartera por categoría de riesgo es estable. La tasa de mora de enero sale 3,89 % frente a ~6,6 % en febrero. Es una caída artificial (probablemente las cuentas 84xx no se reportaron completas en enero).
+4. **Otros meses con menos entidades:** abril (167), enero (171), noviembre (171) y diciembre (170), frente a 172. Esto ya mueve levemente los totales y el ranking.
+
+**Tasas del sector por mes** (con las definiciones actuales del informe)
+
+| Cierre | Cartera (billones) | Tasa mora | Tasa riesgo | Riesgo/Mora |
+|---|---|---|---|---|
+| Ene 2025 | 17,9 | 3,89 % (incompleto) | 8,76 % | 2,25 |
+| Feb 2025 | 18,1 | 6,59 % | 8,77 % | 1,33 |
+| Mar 2025 | 18,3 | 6,28 % | 8,89 % | 1,42 |
+| Abr 2025 | 18,2 | 6,39 % | 8,73 % | 1,37 |
+| May 2025 | 18,5 | 6,18 % | 8,59 % | 1,39 |
+| Jun 2025 | 18,6 | 6,45 % | 9,04 % | 1,40 |
+| Jul 2025 | 18,8 | 6,49 % | 8,73 % | 1,34 |
+| Ago 2025 | 18,9 | 6,46 % | 8,66 % | 1,34 |
+| Sep 2025 | 0,96 (incompleto) | 5,15 % (inválido) | 6,24 % (inválido) | 1,21 |
+| Oct 2025 | 19,3 | 6,25 % | 8,33 % | 1,33 |
+| Nov 2025 | 19,5 | 6,18 % | 8,31 % | 1,35 |
+| Dic 2025 | 19,5 | 5,89 % | 7,97 % | 1,35 |
+
+**Cuentas "repetidas" del catálogo: resuelto (no hay doble conteo)**
+Las cuentas con la misma línea en grupos distintos (14xx) son cartera distinta, con saldos independientes a diciembre de 2025, en miles de millones de pesos:
+- Vivienda: grupo 1404 (285), 1405 (602) y 1469 (10).
+- Consumo con libranza: 1441 (6.783) y 1469 (24).
+- Consumo sin libranza: 1442 (7.531).
+- Microcrédito: 1448 (0), 1455 (177) y 1476 (1.765).
+- Comercial: 1462 (2.304).
+- **[Inferido]** El grupo 1469 parece ser cartera de empleados; falta confirmarlo con el PUC oficial.
+
+**Conciliación mora frente a cartera (diciembre 2025)**
+La suma de las cuentas de mora (84xx) no coincide con la de cartera (14xx) en algunas líneas: Vivienda 921 frente a 896, Comercial 2.490 frente a 2.304, Consumo sin libranza 7.576 frente a 7.531 (mora mayor que la cartera). En Consumo con libranza y Microcrédito sí se parecen. Esto significa que la `Tasa mora` usa en el numerador cuentas que no se concilian con el denominador. Falta definir cuál es la base correcta (ver pendientes).
+
 ## 5. Medidas (24, tabla `Medidas`)
 
 - **Base:** `Saldo`, `Saldo en mora`, `Saldo en riesgo`, `Saldo total` (suma de las cuentas de riesgo, categorías A a E).
@@ -105,7 +149,10 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 - [ ] **Volver a pasar el documento de CAMEL** para leerlo y citar las definiciones oficiales.
 
 **Por verificar:**
-- [ ] Cuentas repetidas en `dm_Cuentas` para la misma línea (Microcrédito en 1448, 1455 y 1476; Vivienda en 1405 y 1469). Confirmar si es cartera distinta o doble conteo. Requiere los datos de `tb_Balance` o el PUC oficial.
+- [ ] Confirmar con el PUC oficial qué es el grupo 1469 (parece cartera de empleados).
+- [ ] Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
+- [ ] Conciliación de mora (84xx) frente a cartera (14xx): decidir cuál es la base correcta del denominador de las tasas.
+- [ ] El caché termina en diciembre de 2025; confirmar si la versión publicada tiene datos más recientes.
 - [ ] Si el saludo de bienvenida se ve bien en la versión publicada.
 - [ ] Si `Comercial` agrupa 31 a 90 días por norma.
 
