@@ -1,0 +1,16 @@
+expression dm_CuentasIndice =
+		let
+		    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jZM9DoMgHEev8o+zMSJgdG6HLl27GAeKDCQKidoOvVHP0Ys1YuMHCOn8nuH3MFRVdJNPKVTDojhCCVzYMDLI06iOdyhL4CwgR8AAUYdiQxGdMHY/JgZj8zUlDqYGU4JAKGCNaJkahZFOWg2PTgPXClp575l67XbiNKTNm/F0ah4U8RpXBsU5pDS3UATNuQkV/qZB/tVkaf4mS/Q3WWKgyTL9TVfJe837z7uRoz6IsblbYRvufNvY7s6Old/g7OgndKLnkrWHN7+yzdDSpdidsMVkOX59NFtOl1ezm1d/AQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Línea = _t, Altura = _t]),
+		    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Línea", type text}, {"Altura", type text}}),
+		    #"Texto insertado después del delimitador" = Table.AddColumn(#"Tipo cambiado", "key Altura", each Text.AfterDelimiter([Altura], " "), type text),
+		    #"Duplicados quitados" = Table.Distinct(#"Texto insertado después del delimitador", {"Altura"}),
+		    #"Duplicados quitados1" = Table.Distinct(#"Duplicados quitados", {"key Altura"}),
+		    #"Valor reemplazado" = Table.ReplaceValue(#"Duplicados quitados1","en adelante","o más",Replacer.ReplaceText,{"Altura"})
+		in
+		    #"Valor reemplazado"
+	lineageTag: 0007e042-2bab-4e9e-ad0b-3d2420159073
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

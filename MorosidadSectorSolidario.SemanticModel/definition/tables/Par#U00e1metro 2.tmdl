@@ -1,0 +1,50 @@
+table 'Parámetro 2'
+	lineageTag: fd826511-c404-4520-9d72-a792ca669736
+
+	column Parámetro
+		lineageTag: 6ca54208-77eb-4db8-b928-e1e1113315e7
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parámetro Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'Parámetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro Campos'
+		isHidden
+		lineageTag: 850a1a4d-9573-4ee2-b533-3a825e5872f8
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parámetro Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 0221531d-5855-4dac-8f93-1593dd17d7ab
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parámetro 2' = calculated
+		mode: import
+		source =
+				{
+				    ("Departamento", NAMEOF('dm_Entidades'[DEPARTAMENTO]), 0),
+				    ("Municipio", NAMEOF('dm_Entidades'[MUNICIPIO]), 1),
+				    ("Tipo de entidad", NAMEOF('dm_Entidades'[TIPO ENTIDAD SOLIDARIA]), 2),
+				    ("Sin filtros", NAMEOF('dm_Entidades'[Filtros todos]), 3)
+				}
+
+	annotation PBI_Id = afc921ed1c284e9bbbbb6c1abf761d9c
+

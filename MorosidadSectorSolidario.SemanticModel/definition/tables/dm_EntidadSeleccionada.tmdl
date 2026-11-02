@@ -1,0 +1,56 @@
+table dm_EntidadSeleccionada
+	lineageTag: 01bd4da6-5980-46fa-960f-c11e8bf73ff8
+
+	column 'CODIGO ENTIDAD'
+		dataType: string
+		lineageTag: b1a52161-f361-407f-9713-908c98dba6cd
+		summarizeBy: none
+		sourceColumn: CODIGO ENTIDAD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIGLA
+		dataType: string
+		lineageTag: ed891b6f-7b62-453e-8ff0-b3b322e9d291
+		summarizeBy: none
+		sourceColumn: SIGLA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TIPO ENTIDAD SOLIDARIA'
+		dataType: string
+		lineageTag: 3043968a-baa1-448c-a96b-c2838a0c31dd
+		summarizeBy: none
+		sourceColumn: TIPO ENTIDAD SOLIDARIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MUNICIPIO
+		dataType: string
+		lineageTag: e3324297-90d9-4d12-9f39-aec447d0cb3f
+		summarizeBy: none
+		sourceColumn: MUNICIPIO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTAMENTO
+		dataType: string
+		lineageTag: 6655b540-4810-4e02-b765-547297156552
+		summarizeBy: none
+		sourceColumn: DEPARTAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dm_EntidadSeleccionada = m
+		mode: import
+		source =
+				let
+				    Origen = dm_Entidades,
+				    #"Otras columnas quitadas" = Table.SelectColumns(Origen,{"CODIGO ENTIDAD", "TIPO ENTIDAD SOLIDARIA", "MUNICIPIO", "DEPARTAMENTO", "SIGLA"})
+				in
+				    #"Otras columnas quitadas"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

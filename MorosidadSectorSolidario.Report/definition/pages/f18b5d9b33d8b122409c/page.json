@@ -1,0 +1,61 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "f18b5d9b33d8b122409c",
+  "displayName": "Por sector",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#CCCCCC'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F2F2F2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "a6e32ae9ec8de6151925",
+      "target": "296193108b47a9387129",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a6e32ae9ec8de6151925",
+      "target": "a708237337051c1a6a56",
+      "type": "NoFilter"
+    },
+    {
+      "source": "99aa9eaec640d31e4c47",
+      "target": "a6e32ae9ec8de6151925",
+      "type": "DataFilter"
+    }
+  ]
+}

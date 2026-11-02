@@ -1,0 +1,3810 @@
+cultureInfo es-CO
+
+	linguisticMetadata =
+			{
+			  "Version": "4.1.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "medida.tasa_riesgo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Tasa riesgo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tasa riesgo": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "tb_balance": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "tb_Balance"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tb balance": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "tb_Balance": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "balance": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "tb equilibrium": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "tb stability": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "tb steadiness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "equilibrium": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "stability": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "steadiness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "tb poise": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "poise": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tb weighing scale": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "weighing scale": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "tb_balance.fecha_reporte": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "tb_Balance",
+			          "ConceptualProperty": "Fecha reporte"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fecha reporte": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "tb_balance.codigo_entidad": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "tb_Balance",
+			          "ConceptualProperty": "CODIGO ENTIDAD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "codigo entidad": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "tb_balance.codrenglon": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "tb_Balance",
+			          "ConceptualProperty": "CODRENGLON"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "codrenglon": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "tb_balance.valor_en_peso": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "tb_Balance",
+			          "ConceptualProperty": "VALOR EN PESOS"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "valor en peso": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "peso": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "en peso": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidade": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dm entidade": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dm_Entidades": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidade.codigo_entidad": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades",
+			          "ConceptualProperty": "CODIGO ENTIDAD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "codigo entidad": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidade.tipo_entidad_solidaria": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades",
+			          "ConceptualProperty": "TIPO ENTIDAD SOLIDARIA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tipo entidad solidaria": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Tipo de entidad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Tipo Entidad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidade.municipio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades",
+			          "ConceptualProperty": "MUNICIPIO"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "municipio": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidade.departamento": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades",
+			          "ConceptualProperty": "DEPARTAMENTO"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "departamento": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidade.sigla": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades",
+			          "ConceptualProperty": "SIGLA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "sigla": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Seleccione entidades a comparar": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Entidad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Entidades a comparar": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "medida": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_en_riesgo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo en riesgo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo en riesgo": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_en_mora": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo en mora"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo en mora": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.riesgo_mora": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Riesgo/Mora"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "riesgo/mora": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "riesgo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "riesgo mora": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo total"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo total": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "saldo aggregate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "saldo overall": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "medida.tasa_mora": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Tasa mora"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tasa mora": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.ranking_mora": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Ranking Mora"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ranking mora": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.color_barra_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Color barra seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "color barra seleccionada": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.tasa_mora_sin_filtros": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Tasa mora sin filtros"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tasa mora sin filtros": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_en_mora_sin_filtros": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo en mora sin filtros"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo en mora sin filtros": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.riesgo_mora_sin_filtros": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Riesgo/Mora sin filtros"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "riesgo/mora sin filtros": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "riesgo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "riesgo mora sin filtros": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mora sin filtros": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "Riesgo/Mora": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.tasa_riesgo_sin_filtros": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Tasa riesgo sin filtros"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tasa riesgo sin filtros": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_en_riesgo_sin_filtros": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo en riesgo sin filtros"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo en riesgo sin filtros": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saludo_de_bienvenida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saludo de bienvenida"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saludo de bienvenida": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.nombre_de_usuario": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Nombre de usuario"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "nombre de usuario": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dm cuenta": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dm_Cuentas": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.codrenglon": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "CODRENGLON"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "codrenglon": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.descripción": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "Descripción"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "descripción": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.línea": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "Línea"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "línea": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.estado": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "Estado"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "estado": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.tipo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "Tipo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tipo": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_EntidadSeleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dm entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dm_EntidadSeleccionada": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada.codigo_entidad": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_EntidadSeleccionada",
+			          "ConceptualProperty": "CODIGO ENTIDAD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "codigo entidad": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada.sigla": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_EntidadSeleccionada",
+			          "ConceptualProperty": "SIGLA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "sigla": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Seleccione su entidad cooperativa": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Tu entidad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Entidad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "calendario": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "calendario": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.fecha": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "ConceptualProperty": "Fecha"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fecha": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "calendario.fecha.jerarquía_de_fecha": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "VariationSource": "Fecha",
+			          "VariationSet": "Variación",
+			          "Hierarchy": "Jerarquía de fechas"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "jerarquía de fecha": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.fecha.año": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "VariationSource": "Fecha",
+			          "VariationSet": "Variación",
+			          "Hierarchy": "Jerarquía de fechas",
+			          "HierarchyLevel": "Año"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "año": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fecha año": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.fecha.trimestre": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "VariationSource": "Fecha",
+			          "VariationSet": "Variación",
+			          "Hierarchy": "Jerarquía de fechas",
+			          "HierarchyLevel": "Trimestre"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "trimestre": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fecha trimestre": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.fecha.me": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "VariationSource": "Fecha",
+			          "VariationSet": "Variación",
+			          "Hierarchy": "Jerarquía de fechas",
+			          "HierarchyLevel": "Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "me": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fecha me": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.fecha.día": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "VariationSource": "Fecha",
+			          "VariationSet": "Variación",
+			          "Hierarchy": "Jerarquía de fechas",
+			          "HierarchyLevel": "Día"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "día": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fecha día": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.año": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "ConceptualProperty": "Año"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "año": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.me": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "ConceptualProperty": "Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "me": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "calendario.nombre_me": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Calendario",
+			          "ConceptualProperty": "Nombre Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "nombre me": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Seleccione un mes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Mes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "indicadores_gráfico_de_línea": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Indicadores gráfico de líneas"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "indicadores gráfico de línea": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "indicadore gráfico de línea": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.78
+			          }
+			        }
+			      ]
+			    },
+			    "indicadores_gráfico_de_línea.parámetro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Indicadores gráfico de líneas",
+			          "ConceptualProperty": "Parámetro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "parámetro": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "indicadores_gráfico_de_línea.parámetro_campos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Indicadores gráfico de líneas",
+			          "ConceptualProperty": "Parámetro Campos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "parámetro campos": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "indicadores_gráfico_de_línea.parámetro_orden": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Indicadores gráfico de líneas",
+			          "ConceptualProperty": "Parámetro Orden"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "parámetro orden": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_en_mora_con_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo en mora con entidad seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo en mora con entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Saldo en mora": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Saldo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_en_riesgo_con_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo en riesgo con entidad seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo en riesgo con entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Saldo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.saldo_total_con_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Saldo total con entidad seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saldo total con entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "saldo aggregate con entidad seleccionada": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "saldo overall con entidad seleccionada": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "Saldo total": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.tasa_mora_con_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Tasa mora con entidad seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tasa mora con entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Tasa mora": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Tasa de mora": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.tasa_riesgo_con_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Tasa riesgo con entidad seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tasa riesgo con entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Tasa riesgo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.riesgo_mora_con_entidad_seleccionada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Riesgo/Mora con entidad seleccionada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "riesgo/mora con entidad seleccionada": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "riesgo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "riesgo mora con entidad seleccionada": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "mora con entidad seleccionada": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "parámetro": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro.parámetro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro",
+			          "ConceptualProperty": "Parámetro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "parámetro": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "parámetro name": {
+			            "State": "Generated"
+			          }
+			        }
+			      ],
+			      "NameType": "Name"
+			    },
+			    "parámetro.parámetro_campos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro",
+			          "ConceptualProperty": "Parámetro Campos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "parámetro campos": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro.parámetro_orden": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro",
+			          "ConceptualProperty": "Parámetro Orden"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "parámetro orden": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.índice": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "Índice"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "índice": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_cuenta.altura": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Cuentas",
+			          "ConceptualProperty": "Altura"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "altura": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Mora": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada.tipo_entidad_solidaria": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_EntidadSeleccionada",
+			          "ConceptualProperty": "TIPO ENTIDAD SOLIDARIA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tipo entidad solidaria": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada.municipio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_EntidadSeleccionada",
+			          "ConceptualProperty": "MUNICIPIO"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "municipio": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada.departamento": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_EntidadSeleccionada",
+			          "ConceptualProperty": "DEPARTAMENTO"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "departamento": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro_2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro 2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "parámetro 2": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro_2.parámetro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro 2",
+			          "ConceptualProperty": "Parámetro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "parámetro": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro_2.parámetro_campos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro 2",
+			          "ConceptualProperty": "Parámetro Campos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "parámetro campos": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "parámetro_2.parámetro_orden": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Parámetro 2",
+			          "ConceptualProperty": "Parámetro Orden"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "parámetro orden": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "calendario_fecha_jerarquía_de_fecha_has_calendario_fecha_día": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha.jerarquía_de_fecha"
+			          }
+			        },
+			        "calendario.fecha.día": {
+			          "Target": {
+			            "Entity": "calendario.fecha.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_días"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_jerarquía_de_fecha_has_calendario_fecha_me": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha.jerarquía_de_fecha"
+			          }
+			        },
+			        "calendario.fecha.me": {
+			          "Target": {
+			            "Entity": "calendario.fecha.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_me"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_jerarquía_de_fecha_has_calendario_fecha_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha.jerarquía_de_fecha"
+			          }
+			        },
+			        "calendario.fecha.trimestre": {
+			          "Target": {
+			            "Entity": "calendario.fecha.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_trimestres"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_jerarquía_de_fecha_has_calendario_fecha_año": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha.jerarquía_de_fecha"
+			          }
+			        },
+			        "calendario.fecha.año": {
+			          "Target": {
+			            "Entity": "calendario.fecha.año"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_años"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_has_jerarquía_de_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha"
+			          }
+			        },
+			        "calendario.fecha.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha.jerarquía_de_fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.jerarquía_de_fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fechas_have_jerarquía_de_fechas"
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada_has_dm_entidade": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_EntidadSeleccionada"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada"
+			          }
+			        },
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidad_seleccionada"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidad_seleccionadas_have_dm_entidades"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "dm_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_dm_entidad_seleccionadas"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_calendario": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "calendario": {
+			          "Target": {
+			            "Entity": "calendario"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "calendario"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_calendarios"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario"
+			            },
+			            "Object": {
+			              "Role": "tb_balance"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendarios_have_tb_balances"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_dm_cuenta": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_dm_cuentas"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "tb_balance"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_tb_balances"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_dm_entidade": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_dm_entidades"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "tb_balance"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_tb_balances"
+			        }
+			      ]
+			    },
+			    "parámetro_2_has_parámetro": {
+			      "Binding": {
+			        "ConceptualEntity": "Parámetro 2"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "parámetro_2": {
+			          "Target": {
+			            "Entity": "parámetro_2"
+			          }
+			        },
+			        "parámetro_2.parámetro": {
+			          "Target": {
+			            "Entity": "parámetro_2.parámetro"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "parámetro_2"
+			            },
+			            "Object": {
+			              "Role": "parámetro_2.parámetro"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "parámetro_2_have_parámetros"
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada_has_departamento": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_EntidadSeleccionada"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada"
+			          }
+			        },
+			        "dm_entidad_seleccionada.departamento": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada.departamento"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidad_seleccionada"
+			            },
+			            "Object": {
+			              "Role": "dm_entidad_seleccionada.departamento"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidad_seleccionadas_have_departamentos"
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada_has_municipio": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_EntidadSeleccionada"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada"
+			          }
+			        },
+			        "dm_entidad_seleccionada.municipio": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada.municipio"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidad_seleccionada"
+			            },
+			            "Object": {
+			              "Role": "dm_entidad_seleccionada.municipio"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidad_seleccionadas_have_municipios"
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada_has_tipo_entidad_solidaria": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_EntidadSeleccionada"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada"
+			          }
+			        },
+			        "dm_entidad_seleccionada.tipo_entidad_solidaria": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada.tipo_entidad_solidaria"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidad_seleccionada"
+			            },
+			            "Object": {
+			              "Role": "dm_entidad_seleccionada.tipo_entidad_solidaria"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidad_seleccionadas_have_tipo_entidad_solidarias"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_altura": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.altura": {
+			          "Target": {
+			            "Entity": "dm_cuenta.altura"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.altura"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_alturas"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_índice": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.índice": {
+			          "Target": {
+			            "Entity": "dm_cuenta.índice"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.índice"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_índices"
+			        }
+			      ]
+			    },
+			    "parámetro_has_parámetro": {
+			      "Binding": {
+			        "ConceptualEntity": "Parámetro"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "parámetro": {
+			          "Target": {
+			            "Entity": "parámetro"
+			          }
+			        },
+			        "parámetro.parámetro": {
+			          "Target": {
+			            "Entity": "parámetro.parámetro"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "parámetro"
+			            },
+			            "Object": {
+			              "Role": "parámetro.parámetro"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "parámetros_have_parámetros"
+			        },
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "parámetro"
+			            },
+			            "Name": {
+			              "Role": "parámetro.parámetro"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "parámetros_are_names_IDs_of_parámetros"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_riesgo_mora_con_entidad_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.riesgo_mora_con_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.riesgo_mora_con_entidad_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.riesgo_mora_con_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_riesgo_mora_con_entidad_seleccionada"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_tasa_riesgo_con_entidad_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.tasa_riesgo_con_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.tasa_riesgo_con_entidad_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.tasa_riesgo_con_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_tasa_riesgo_con_entidad_seleccionada"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_tasa_mora_con_entidad_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.tasa_mora_con_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.tasa_mora_con_entidad_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.tasa_mora_con_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_tasa_mora_con_entidad_seleccionada"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_total_con_entidad_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_total_con_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.saldo_total_con_entidad_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_total_con_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_total_con_entidad_seleccionada"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_en_riesgo_con_entidad_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_en_riesgo_con_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.saldo_en_riesgo_con_entidad_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_en_riesgo_con_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_en_riesgo_con_entidad_seleccionada"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_en_mora_con_entidad_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_en_mora_con_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.saldo_en_mora_con_entidad_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_en_mora_con_entidad_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_en_mora_con_entidad_seleccionada"
+			        }
+			      ]
+			    },
+			    "indicadores_gráfico_de_línea_has_parámetro": {
+			      "Binding": {
+			        "ConceptualEntity": "Indicadores gráfico de líneas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "indicadores_gráfico_de_línea": {
+			          "Target": {
+			            "Entity": "indicadores_gráfico_de_línea"
+			          }
+			        },
+			        "indicadores_gráfico_de_línea.parámetro": {
+			          "Target": {
+			            "Entity": "indicadores_gráfico_de_línea.parámetro"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "indicadores_gráfico_de_línea"
+			            },
+			            "Object": {
+			              "Role": "indicadores_gráfico_de_línea.parámetro"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "indicadores_gráfico_de_líneas_have_parámetros"
+			        }
+			      ]
+			    },
+			    "calendario_has_nombre_me": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario": {
+			          "Target": {
+			            "Entity": "calendario"
+			          }
+			        },
+			        "calendario.nombre_me": {
+			          "Target": {
+			            "Entity": "calendario.nombre_me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario"
+			            },
+			            "Object": {
+			              "Role": "calendario.nombre_me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendarios_have_nombre_me"
+			        }
+			      ]
+			    },
+			    "calendario_has_me": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario": {
+			          "Target": {
+			            "Entity": "calendario"
+			          }
+			        },
+			        "calendario.me": {
+			          "Target": {
+			            "Entity": "calendario.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario"
+			            },
+			            "Object": {
+			              "Role": "calendario.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendarios_have_me"
+			        }
+			      ]
+			    },
+			    "calendario_has_año": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario": {
+			          "Target": {
+			            "Entity": "calendario"
+			          }
+			        },
+			        "calendario.año": {
+			          "Target": {
+			            "Entity": "calendario.año"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario"
+			            },
+			            "Object": {
+			              "Role": "calendario.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendarios_have_años"
+			        }
+			      ]
+			    },
+			    "calendario_has_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario": {
+			          "Target": {
+			            "Entity": "calendario"
+			          }
+			        },
+			        "calendario.fecha": {
+			          "Target": {
+			            "Entity": "calendario.fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "calendarios_have_fechas"
+			        }
+			      ]
+			    },
+			    "dm_entidad_seleccionada_has_sigla": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_EntidadSeleccionada"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidad_seleccionada": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada"
+			          }
+			        },
+			        "dm_entidad_seleccionada.sigla": {
+			          "Target": {
+			            "Entity": "dm_entidad_seleccionada.sigla"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidad_seleccionada"
+			            },
+			            "Object": {
+			              "Role": "dm_entidad_seleccionada.sigla"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidad_seleccionadas_have_siglas"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_tipo": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.tipo": {
+			          "Target": {
+			            "Entity": "dm_cuenta.tipo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.tipo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_tipos"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_estado": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.estado": {
+			          "Target": {
+			            "Entity": "dm_cuenta.estado"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.estado"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_estado"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_línea": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.línea": {
+			          "Target": {
+			            "Entity": "dm_cuenta.línea"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.línea"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_líneas"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_descripción": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.descripción": {
+			          "Target": {
+			            "Entity": "dm_cuenta.descripción"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.descripción"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_descripcións"
+			        }
+			      ]
+			    },
+			    "dm_cuenta_has_codrenglon": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Cuentas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_cuenta": {
+			          "Target": {
+			            "Entity": "dm_cuenta"
+			          }
+			        },
+			        "dm_cuenta.codrenglon": {
+			          "Target": {
+			            "Entity": "dm_cuenta.codrenglon"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_cuenta"
+			            },
+			            "Object": {
+			              "Role": "dm_cuenta.codrenglon"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_cuentas_have_codrenglons"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo": {
+			          "Target": {
+			            "Entity": "medida.saldo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo"
+			        }
+			      ]
+			    },
+			    "medida_has_nombre_de_usuario": {
+			      "Binding": {
+			        "ConceptualEntity": "Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "medida": {
+			          "Target": {
+			            "Entity": "medida"
+			          }
+			        },
+			        "medida.nombre_de_usuario": {
+			          "Target": {
+			            "Entity": "medida.nombre_de_usuario"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "medida"
+			            },
+			            "Object": {
+			              "Role": "medida.nombre_de_usuario"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "medidas_have_nombre_de_usuario"
+			        }
+			      ]
+			    },
+			    "medida_has_saludo_de_bienvenida": {
+			      "Binding": {
+			        "ConceptualEntity": "Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "medida": {
+			          "Target": {
+			            "Entity": "medida"
+			          }
+			        },
+			        "medida.saludo_de_bienvenida": {
+			          "Target": {
+			            "Entity": "medida.saludo_de_bienvenida"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "medida"
+			            },
+			            "Object": {
+			              "Role": "medida.saludo_de_bienvenida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "medidas_have_saludo_de_bienvenida"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_en_riesgo_sin_filtros": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_en_riesgo_sin_filtros": {
+			          "Target": {
+			            "Entity": "medida.saldo_en_riesgo_sin_filtros"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_en_riesgo_sin_filtros"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_en_riesgo_sin_filtros"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_tasa_riesgo_sin_filtros": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.tasa_riesgo_sin_filtros": {
+			          "Target": {
+			            "Entity": "medida.tasa_riesgo_sin_filtros"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.tasa_riesgo_sin_filtros"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_tasa_riesgo_sin_filtros"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_riesgo_mora_sin_filtros": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.riesgo_mora_sin_filtros": {
+			          "Target": {
+			            "Entity": "medida.riesgo_mora_sin_filtros"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.riesgo_mora_sin_filtros"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_riesgo_mora_sin_filtros"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_en_mora_sin_filtros": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_en_mora_sin_filtros": {
+			          "Target": {
+			            "Entity": "medida.saldo_en_mora_sin_filtros"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_en_mora_sin_filtros"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_en_mora_sin_filtros"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_tasa_mora_sin_filtros": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.tasa_mora_sin_filtros": {
+			          "Target": {
+			            "Entity": "medida.tasa_mora_sin_filtros"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.tasa_mora_sin_filtros"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_tasa_mora_sin_filtros"
+			        }
+			      ]
+			    },
+			    "medida_has_color_barra_seleccionada": {
+			      "Binding": {
+			        "ConceptualEntity": "Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "medida": {
+			          "Target": {
+			            "Entity": "medida"
+			          }
+			        },
+			        "medida.color_barra_seleccionada": {
+			          "Target": {
+			            "Entity": "medida.color_barra_seleccionada"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "medida"
+			            },
+			            "Object": {
+			              "Role": "medida.color_barra_seleccionada"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "medidas_have_color_barra_seleccionada"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_ranking_mora": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.ranking_mora": {
+			          "Target": {
+			            "Entity": "medida.ranking_mora"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.ranking_mora"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_ranking_mora"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_tasa_mora": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.tasa_mora": {
+			          "Target": {
+			            "Entity": "medida.tasa_mora"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.tasa_mora"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_tasa_mora"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_total": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_total": {
+			          "Target": {
+			            "Entity": "medida.saldo_total"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_total"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_total"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_riesgo_mora": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.riesgo_mora": {
+			          "Target": {
+			            "Entity": "medida.riesgo_mora"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.riesgo_mora"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_riesgo_mora"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_en_mora": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_en_mora": {
+			          "Target": {
+			            "Entity": "medida.saldo_en_mora"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_en_mora"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_en_mora"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_saldo_en_riesgo": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.saldo_en_riesgo": {
+			          "Target": {
+			            "Entity": "medida.saldo_en_riesgo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.saldo_en_riesgo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_saldo_en_riesgo"
+			        }
+			      ]
+			    },
+			    "dm_entidade_has_sigla": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Entidades"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        },
+			        "dm_entidade.sigla": {
+			          "Target": {
+			            "Entity": "dm_entidade.sigla"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade.sigla"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_siglas"
+			        },
+			        {
+			          "Verb": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Verbs": [
+			              {
+			                "Entidade": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "PrepositionalPhrases": [
+			              {
+			                "Prepositions": [
+			                  {
+			                    "a": {
+			                      "State": "Generated"
+			                    }
+			                  }
+			                ],
+			                "Object": {
+			                  "Role": "dm_entidade.sigla"
+			                }
+			              }
+			            ]
+			          },
+			          "State": "Generated",
+			          "Weight": 0.95,
+			          "ID": "dm_entidades_Entidade_a_siglas"
+			        }
+			      ]
+			    },
+			    "dm_entidade_has_departamento": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Entidades"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        },
+			        "dm_entidade.departamento": {
+			          "Target": {
+			            "Entity": "dm_entidade.departamento"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade.departamento"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_departamentos"
+			        }
+			      ]
+			    },
+			    "dm_entidade_has_municipio": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Entidades"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        },
+			        "dm_entidade.municipio": {
+			          "Target": {
+			            "Entity": "dm_entidade.municipio"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade.municipio"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_municipios"
+			        }
+			      ]
+			    },
+			    "dm_entidade_has_tipo_entidad_solidaria": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Entidades"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        },
+			        "dm_entidade.tipo_entidad_solidaria": {
+			          "Target": {
+			            "Entity": "dm_entidade.tipo_entidad_solidaria"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade.tipo_entidad_solidaria"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_tipo_entidad_solidarias"
+			        }
+			      ]
+			    },
+			    "dm_entidade_has_codigo_entidad": {
+			      "Binding": {
+			        "ConceptualEntity": "dm_Entidades"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dm_entidade": {
+			          "Target": {
+			            "Entity": "dm_entidade"
+			          }
+			        },
+			        "dm_entidade.codigo_entidad": {
+			          "Target": {
+			            "Entity": "dm_entidade.codigo_entidad"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dm_entidade"
+			            },
+			            "Object": {
+			              "Role": "dm_entidade.codigo_entidad"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dm_entidades_have_codigo_entidads"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_valor_en_peso": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "tb_balance.valor_en_peso": {
+			          "Target": {
+			            "Entity": "tb_balance.valor_en_peso"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "tb_balance.valor_en_peso"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_valor_en_pesos"
+			        },
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Adjectives": [
+			              {
+			                "expensive": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "cheap": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "tb_balance.valor_en_peso"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "valor_en_peso_indicates_how_expensive_tb_balances_are"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_fecha_reporte": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "tb_balance.fecha_reporte": {
+			          "Target": {
+			            "Entity": "tb_balance.fecha_reporte"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "tb_balance.fecha_reporte"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_fecha_reportes"
+			        }
+			      ]
+			    },
+			    "tb_balance_has_medida_tasa_riesgo": {
+			      "Binding": {
+			        "ConceptualEntity": "tb_Balance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tb_balance": {
+			          "Target": {
+			            "Entity": "tb_balance"
+			          }
+			        },
+			        "medida.tasa_riesgo": {
+			          "Target": {
+			            "Entity": "medida.tasa_riesgo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tb_balance"
+			            },
+			            "Object": {
+			              "Role": "medida.tasa_riesgo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tb_balances_have_tasa_riesgo"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_año_has_calendario_fecha_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.año": {
+			          "Target": {
+			            "Entity": "calendario.fecha.año"
+			          }
+			        },
+			        "calendario.fecha.trimestre": {
+			          "Target": {
+			            "Entity": "calendario.fecha.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.año"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "años_have_trimestres"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.trimestre"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_años"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "calendario.fecha.trimestre"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "calendario.fecha.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_are_in_años"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_trimestre_has_calendario_fecha_me": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.trimestre": {
+			          "Target": {
+			            "Entity": "calendario.fecha.trimestre"
+			          }
+			        },
+			        "calendario.fecha.me": {
+			          "Target": {
+			            "Entity": "calendario.fecha.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.trimestre"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_me"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.me"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_trimestres"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "calendario.fecha.me"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "calendario.fecha.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_are_in_trimestres"
+			        }
+			      ]
+			    },
+			    "calendario_fecha_me_has_calendario_fecha_día": {
+			      "Binding": {
+			        "ConceptualEntity": "Calendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "calendario.fecha.me": {
+			          "Target": {
+			            "Entity": "calendario.fecha.me"
+			          }
+			        },
+			        "calendario.fecha.día": {
+			          "Target": {
+			            "Entity": "calendario.fecha.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.me"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_días"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "calendario.fecha.día"
+			            },
+			            "Object": {
+			              "Role": "calendario.fecha.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_have_me"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "calendario.fecha.día"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "calendario.fecha.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_are_in_me"
+			        }
+			      ]
+			    }
+			  },
+			  "Agents": {
+			    "Internal": {
+			      "Version": "1.1.0"
+			    }
+			  }
+			}
+		contentType: json
+

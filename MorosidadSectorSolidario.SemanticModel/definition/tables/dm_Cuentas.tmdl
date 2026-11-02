@@ -1,0 +1,83 @@
+table dm_Cuentas
+	lineageTag: e3cbd082-f36b-4228-bd6d-1c991c4db57e
+
+	column CODRENGLON
+		dataType: string
+		lineageTag: d9cfc5cc-8f14-4dde-8aaf-75ea396499dc
+		summarizeBy: none
+		sourceColumn: CODRENGLON
+		sortByColumn: Índice
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descripción
+		dataType: string
+		lineageTag: 63df5ce9-caed-48e8-ac1d-2228652d0591
+		summarizeBy: none
+		sourceColumn: Descripción
+
+		annotation SummarizationSetBy = Automatic
+
+	column Línea
+		dataType: string
+		lineageTag: e73c103a-f819-49fb-a4d0-68300cc8f640
+		summarizeBy: none
+		sourceColumn: Línea
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		dataType: string
+		lineageTag: 20595916-80ef-4ea3-9650-f375d8f51114
+		summarizeBy: none
+		sourceColumn: Estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo
+		dataType: string
+		lineageTag: 2dcfb1e7-abd3-42d6-81a9-bf014db6ea80
+		summarizeBy: none
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: a4b5b7d3-b4be-41e7-b2d4-1f42b8ae9246
+		summarizeBy: none
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	column Altura
+		dataType: string
+		lineageTag: b9256a6b-7d2d-4f56-8598-e6b0f61946e1
+		summarizeBy: none
+		sourceColumn: Altura
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dm_Cuentas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("tZjNbqMwFIVfxcq6i2AwhaUDNEVKQkUykaqqCyZFI6Q2SElnFvMO8yDzHH2xMenkz8TX95JSqWraROf48h2OXZ6eBo439IZicDNg+69ILpJxln/8kUyyPE3m44zNsnwqJ+pTy+pXVa5fCvVSqu87OZln6mdeldsf9eD55lPQGRoER3tBGSUPCzmaJOeao+bXJI9lnOSXdE0LjQ66D3kSpW3hCBbmpgXHe+F5Op6ld6l6K11m59qxRdu06GSvHScsnUXZKJejdJIqnXP9BNQXX01P9ERP9EVP9EhP9EtP3Sl4elG93v58q9mqXrPX6vumWP8GSXoOjaRBH6SqPGhUDSYgYc+hEzb4gLSVTyfaBi+YPO9AflshyfNu5DV9mDzvSF4zgcnz7uQ1H5g8v4685gWTDwjkp9VqU682H39fqvcaRB7QkOvCMOuAyFpXhyEHdMi6AUw36EZXNwGxCspGjMYqiLsxCaugbskkrKLDvkzCKjpuziSsPq2n38rNqipeIaQ+uZyPoiBOn97IR2UQpd+pho/iIEa/c/ceDWCEIRbhDVumyzSZxQ08zGHZDwksTeow1JAC1WQB0w2JdE0uMOawA2aTk4W3a5qnxTvKZvNvU+DACKB3TfNcQm81sqTAM410MQVWN0sgPNNopkBYDS3ZEKbxoGxYTcGY3Pp9bNi3fo8bthLvccO+9XvesJVB3xt20HogsvN5SBdyorpknMwWCXtk93K+kMwfsliZzxvTaZZrHXNfbN8L9ZkT0tN6Uxxszjmf2KhY7uTYVD5mOTvx2Rs74v9ftP4sme+wonlbm/Dc2DRfy/jgc3B2fZOzIxpr1wetOXpmtzW08EzW7m5q4cHW6KnNRsJzWLlmxUv5WqzfS7OdM0SHyG2HyNBGn4FyDYFyhvhAufq1PaFq6l91mZurDPFVS0Bf5BbeELOEHegQXAI+YmHrtgowawh3t1gALwJ/i6E8nQAbPHx7AcHTHkdYgkdoMkzw9OcumOAROg0TvPYS7MEjdBsqeO01IIJHaDmcJzp4/KrG03doOHH8i6qudfhARI1/Ucdd8LZmjF9Vbhw0/wwXh93x4YLNHI5N1ZV1dvwP35KoazrsrEBOHlr8TxNIlFBcIFHNGEGT0FcHo4sHUM26YWs5gnJKTQFOwp6i538=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Cuenta = _t, Descripción = _t, Línea = _t, Altura = _t, Estado = _t, Tipo = _t]),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(Origen,{{"Cuenta", "CODRENGLON"}}),
+				    #"Índice agregado" = Table.AddIndexColumn(#"Columnas con nombre cambiado", "Índice", 0, 1, Int64.Type),
+				    #"Consultas combinadas" = Table.NestedJoin(#"Índice agregado", {"Altura"}, dm_CuentasIndice, {"key Altura"}, "dm_CuentasIndice", JoinKind.LeftOuter),
+				    #"Se expandió dm_CuentasIndice" = Table.ExpandTableColumn(#"Consultas combinadas", "dm_CuentasIndice", {"Altura"}, {"Altura.1"}),
+				    #"Columna condicional agregada" = Table.AddColumn(#"Se expandió dm_CuentasIndice", "Personalizado", each if [Altura.1] = null then [Altura] else [Altura.1], type text),
+				    #"Columnas quitadas1" = Table.RemoveColumns(#"Columna condicional agregada",{"Altura", "Altura.1"}),
+				    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Columnas quitadas1",{{"Personalizado", "Altura"}}),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Columnas con nombre cambiado1","4. De 91 a 120","3. De 91 a 120",Replacer.ReplaceText,{"Altura"})
+				in
+				    #"Valor reemplazado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

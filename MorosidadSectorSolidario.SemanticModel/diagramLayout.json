@@ -1,0 +1,138 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 353.94265727567125,
+        "y": 1137.6728269575146
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 361.02756016018742,
+            "y": 1304.2914294139364
+          },
+          "nodeIndex": "tb_Balance",
+          "nodeLineageTag": "0d4e1046-bcea-458e-8a8e-5fe672c3b36a",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1018.6991610870693,
+            "y": 1404.7219148962693
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "83f8f553-7f23-49bd-9b3a-b9ee44617fb2",
+          "size": {
+            "height": 145,
+            "width": 284.21485402753592
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 619.53566101037939,
+            "y": 1124.3037356011721
+          },
+          "nodeIndex": "dm_Cuentas",
+          "nodeLineageTag": "e3cbd082-f36b-4228-bd6d-1c991c4db57e",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 676.71529858155031,
+            "y": 1614.0955976410655
+          },
+          "nodeIndex": "dm_EntidadSeleccionada",
+          "nodeLineageTag": "01bd4da6-5980-46fa-960f-c11e8bf73ff8",
+          "size": {
+            "height": 195.94434938774043,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 353.80707887868806,
+            "y": 1589.9731767799758
+          },
+          "nodeIndex": "dm_Entidades",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 45.49694657039106,
+            "y": 1106.24054453353
+          },
+          "nodeIndex": "Calendario",
+          "nodeLineageTag": "70c93c43-734b-46ac-b3b5-c3c90c81b879",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 995.48965547824332,
+            "y": 1037.1303492530733
+          },
+          "nodeIndex": "Indicadores gráfico de líneas",
+          "nodeLineageTag": "01fef8ff-6234-4a16-b6b0-e285b97877a7",
+          "size": {
+            "height": 152,
+            "width": 305.75483930499854
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 997.79974181606372,
+            "y": 1208.5119330277214
+          },
+          "nodeIndex": "Parámetro",
+          "nodeLineageTag": "00b074a4-3964-4722-91c7-711dc5d6f31d",
+          "size": {
+            "height": 152,
+            "width": 303.51250057671723
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1307.4170685442141,
+            "y": 658.13153018114235
+          },
+          "nodeIndex": "Parámetro 2",
+          "nodeLineageTag": "fd826511-c404-4520-9d72-a792ca669736",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 63.287087723234137,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

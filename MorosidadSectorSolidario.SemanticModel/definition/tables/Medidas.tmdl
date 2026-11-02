@@ -1,0 +1,212 @@
+table Medidas
+	lineageTag: 83f8f553-7f23-49bd-9b3a-b9ee44617fb2
+
+	measure 'Saldo en riesgo' =
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Riesgo"  &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d2072960-139c-4534-836e-64ad45a79ee8
+
+	measure 'Saldo en mora' =
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Mora" &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    )
+			)
+		formatString: 0.00
+		lineageTag: d1d9bac3-7c1c-4835-b17c-265b0006f214
+
+	measure Riesgo/Mora = DIVIDE([Saldo en riesgo], [Saldo en mora], BLANK())
+		lineageTag: 4ccb0327-fb85-4946-a84f-84df5e95ce98
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Saldo total' =
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        ALL(dm_Cuentas),
+			        dm_Cuentas[Tipo] = "Riesgo"
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 672bd395-8f50-48a6-99d7-d7533acda709
+
+	measure 'Tasa mora' = DIVIDE([Saldo en mora], [Saldo total], 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: fdc7223e-ff9d-4192-99c3-f916614670d7
+
+	measure 'Tasa riesgo' = DIVIDE([Saldo en riesgo], [Saldo total], 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 66b4a2bf-7a9a-4c40-816f-08c7a018ea26
+
+	measure 'Ranking Mora' = RANKX(ALL(dm_Entidades[SIGLA]), [Tasa mora])
+		formatString: 0
+		lineageTag: 2e9adb90-4fba-4519-a19c-1bdfbb4994a7
+
+	measure 'Color barra seleccionada' =
+			IF(SELECTEDVALUE(dm_Entidades[SIGLA]) = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]), "#FF8C42",  // Amarillo
+			    "#1E88E5") //Azul
+		lineageTag: 5bdabf19-95f4-438b-b656-c8e64f87d506
+
+	measure 'Tasa mora sin filtros' = CALCULATE([Tasa mora], ALL(dm_Entidades[SIGLA]), dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 2c4bc232-4d6d-4d21-ae66-940a5094d23e
+
+	measure 'Saldo en mora sin filtros' = ```
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Mora" &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    )
+			)
+			
+			```
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 30066e1a-8168-40ae-a6f2-98f0eaee70e4
+
+	measure 'Riesgo/Mora sin filtros' = CALCULATE(DIVIDE([Saldo en riesgo], [Saldo en mora], BLANK()))
+		formatString: 0.00
+		lineageTag: c0b84c4a-2925-4e22-85ec-540918f37c17
+
+	measure 'Tasa riesgo sin filtros' = ```
+			CALCULATE(
+			    [Tasa riesgo], 
+			        ALL(dm_Entidades[SIGLA]), 
+			        dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			        )
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 214f37fb-1760-4db6-a253-8b9e7b3dfde1
+
+	measure 'Saldo en riesgo sin filtros' =
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Riesgo"  &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    ),
+			    dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			)
+		formatString: 0
+		lineageTag: 838caf5c-c1be-4344-b173-f19b60cd7ab2
+
+	measure 'Saludo de bienvenida' = ```
+			
+			VAR Hour = HOUR(NOW())
+			VAR Greeting =
+			    SWITCH(
+			        TRUE(),
+			        Hour >= 0 && Hour < 5, "Buenas noches",
+			        Hour >= 5 && Hour < 12, "Buenos días",
+			        Hour >= 12 && Hour < 18, "Buenas tardes",
+			        Hour >= 18 && Hour < 24, "Buenas noches"
+			    )
+			RETURN
+			    Greeting & " - " & [Nombre de usuario]
+			
+			```
+		lineageTag: 031bd601-d882-41e3-9db7-94905fc5584e
+
+	measure 'Nombre de usuario' =
+			
+			VAR FullUserName = USERNAME()
+			VAR CleanName = LEFT(FullUserName, FIND("\", FullUserName) - 1)
+			VAR CapitalizedName = UPPER(LEFT(CleanName, 1)) & LOWER(MID(CleanName, 2, LEN(CleanName) - 1))
+			RETURN CapitalizedName
+		lineageTag: eefe523f-778f-4f53-8f63-a654592a24fc
+
+	measure Saldo = CALCULATE(SUM(tb_Balance[VALOR EN PESOS]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 3deb1b1f-69ba-4bf0-9a0d-7661fc6e9846
+
+	measure 'Saldo en mora con entidad seleccionada' =
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Mora" &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    ),
+			    TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 912a2da5-8af3-4a6a-bcd0-810bc972ca4c
+
+	measure 'Saldo en riesgo con entidad seleccionada' =
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Riesgo"  &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    ),
+			    TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 7241d9b9-bee5-4f30-a959-2229849342bb
+
+	measure 'Saldo total con entidad seleccionada' =
+			
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        ALL(dm_Cuentas),
+			        dm_Cuentas[Tipo] = "Riesgo"
+			    ),
+			    TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: ee2fa52c-4f20-4f5e-8a3a-29fee87084f8
+
+	measure 'Tasa mora con entidad seleccionada' = DIVIDE([Saldo en mora con entidad seleccionada], [Saldo total con entidad seleccionada], 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 917b990d-18ae-4e01-bd65-9c63d16b3212
+
+	measure 'Tasa riesgo con entidad seleccionada' = DIVIDE([Saldo en riesgo con entidad seleccionada], [Saldo total con entidad seleccionada], 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 827052ce-af0e-4c3f-a5ac-271f1e65a3e2
+
+	measure 'Riesgo/Mora con entidad seleccionada' = DIVIDE([Saldo en riesgo con entidad seleccionada], [Saldo en mora con entidad seleccionada], BLANK())
+		lineageTag: 726ea9c7-66e4-4b47-b62e-c4b003fe8664
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Columna1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

@@ -1,0 +1,60 @@
+table tb_Balance
+	lineageTag: 0d4e1046-bcea-458e-8a8e-5fe672c3b36a
+
+	column 'Fecha reporte'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 54efab77-92cf-499d-b3c9-bae230049312
+		summarizeBy: none
+		sourceColumn: Fecha reporte
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'CODIGO ENTIDAD'
+		dataType: string
+		lineageTag: d77b60da-2e56-422f-806d-b18c33f6de76
+		summarizeBy: none
+		sourceColumn: CODIGO ENTIDAD
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODRENGLON
+		dataType: string
+		lineageTag: fd7035c2-5101-40d1-bfe3-daad0d874846
+		summarizeBy: none
+		sourceColumn: CODRENGLON
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'VALOR EN PESOS'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 2b61ba77-3812-4b64-88c7-20c51dbb72d9
+		summarizeBy: sum
+		sourceColumn: VALOR EN PESOS
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tb_Balance = m
+		mode: import
+		source =
+				let
+				    Origen = PowerPlatform.Dataflows(null),
+				    Workspaces = Origen{[Id="Workspaces"]}[Data],
+				    #"ca53e802-ef7f-4429-b643-fe316dbbff4b" = Workspaces{[workspaceId="ca53e802-ef7f-4429-b643-fe316dbbff4b"]}[Data],
+				    #"210af2db-4205-47ea-b3cf-a4b57747d9f8" = #"ca53e802-ef7f-4429-b643-fe316dbbff4b"{[dataflowId="210af2db-4205-47ea-b3cf-a4b57747d9f8"]}[Data],
+				    tb_Balance_ = #"210af2db-4205-47ea-b3cf-a4b57747d9f8"{[entity="tb_Balance",version=""]}[Data],
+				    #"Filas filtradas" = Table.SelectRows(tb_Balance_, each [Fecha reporte] >= #date(2025, 1, 1)),
+				    #"Consultas combinadas" = Table.NestedJoin(#"Filas filtradas", {"CODIGO ENTIDAD"}, dm_Entidades, {"CODIGO ENTIDAD"}, "dm_Entidades", JoinKind.LeftOuter),
+				    #"Se expandió dm_Entidades" = Table.ExpandTableColumn(#"Consultas combinadas", "dm_Entidades", {"SIGLA"}, {"SIGLA"}),
+				    #"Filas filtradas1" = Table.SelectRows(#"Se expandió dm_Entidades", each [SIGLA] <> null),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas1",{"SIGLA"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
