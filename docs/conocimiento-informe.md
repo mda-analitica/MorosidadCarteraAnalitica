@@ -1,7 +1,7 @@
 # Conocimiento del informe: Morosidad del Sector Solidario
 
 Documento vivo. Registra lo que sabemos del informe de Power BI, las decisiones tomadas y lo que falta por aclarar.
-Última actualización: 2026-11-02.
+Última actualización: 2026-11-03. El detalle técnico (columnas, catálogo de cuentas, lógica de medidas y uso en visuales) está en `docs/diccionario-de-datos.md`.
 
 Convenciones: **[Confirmado]** lo dijo el dueño del informe. **[Verificado]** se comprobó en los archivos del modelo. **[Inferido]** es una deducción pendiente de confirmar.
 
@@ -14,7 +14,22 @@ Convenciones: **[Confirmado]** lo dijo el dueño del informe. **[Verificado]** s
 - **[Confirmado] Distribución:** Power BI Service, incrustado en un iframe dentro de una URL pública, sin inicio de sesión.
 - **[Confirmado] Datos:** públicos, extraídos de la página de la Superintendencia de la Economía Solidaria. Ninguno es confidencial.
 - **[Confirmado] Motivo de mejora:** principalmente la parte visual (estética).
-- **Implicación:** con acceso público no hay usuario autenticado. Las medidas `Nombre de usuario` y `Saludo de bienvenida` (basadas en `USERNAME()`) probablemente no funcionan en la versión publicada. Pendiente de verificar.
+- **Implicación:** con acceso público no hay usuario autenticado, así que las medidas basadas en `USERNAME()` no sirven (ver 1b).
+
+## 1b. Respuestas y decisiones del dueño (2026-11-03)
+
+- **[Confirmado] Documentación:** en archivos `.md`, con un diccionario de datos y las lógicas, escrito para que Claude lo consulte en el futuro (ver `docs/diccionario-de-datos.md`).
+- **[Confirmado] Edición:** solo el dueño trabaja en el informe. Claude hará los cambios directamente en los archivos del proyecto.
+- **[Confirmado] Alcance de los cambios:** se puede cambiar el diseño, el modelo, las tablas, las medidas y la lógica de UX y UI del informe.
+- **[Confirmado] Orden de trabajo:** por ahora **no** se hacen cambios (ni reorganizar medidas ni renombrarlas). Primero hay que entender todo el modelo.
+- **[Confirmado] Usuario:** `USERNAME()` solo sirve con usuario autenticado, y el informe es público. Por eso `Saludo de bienvenida` y `Nombre de usuario` no sirven. **[Verificado]** Ningún visual las usa.
+- **[Confirmado] Entidad seleccionada:** la elige siempre el usuario; no hay valor por defecto.
+- **[Confirmado] Celular:** aún no hay vista móvil. En el futuro se diseñará un visor público para celulares.
+- **[Confirmado] Entidades:** el modelo todavía no sabe cuáles se fusionan, cambian de nombre o se liquidan.
+- **[Confirmado] Alcance:** el informe por ahora solo mide a las cooperativas de ahorro y crédito.
+- **[Confirmado] Fecha de inicio:** desde 2025-01-01, porque desde esa fecha hay información de cartera en mora.
+- **[Confirmado] Fuente:** https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion; los datos pasan por flujos de datos (dataflows) y luego al modelo semántico.
+- **[Verificado] Uso de medidas (respuesta a "¿cuál se usa en qué visual?"):** las dos familias de entidad seleccionada se usan, y ambas son necesarias hoy. Las medidas sin uso en visuales son `Saldo`, `Ranking Mora`, `Saldo en mora sin filtros`, `Saldo en riesgo sin filtros`, `Saludo de bienvenida` y `Nombre de usuario`. Ver la tabla completa en el diccionario.
 
 ## 2. Definiciones de negocio
 
@@ -153,16 +168,13 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 - [ ] Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
 - [ ] Conciliación de mora (84xx) frente a cartera (14xx): decidir cuál es la base correcta del denominador de las tasas.
 - [ ] El caché termina en diciembre de 2025; confirmar si la versión publicada tiene datos más recientes.
-- [ ] Si el saludo de bienvenida se ve bien en la versión publicada.
 - [ ] Si `Comercial` agrupa 31 a 90 días por norma.
 
 **Preguntas sin responder** (se van planteando de a una):
-- Tema visual: conservar la estructura actual y mejorar colores, tipografía y fondos, o rehacer el diseño desde cero.
-- Guía de marca o paleta; qué es lo que menos gusta hoy; tamaño del iframe y uso en celular.
-- Refresco programado, frecuencia de llegada de datos y volumen de `tb_Balance`.
-- Entidades que se fusionan, cambian de nombre o se liquidan.
+- Tema visual: conservar la estructura actual y mejorar colores, tipografía y fondos, o rehacer el diseño desde cero (el dueño ya autorizó cambiar el diseño, falta la dirección).
+- Guía de marca o paleta; qué es lo que menos gusta hoy; tamaño del iframe.
+- Refresco programado y frecuencia de llegada de datos nuevos.
 - Qué segmentadores casi no se usan.
 - Un número de control del sector para validar el modelo.
-- Formato de la documentación final y si hay más personas editando el informe.
-- Si los cambios se editan directamente en los archivos `.tmdl` y `.json` o se guían desde Power BI Desktop.
-- Qué no se debe tocar del diseño.
+- Si "cooperativas de ahorro y crédito" incluye a las 32 multiactivas y 2 integrales con ahorro y crédito que hoy están en `dm_Entidades` (el diccionario las cuenta como parte del alcance).
+- Cómo se deben tratar las fusiones y liquidaciones de entidades cuando se defina.
