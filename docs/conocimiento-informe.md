@@ -26,7 +26,7 @@ Convenciones: **[Confirmado]** lo dijo el dueño del informe. **[Verificado]** s
 - **[Confirmado] Entidad seleccionada:** la elige siempre el usuario; no hay valor por defecto.
 - **[Confirmado] Celular:** aún no hay vista móvil. En el futuro se diseñará un visor público para celulares.
 - **[Confirmado] Entidades:** el modelo todavía no sabe cuáles se fusionan, cambian de nombre o se liquidan.
-- **[Confirmado] Alcance:** el informe por ahora solo mide a las cooperativas de ahorro y crédito.
+- **[Confirmado] Alcance:** el informe por ahora solo mide a las cooperativas de ahorro y crédito. Las 174 entidades de `dm_Entidades` (140 especializadas, 32 multiactivas y 2 integrales, todas con ahorro y crédito) están dentro del alcance.
 - **[Confirmado] Fecha de inicio:** desde 2025-01-01, porque desde esa fecha hay información de cartera en mora.
 - **[Confirmado] Fuente:** https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion; los datos pasan por flujos de datos (dataflows) y luego al modelo semántico.
 - **[Verificado] Uso de medidas (respuesta a "¿cuál se usa en qué visual?"):** las dos familias de entidad seleccionada se usan, y ambas son necesarias hoy. Las medidas sin uso en visuales son `Saldo`, `Ranking Mora`, `Saldo en mora sin filtros`, `Saldo en riesgo sin filtros`, `Saludo de bienvenida` y `Nombre de usuario`. Ver la tabla completa en el diccionario.
@@ -165,7 +165,7 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 
 **Por verificar:**
 - [ ] Confirmar con el PUC oficial qué es el grupo 1469 (parece cartera de empleados).
-- [ ] Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
+- [ ] **En curso (2026-11-03):** el dueño está revisando los dataflows para actualizar el modelo y volver a subirlo; cuando lo suba, releer el caché y revalidar septiembre y enero. Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
 - [ ] Conciliación de mora (84xx) frente a cartera (14xx): decidir cuál es la base correcta del denominador de las tasas.
 - [ ] El caché termina en diciembre de 2025; confirmar si la versión publicada tiene datos más recientes.
 - [ ] Si `Comercial` agrupa 31 a 90 días por norma.
@@ -176,5 +176,4 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 - Refresco programado y frecuencia de llegada de datos nuevos.
 - Qué segmentadores casi no se usan.
 - Un número de control del sector para validar el modelo.
-- Si "cooperativas de ahorro y crédito" incluye a las 32 multiactivas y 2 integrales con ahorro y crédito que hoy están en `dm_Entidades` (el diccionario las cuenta como parte del alcance).
 - Cómo se deben tratar las fusiones y liquidaciones de entidades cuando se defina.
