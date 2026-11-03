@@ -42,7 +42,7 @@ table dm_Entidades
 		annotation SummarizationSetBy = Automatic
 
 	column 'Filtros todos' = "Sin filtros"
-		lineageTag: 051ce49b-8929-4e87-81c4-21c76bc3c706
+		lineageTag: 62c7e854-77cc-4f9f-beea-d1ade31ad8a6
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic

@@ -78,12 +78,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Riesgo/Mora con entidad seleccionada"
+                  "Property": "Tasa mora con entidad seleccionada"
                 }
               },
-              "queryRef": "Medidas.Riesgo/Mora con entidad seleccionada",
-              "nativeQueryRef": "Riesgo/Mora",
-              "displayName": "Riesgo/Mora"
+              "queryRef": "Medidas.Tasa mora con entidad seleccionada",
+              "nativeQueryRef": "Tasa mora",
+              "displayName": "Tasa mora"
             }
           ],
           "fieldParameters": [
@@ -256,42 +256,35 @@
             "Property": "Tasa mora con entidad seleccionada"
           }
         },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "m",
-              "Entity": "Medidas",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Comparison": {
-                  "ComparisonKind": 1,
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "m"
-                        }
-                      },
-                      "Property": "Tasa mora con entidad seleccionada"
-                    }
-                  },
-                  "Right": {
-                    "Literal": {
-                      "Value": "0L"
-                    }
-                  }
-                }
+        "type": "Advanced"
+      },
+      {
+        "name": "1b8a37a42b49c0d26dbd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calendario"
               }
-            }
-          ]
+            },
+            "Property": "Nombre Mes"
+          }
         },
-        "howCreated": "User"
+        "type": "Categorical"
+      },
+      {
+        "name": "a1f2e659571a60080b84",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dm_Entidades"
+              }
+            },
+            "Property": "Filtros todos"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

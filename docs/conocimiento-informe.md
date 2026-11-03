@@ -31,6 +31,11 @@ Convenciones: **[Confirmado]** lo dijo el dueño del informe. **[Verificado]** s
 - **[Confirmado] Fuente:** https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion; los datos pasan por flujos de datos (dataflows) y luego al modelo semántico.
 - **[Verificado] Uso de medidas (respuesta a "¿cuál se usa en qué visual?"):** las dos familias de entidad seleccionada se usan, y ambas son necesarias hoy. Las medidas sin uso en visuales son `Saldo`, `Ranking Mora`, `Saldo en mora sin filtros`, `Saldo en riesgo sin filtros`, `Saludo de bienvenida` y `Nombre de usuario`. Ver la tabla completa en el diccionario.
 
+- **[Confirmado] Dirección visual (2026-11-03):** Claude puede cambiar la dirección visual, pero **creando páginas nuevas**. Las páginas existentes no se modifican.
+- **[Confirmado] Paleta y marca:** la actual está bien por ahora.
+- **[Verificado] Cambios del dueño en el modelo (2026-11-03):** datos actualizados hasta agosto de 2026, medida nueva `Cantidad de entidades` (`DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD])`), página nueva "Cantidad Entidades", rango de fechas de los segmentadores ampliado hasta 2026 y el gráfico de línea de "Por sector" ahora muestra `Tasa mora` por defecto.
+- **Diagnóstico de datos 2026:** ver `docs/diagnostico-datos-2026.md`. La caída de entidades en 2026 se debe a que el dataflow solo lee la primera hoja del Excel.
+
 ## 2. Definiciones de negocio
 
 - **[Confirmado] Riesgo / Mora** (idea de fondo): `Riesgo/Mora` es un indicador de alerta temprana. Si el riesgo crece frente a la mora, es probable que la mora suba en el corto plazo.
@@ -165,14 +170,13 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 
 **Por verificar:**
 - [ ] Confirmar con el PUC oficial qué es el grupo 1469 (parece cartera de empleados).
-- [ ] **En curso (2026-11-03):** el dueño está revisando los dataflows para actualizar el modelo y volver a subirlo; cuando lo suba, releer el caché y revalidar septiembre y enero. Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
+- [ ] **Diagnosticado (2026-11-03):** ver `docs/diagnostico-datos-2026.md`. Falta revisar los archivos fuente de septiembre 2025, marzo 2026, junio 2026 y enero 2025. Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
 - [ ] Conciliación de mora (84xx) frente a cartera (14xx): decidir cuál es la base correcta del denominador de las tasas.
 - [ ] El caché termina en diciembre de 2025; confirmar si la versión publicada tiene datos más recientes.
 - [ ] Si `Comercial` agrupa 31 a 90 días por norma.
 
 **Preguntas sin responder** (se van planteando de a una):
-- Tema visual: conservar la estructura actual y mejorar colores, tipografía y fondos, o rehacer el diseño desde cero (el dueño ya autorizó cambiar el diseño, falta la dirección).
-- Guía de marca o paleta; qué es lo que menos gusta hoy; tamaño del iframe.
+- Qué es lo que menos gusta hoy; tamaño del iframe.
 - Refresco programado y frecuencia de llegada de datos nuevos.
 - Qué segmentadores casi no se usan.
 - Un número de control del sector para validar el modelo.

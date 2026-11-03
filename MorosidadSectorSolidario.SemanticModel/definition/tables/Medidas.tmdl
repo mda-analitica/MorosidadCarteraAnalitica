@@ -196,6 +196,10 @@ table Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Cantidad de entidades' = DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD])
+		formatString: 0
+		lineageTag: cf1fa73f-4738-4937-a5f5-4dd080c68f22
+
 	partition Medidas = m
 		mode: import
 		source =

@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''Medidas''[Riesgo/Mora con entidad seleccionada]'"
+                                "Value": "'''Medidas''[Tasa mora con entidad seleccionada]'"
                               }
                             }
                           ]
@@ -109,7 +109,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''Medidas''[Riesgo/Mora con entidad seleccionada]'"
+                                      "Value": "'''Medidas''[Tasa mora con entidad seleccionada]'"
                                     }
                                   }
                                 ]
@@ -133,7 +133,7 @@
                         },
                         "valueMap": [
                           {
-                            "0": "Riesgo/Mora"
+                            "0": "Tasa mora"
                           }
                         ]
                       }

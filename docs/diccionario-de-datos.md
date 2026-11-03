@@ -4,7 +4,7 @@ Referencia técnica del modelo semántico y del informe, escrita para consulta f
 Cubre tablas, columnas, relaciones, catálogo de cuentas, medidas (con su lógica y dónde se usan), parámetros de campos y páginas.
 Complementa a `docs/conocimiento-informe.md`, que guarda el contexto de negocio, las decisiones y los pendientes.
 
-Última actualización: 2026-11-03. Fuente: archivos del proyecto PBIP y lectura del caché `cache.abf` (datos hasta diciembre de 2025).
+Última actualización: 2026-11-03. Fuente: archivos del proyecto PBIP y lectura del caché `cache.abf` (datos de enero de 2025 a agosto de 2026).
 
 ---
 
@@ -13,7 +13,7 @@ Complementa a `docs/conocimiento-informe.md`, que guarda el contexto de negocio,
 1. **Fuente pública:** la Superintendencia de la Economía Solidaria publica la información financiera de las entidades vigiladas en https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion (confirmado por el dueño).
 2. **Dataflows de Power BI Service:** los datos se cargan y limpian en dataflows y de ahí pasan al modelo semántico. El código de esos dataflows no está en este repo.
 3. **Modelo semántico** (`MorosidadSectorSolidario.SemanticModel`, cultura `es-CO`, modo Import).
-4. **Informe** (`MorosidadSectorSolidario.Report`): 4 páginas visibles y 2 tooltips ocultos, publicado en Power BI Service y embebido en un iframe público (sin inicio de sesión).
+4. **Informe** (`MorosidadSectorSolidario.Report`): 5 páginas visibles (incluida "Cantidad Entidades") y 2 tooltips ocultos, publicado en Power BI Service y embebido en un iframe público (sin inicio de sesión).
 
 Alcance actual (confirmado): solo cooperativas de ahorro y crédito, y solo desde 2025-01-01, porque desde esa fecha hay información de cartera en mora.
 
@@ -31,7 +31,9 @@ Alcance actual (confirmado): solo cooperativas de ahorro y crédito, y solo desd
 ## 2. Tablas y columnas
 
 ### `tb_Balance` (hechos)
-Una fila por fecha, entidad y cuenta del PUC. 4.335.629 filas en el caché (enero a diciembre de 2025).
+Una fila por fecha, entidad y cuenta del PUC. 5.689.979 filas en el caché (enero de 2025 a agosto de 2026).
+
+Archivos fuente: `Supersolidaria_PUC_AAAA_MM_DD.xlsx`, con las columnas `CODIGO ENTIDAD`, `CODRENGLON`, `NOMBRE CUENTA` y `VALOR EN PESOS`. Desde 2026 los archivos pueden venir en varias hojas (`Parte 1`, `Parte 2`) y con los códigos como número. Ver `docs/diagnostico-datos-2026.md`.
 
 | Columna | Tipo | Descripción |
 |---|---|---|
@@ -237,6 +239,11 @@ Fijan la entidad con `dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada
 | `Saldo en riesgo sin filtros` | Fija la entidad con `SELECTEDVALUE` | No se usa |
 | `Saldo en mora sin filtros` | Fórmula igual a `Saldo en mora` (no fija la entidad) | No se usa |
 
+### Control
+| Medida | Lógica | Dónde se usa |
+|---|---|---|
+| `Cantidad de entidades` | `DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD])` | Cantidad Entidades |
+
 ### Apoyo visual
 | Medida | Lógica | Dónde se usa |
 |---|---|---|
@@ -256,6 +263,7 @@ Todas miden 1280×720 (los tooltips son más chicos). Navegación: **Inicio** �
 | **Por entidades** (benchmarking) | Tarjeta con 6 indicadores; barras de `Tasa mora`, `Tasa riesgo` y `Riesgo/Mora` por entidad, con la entidad seleccionada resaltada | Mes, entidades, entidad seleccionada, `Línea` |
 | **Por entidad** | Línea de tiempo con indicador elegible; barras por línea de `Tasa mora`, `Tasa riesgo` y `Riesgo/Mora`; torta de composición de la mora | Mes, rango de fechas, entidad seleccionada, indicador (`Parámetro`) |
 | **Por sector** | Igual que Por entidad, pero con desagregación elegible (departamento, municipio, tipo de entidad o sin filtros) | Mes, rango de fechas, tipo de entidad, departamento, municipio, indicador, dimensión |
+| **Cantidad Entidades** | Página nueva del dueño (2026-11-03) con un visual de cantidad de entidades | |
 | **Tooltip-Mora** (oculta) | Saldo total y tabla de saldo y tasa de mora por rango de días (`Altura`) | |
 | **Tooltip-Riesgo** (oculta) | Saldo total y tabla de saldo y tasa de riesgo por categoría | |
 
@@ -263,7 +271,10 @@ El fondo de las páginas son imágenes estáticas (6 PNG en `StaticResources/Reg
 
 Filtro a nivel de informe: se excluyen las filas con `dm_Entidades[SIGLA]` nula (bloqueado para el usuario).
 
-## 8. Calidad de datos conocida (caché hasta diciembre de 2025)
+## 8. Calidad de datos conocida
+
+El diagnóstico completo de 2026 y el plan de corrección están en `docs/diagnostico-datos-2026.md`. Resumen: en 2026 el dataflow solo carga la primera hoja del Excel y se pierden unas 80 entidades por mes.
+
 
 - **Septiembre 2025:** solo 11 entidades (172 en los otros meses), 10.216 filas en grupos duplicados y negativos en la entidad `2773`. Las tasas de ese mes no son válidas.
 - **Enero 2025:** la mora (84xx) del sector es la mitad de la de febrero, así que su tasa de mora (3,89 %) no es comparable con las demás (alrededor de 6,2 % a 6,6 %). Coincide con la fecha desde la que hay datos de mora (confirmado por el dueño), lo que sugiere que enero llegó incompleto.
