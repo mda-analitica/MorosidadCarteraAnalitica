@@ -186,7 +186,7 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 **Recordar al dueño:**
 - [x] Documento de indicadores (Título V y anexo técnico): recibido el 2026-11-04.
 - [ ] Abrir el PBIP en Power BI Desktop, actualizar y comparar con `docs/validacion-medidas.md`.
-- [ ] Decidir si se agrega un botón a la página "Cobertura de cartera" en Inicio (implica modificar una página existente).
+- [x] Botón a "Cobertura de cartera" en Inicio: agregado (2026-11-04).
 
 **Por verificar:**
 - [x] 1469 es "Créditos a empleados" (catálogo de cuentas): 05 a 25 vivienda, 30 a 50 consumo.

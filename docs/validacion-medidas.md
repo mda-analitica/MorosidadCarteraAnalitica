@@ -79,3 +79,27 @@ En las filas por modalidad o línea, la cobertura usa solo el deterioro individu
 | 2026-06-30 | 169 |
 | 2026-07-31 | 167 |
 | 2026-08-31 | 167 |
+
+## Cuenta 84 frente a cuenta 14 (validado el 2026-11-04)
+
+Comparación del total de la cuenta 84 (todas las franjas) con la cartera bruta de la cuenta 14 (categorías A a E), de octubre de 2025 a agosto de 2026. "Iguales" = diferencia menor a $1 millón por entidad y mes.
+
+| Nivel | Casos entidad-mes | Iguales | % | Cuenta 14 (prom. mes) | Cuenta 84 (prom. mes) | Diferencia |
+|---|---|---|---|---|---|---|
+| Total de la entidad | 1.856 | 1.839 | 99,1 % | | | |
+| Modalidad Vivienda | 946 | 927 | 98,0 % | 918,7 | 943,3 | +2,7 % |
+| Modalidad Consumo | 1.845 | 1.782 | 96,6 % | 14.713,1 | 14.691,0 | −0,2 % |
+| Línea Consumo con libranza | 1.544 | 1.291 | 83,6 % | 7.024,2 | 6.972,9 | −0,7 % |
+| Línea Consumo sin libranza | 1.845 | 1.575 | 85,4 % | 7.689,0 | 7.718,1 | +0,4 % |
+| Modalidad Microcrédito (con productivo) | 560 | 501 | 89,5 % | 2.059,5 | 1.842,9 | −10,5 % |
+| Modalidad Comercial | 1.281 | 1.181 | 92,2 % | 2.337,4 | 2.547,9 | +9,0 % |
+
+Cifras en miles de millones de pesos.
+
+Conclusiones:
+- En el total de cada entidad, la 84 y la 14 son iguales en el 99,1 % de los casos. Las excepciones se concentran en julio de 2026 (por ejemplo `2660` y `1344` sin cuenta 84 ese mes).
+- Por línea o modalidad **no siempre son iguales**: algunas entidades clasifican distinto en cada reporte.
+  - Microcrédito frente a Comercial: `3246` (unos $227 mil millones en agosto de 2026), `1198` y `3341`.
+  - Consumo con libranza frente a sin libranza: `997`, `2675`, `13024` y `1344` (se compensa dentro de la modalidad Consumo).
+  - Vivienda: `561` (febrero y junio de 2026) y `1386`.
+- Por eso cada tasa usa el denominador de su propia cuenta: la mora sobre el total de la 84 y el riesgo sobre la cartera bruta de la 14.

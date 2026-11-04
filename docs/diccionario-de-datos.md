@@ -205,11 +205,11 @@ La cobertura se calcula por **modalidad**: en consumo el deterioro no separa con
 | **Cobertura de cartera** (nueva, 2026-11-04) | Tendencia de la cobertura; tarjetas (cobertura, deterioro / cartera bruta, cobertura C-D-E, deterioro total); barras por modalidad de cobertura, cobertura C-D-E y tasa de riesgo. Usa la familia "con entidad seleccionada": sin entidad elegida muestra el sector |
 | **Tooltip-Mora**, **Tooltip-Riesgo** (ocultas) | Saldo y tasa por franja de mora o por categoría |
 
-La página "Cobertura de cartera" no tiene botón en Inicio (las páginas existentes no se modificaron); se llega por la lista de páginas.
+Inicio tiene un cuarto botón, "Ver cobertura de cartera" (agregado el 2026-11-04 a pedido del dueño; las cuatro filas de botones se reacomodaron para que quepan).
 
 ## 7. Calidad de datos conocida
 
 - **Septiembre 2025:** 11 entidades. Fuera del alcance desde el 2026-11-04.
-- **Clasificación distinta entre la cuenta 14 y la 84** (validado de octubre de 2025 a agosto de 2026): en el 94,5 % de los casos entidad-mes, (1448 + 1454 + 1455 + 1476) = 8420 y (1461 + 1462) = 8425 al peso. Excepciones recurrentes: `3246` (unos $197 mil millones al mes de microcrédito o productivo reportados como comercial en la 84), `1198` (unos $15 mil millones) y `3341` (unos $7 mil millones). `561` no reporta la 8425 en febrero y junio de 2026. Por eso la tasa de mora usa como denominador la propia cuenta 84.
+- **Clasificación distinta entre la cuenta 14 y la 84** (validado de octubre de 2025 a agosto de 2026): en el 94,5 % de los casos entidad-mes, (1448 + 1454 + 1455 + 1476) = 8420 y (1461 + 1462) = 8425 al peso. Excepciones recurrentes: `3246` (unos $197 mil millones al mes de microcrédito o productivo reportados como comercial en la 84), `1198` (unos $15 mil millones) y `3341` (unos $7 mil millones). `561` no reporta la 8425 en febrero y junio de 2026. La comparación completa por línea y modalidad está en `docs/validacion-medidas.md`. Por eso la tasa de mora usa como denominador la propia cuenta 84.
 - El diagnóstico de 2026 (hojas del Excel, tipos de dato, directorio estático) está en `docs/diagnostico-datos-2026.md`. Con los datos del 2026-11-04, agosto de 2026 ya tiene 167 entidades.
 - **Pendiente:** el modelo no sabe qué entidades se fusionan, cambian de nombre o se liquidan.
