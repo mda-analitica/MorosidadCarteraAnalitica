@@ -45,7 +45,8 @@ table 'Indicadores gráfico de líneas'
 				    ("Saldo total", NAMEOF('Medidas'[Saldo total]), 2),
 				    ("Tasa mora", NAMEOF('Medidas'[Tasa mora]), 3),
 				    ("Tasa riesgo", NAMEOF('Medidas'[Tasa riesgo]), 4),
-				    ("Riesgo/Mora", NAMEOF('Medidas'[Riesgo/Mora]), 5)
+				    ("Riesgo/Mora", NAMEOF('Medidas'[Riesgo/Mora]), 5),
+				    ("Cobertura", NAMEOF('Medidas'[Cobertura cartera en riesgo]), 6)
 				}
 
 	annotation PBI_Id = 6b2cd78f69644bc39e0b9064efb61e76
