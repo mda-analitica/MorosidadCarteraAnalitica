@@ -54,7 +54,7 @@ table Calendario
 				    #"7d7a12b8-9d3c-48ad-ab9b-018ceb413f07" = Workspaces{[workspaceId="7d7a12b8-9d3c-48ad-ab9b-018ceb413f07"]}[Data],
 				    #"3103eda1-7a05-4d3d-8016-d3dcdd60938c" = #"7d7a12b8-9d3c-48ad-ab9b-018ceb413f07"{[dataflowId="3103eda1-7a05-4d3d-8016-d3dcdd60938c"]}[Data],
 				    Calendario_ = #"3103eda1-7a05-4d3d-8016-d3dcdd60938c"{[entity="Calendario",version=""]}[Data],
-				    #"Filas filtradas" = Table.SelectRows(Calendario_, each [Fecha] > #date(2025, 1, 1)),
+				    #"Filas filtradas" = Table.SelectRows(Calendario_, each [Fecha] >= #date(2025, 10, 1)),
 				    #"Otras columnas quitadas" = Table.SelectColumns(#"Filas filtradas",{"Fecha", "Año", "Mes", "Nombre Mes"}),
 				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Otras columnas quitadas",{{"Año", type text}})
 				in

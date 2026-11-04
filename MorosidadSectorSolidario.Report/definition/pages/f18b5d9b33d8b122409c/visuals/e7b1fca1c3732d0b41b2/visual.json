@@ -588,65 +588,45 @@
           }
         },
         "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "d",
-              "Entity": "dm_Cuentas",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Not": {
-                  "Expression": {
-                    "In": {
-                      "Expressions": [
-                        {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "d"
-                              }
-                            },
-                            "Property": "Línea"
-                          }
-                        }
-                      ],
-                      "Values": [
-                        [
-                          {
-                            "Literal": {
-                              "Value": "null"
-                            }
-                          }
-                        ]
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
         "howCreated": "User",
+        "isHiddenInViewMode": true,
+        "isLockedInViewMode": true,
         "objects": {
           "general": [
             {
-              "properties": {
-                "isInvertedSelectionMode": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "true"
-                    }
-                  }
-                }
-              }
+              "properties": {}
             }
           ]
         }
+      },
+      {
+        "name": "9493d46f2b6b07850748",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Parámetro 2"
+              }
+            },
+            "Property": "Parámetro"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b57afc5f6e2db0c0a092",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dm_Entidades"
+              }
+            },
+            "Property": "MUNICIPIO"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
       }
     ]
   }

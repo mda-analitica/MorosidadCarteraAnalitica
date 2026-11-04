@@ -46,7 +46,7 @@ table tb_Balance
 				    #"ca53e802-ef7f-4429-b643-fe316dbbff4b" = Workspaces{[workspaceId="ca53e802-ef7f-4429-b643-fe316dbbff4b"]}[Data],
 				    #"210af2db-4205-47ea-b3cf-a4b57747d9f8" = #"ca53e802-ef7f-4429-b643-fe316dbbff4b"{[dataflowId="210af2db-4205-47ea-b3cf-a4b57747d9f8"]}[Data],
 				    tb_Balance_ = #"210af2db-4205-47ea-b3cf-a4b57747d9f8"{[entity="tb_Balance",version=""]}[Data],
-				    #"Filas filtradas" = Table.SelectRows(tb_Balance_, each [Fecha reporte] >= #date(2025, 1, 1)),
+				    #"Filas filtradas" = Table.SelectRows(tb_Balance_, each [Fecha reporte] >= #date(2025, 10, 1)),
 				    #"Consultas combinadas" = Table.NestedJoin(#"Filas filtradas", {"CODIGO ENTIDAD"}, dm_Entidades, {"CODIGO ENTIDAD"}, "dm_Entidades", JoinKind.LeftOuter),
 				    #"Se expandió dm_Entidades" = Table.ExpandTableColumn(#"Consultas combinadas", "dm_Entidades", {"SIGLA"}, {"SIGLA"}),
 				    #"Filas filtradas1" = Table.SelectRows(#"Se expandió dm_Entidades", each [SIGLA] <> null),

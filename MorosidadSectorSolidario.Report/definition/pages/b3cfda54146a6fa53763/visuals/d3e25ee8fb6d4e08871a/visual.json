@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COOPRUDEA'"
+                                "Value": "'COEDA'"
                               }
                             }
                           ]
@@ -132,7 +132,7 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "'code'"
+                            "Value": "'cooprudea'"
                           }
                         }
                       }

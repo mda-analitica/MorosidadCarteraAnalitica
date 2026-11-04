@@ -17,19 +17,55 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "HierarchyLevel": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Calendario"
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Calendario"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "Fecha"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
                     }
                   },
-                  "Property": "Nombre Mes"
+                  "Level": "Año"
                 }
               },
-              "queryRef": "Calendario.Nombre Mes",
-              "nativeQueryRef": "Mes",
-              "active": true,
-              "displayName": "Mes"
+              "queryRef": "Calendario.Fecha.Variación.Jerarquía de fechas.Año",
+              "nativeQueryRef": "Fecha Año",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Calendario"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "Fecha"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
+                    }
+                  },
+                  "Level": "Mes"
+                }
+              },
+              "queryRef": "Calendario.Fecha.Variación.Jerarquía de fechas.Mes",
+              "nativeQueryRef": "Fecha Mes",
+              "active": true
             }
           ]
         },
@@ -103,23 +139,6 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Calendario"
-                  }
-                },
-                "Property": "Nombre Mes"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ]
       }
     },
     "objects": {
@@ -259,29 +278,51 @@
         "type": "Advanced"
       },
       {
-        "name": "1b8a37a42b49c0d26dbd",
+        "name": "5c2e4b0e0b52a9ee8430",
         "field": {
-          "Column": {
+          "HierarchyLevel": {
             "Expression": {
-              "SourceRef": {
-                "Entity": "Calendario"
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Calendario"
+                      }
+                    },
+                    "Name": "Variación",
+                    "Property": "Fecha"
+                  }
+                },
+                "Hierarchy": "Jerarquía de fechas"
               }
             },
-            "Property": "Nombre Mes"
+            "Level": "Año"
           }
         },
-        "type": "Categorical"
+        "type": "Advanced"
       },
       {
-        "name": "a1f2e659571a60080b84",
+        "name": "ea7232626b9d146c0b9c",
         "field": {
-          "Column": {
+          "HierarchyLevel": {
             "Expression": {
-              "SourceRef": {
-                "Entity": "dm_Entidades"
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Calendario"
+                      }
+                    },
+                    "Name": "Variación",
+                    "Property": "Fecha"
+                  }
+                },
+                "Hierarchy": "Jerarquía de fechas"
               }
             },
-            "Property": "Filtros todos"
+            "Level": "Mes"
           }
         },
         "type": "Categorical"

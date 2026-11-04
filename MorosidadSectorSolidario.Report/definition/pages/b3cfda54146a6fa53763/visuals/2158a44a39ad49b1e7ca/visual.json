@@ -17,19 +17,55 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "HierarchyLevel": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Calendario"
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Calendario"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "Fecha"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
                     }
                   },
-                  "Property": "Nombre Mes"
+                  "Level": "Año"
                 }
               },
-              "queryRef": "Calendario.Nombre Mes",
-              "nativeQueryRef": "Mes",
-              "active": true,
-              "displayName": "Mes"
+              "queryRef": "Calendario.Fecha.Variación.Jerarquía de fechas.Año",
+              "nativeQueryRef": "Fecha Año",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Calendario"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "Fecha"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
+                    }
+                  },
+                  "Level": "Mes"
+                }
+              },
+              "queryRef": "Calendario.Fecha.Variación.Jerarquía de fechas.Mes",
+              "nativeQueryRef": "Fecha Mes",
+              "active": true
             }
           ]
         },
@@ -68,23 +104,6 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Calendario"
-                  }
-                },
-                "Property": "Nombre Mes"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ]
       }
     },
     "objects": {

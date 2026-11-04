@@ -95,12 +95,50 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COOPRUDEA'"
+                                "Value": "'COEDA'"
                               }
                             }
                           ]
                         ]
                       }
+                    }
+                  }
+                ]
+              }
+            },
+            "selfFilter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "d",
+                    "Entity": "dm_EntidadSeleccionada",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Contains": {
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "SIGLA"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'coeda'"
+                          }
+                        }
+                      }
+                    },
+                    "Annotations": {
+                      "PowerBI.MParameterBehavior": 1
                     }
                   }
                 ]

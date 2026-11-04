@@ -291,16 +291,6 @@ cultureInfo es-CO
 			          }
 			        },
 			        {
-			          "Tipo de entidad": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
 			          "Tipo Entidad": {
 			            "State": "Suggested",
 			            "Source": {
@@ -369,7 +359,7 @@ cultureInfo es-CO
 			          }
 			        },
 			        {
-			          "Entidad": {
+			          "Entidades a comparar": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -379,7 +369,7 @@ cultureInfo es-CO
 			          }
 			        },
 			        {
-			          "Entidades a comparar": {
+			          "Entidad": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -1285,16 +1275,6 @@ cultureInfo es-CO
 			            },
 			            "Weight": 0.605
 			          }
-			        },
-			        {
-			          "Saldo total": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -1624,6 +1604,27 @@ cultureInfo es-CO
 			        {
 			          "parámetro orden": {
 			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dm_entidades.filtros_todos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dm_Entidades",
+			          "ConceptualProperty": "Filtros todos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sin filtros": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
