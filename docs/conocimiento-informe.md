@@ -1,7 +1,7 @@
 # Conocimiento del informe: Morosidad del Sector Solidario
 
 Documento vivo. Registra lo que sabemos del informe de Power BI, las decisiones tomadas y lo que falta por aclarar.
-Última actualización: 2026-11-03. El detalle técnico (columnas, catálogo de cuentas, lógica de medidas y uso en visuales) está en `docs/diccionario-de-datos.md`.
+Última actualización: 2026-11-04. El detalle técnico (columnas, catálogo de cuentas, lógica de medidas y uso en visuales) está en `docs/diccionario-de-datos.md`.
 
 Convenciones: **[Confirmado]** lo dijo el dueño del informe. **[Verificado]** se comprobó en los archivos del modelo. **[Inferido]** es una deducción pendiente de confirmar.
 
@@ -36,11 +36,27 @@ Convenciones: **[Confirmado]** lo dijo el dueño del informe. **[Verificado]** s
 - **[Verificado] Cambios del dueño en el modelo (2026-11-03):** datos actualizados hasta agosto de 2026, medida nueva `Cantidad de entidades` (`DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD])`), página nueva "Cantidad Entidades", rango de fechas de los segmentadores ampliado hasta 2026 y el gráfico de línea de "Por sector" ahora muestra `Tasa mora` por defecto.
 - **Diagnóstico de datos 2026:** ver `docs/diagnostico-datos-2026.md`. La caída de entidades en 2026 se debe a que el dataflow solo lee la primera hoja del Excel.
 
+## 1c. Decisiones del dueño y cambios aplicados (2026-11-04)
+
+Insumos nuevos: catálogo de cuentas (`20231103_formato_catalogo_unico_cuentas.XLSx`), Circular Básica Contable y Financiera, Título V (indicadores financieros), y su anexo técnico (`anexo_tecnico_titulo_v_indicadores_financieros_esigna_1_0_0.xlsx`).
+
+- **[Confirmado] Base de trabajo:** los archivos PBIP entregados el 2026-11-04 reemplazan a los anteriores; la versión previa queda solo en el historial de git (incluida la página "Cantidad Entidades").
+- **[Confirmado] Fechas:** solo datos desde el corte de octubre de 2025.
+- **[Confirmado] Tasa por línea:** la tasa de cada línea se divide por la cartera de esa misma línea (antes se dividía por la cartera total de la entidad).
+- **[Confirmado] Fuente de cada indicador:** la mora está en la cuenta 84; la cartera en riesgo (B a E) y sin riesgo (A) en la cuenta 14. Por eso `Tasa mora` = mora 84 / total 84 de la línea, y `Tasa riesgo` = B a E / cartera bruta 14 de la línea.
+- **[Confirmado] Productivos:** la cartera productiva (1476) era antes microcrédito, así que se agrupa con Microcrédito. Comercial va aparte. **[Verificado]** En la cuenta 84 los productivos se reportan en 8420 (38 de 43 entidades cuadran al peso); unas pocas entidades (`3246`, `1198`, `3341`) mandan una parte a 8425.
+- **[Confirmado] Cobertura:** se calcula sobre la **cartera en riesgo** (B a E), no sobre la mora. Por modalidad solo usa el deterioro individual; el deterioro general solo entra en la cobertura total. Indicador secundario: deterioro / cartera bruta (fórmula literal del anexo, 7,17 % en agosto de 2026).
+- **[Confirmado] Audiencia:** lo usan todos (gerencias, analistas, gremio); no se necesita RLS porque los datos son públicos.
+- **[Verificado] Errata del anexo técnico:** la fórmula de cobertura comercial repite la de microcrédito. El modelo usa 1465 / cartera comercial B a E.
+- **Entrega:** Claude no puede reescribir el `.pbix` (binario); trabaja en el PBIP, que el dueño abre en Power BI Desktop, actualiza y guarda como `.pbix`.
+- Cambios aplicados: ver `docs/diccionario-de-datos.md` (modelo) y `docs/validacion-medidas.md` (valores esperados).
+
 ## 2. Definiciones de negocio
 
 - **[Confirmado] Riesgo / Mora** (idea de fondo): `Riesgo/Mora` es un indicador de alerta temprana. Si el riesgo crece frente a la mora, es probable que la mora suba en el corto plazo.
 - **[Confirmado] Cartera en riesgo:** toda la cartera con calificación distinta de A (categorías B a E).
-- **[Confirmado] Tasa de mora:** cartera con mora mayor a 30 o 60 días, según la línea de crédito, sobre la cartera total.
+- **[Confirmado] Tasa de mora:** cartera con mora mayor a 30 o 60 días, según la línea de crédito, sobre el total de la cuenta 84 de la misma línea (actualizado 2026-11-04).
+- **[Confirmado] Cobertura:** deterioro / cartera en riesgo (B a E). Por modalidad, solo deterioro individual; en el total, individual + general (2026-11-04).
 - **[Verificado] Umbral de mora por línea** (catálogo `dm_Cuentas`):
 
 | Línea | Es mora desde |
@@ -81,6 +97,8 @@ Relaciones:
 - `dm_CuentasIndice` numera los rangos de mora para ordenarlos y cambia "en adelante" por "o más". Hay un reemplazo manual `"4. De 91 a 120"` → `"3. De 91 a 120"` para unificar el orden entre Microcrédito y Comercial. Es un parche frágil.
 
 ## 4b. Hallazgos al leer los datos del caché (`cache.abf`)
+
+> Histórico (2026-11-03). Las secciones 3 a 7 describen el modelo antes de los cambios del 2026-11-04; el modelo vigente está en `docs/diccionario-de-datos.md`.
 
 Se abrió el caché local del modelo (formato Analysis Services con compresión XPress9) con la librería `pbixray`. Es una **copia de los datos cargados en Desktop**, no necesariamente la versión publicada. Todos los valores de abajo son **[Verificado]** contra ese caché.
 
@@ -166,10 +184,15 @@ Tamaño 1280×720. Orden: Inicio, Por entidades, Por entidad, Por sector, Toolti
 ## 9. Pendientes
 
 **Recordar al dueño:**
-- [ ] **Volver a pasar el documento de CAMEL** para leerlo y citar las definiciones oficiales.
+- [x] Documento de indicadores (Título V y anexo técnico): recibido el 2026-11-04.
+- [ ] Abrir el PBIP en Power BI Desktop, actualizar y comparar con `docs/validacion-medidas.md`.
+- [ ] Decidir si se agrega un botón a la página "Cobertura de cartera" en Inicio (implica modificar una página existente).
 
 **Por verificar:**
-- [ ] Confirmar con el PUC oficial qué es el grupo 1469 (parece cartera de empleados).
+- [x] 1469 es "Créditos a empleados" (catálogo de cuentas): 05 a 25 vivienda, 30 a 50 consumo.
+- [x] Conciliación 84 frente a 14: resuelta con denominadores separados (ver 1c).
+- [x] Comercial agrupa 31 a 90 días en la cuenta 8425 (así viene el reporte).
+- [ ] Aclarar con la Supersolidaria por qué `3246`, `1198` y `3341` reportan parte de microcrédito/productivo como comercial en la cuenta 84.
 - [ ] **Diagnosticado (2026-11-03):** ver `docs/diagnostico-datos-2026.md`. Falta revisar los archivos fuente de septiembre 2025, marzo 2026, junio 2026 y enero 2025. Septiembre 2025 (11 entidades, filas duplicadas y negativos) y enero 2025 (mora a la mitad): confirmar en el dataflow si es un error de carga o un dato así en la fuente, y decidir cómo tratarlos (excluir el mes, corregir en el dataflow o avisar en el informe).
 - [ ] Conciliación de mora (84xx) frente a cartera (14xx): decidir cuál es la base correcta del denominador de las tasas.
 - [ ] El caché termina en diciembre de 2025; confirmar si la versión publicada tiene datos más recientes.

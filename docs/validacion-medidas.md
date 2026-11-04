@@ -2,6 +2,7 @@
 
 Calculados en Python con los datos del .pbix entregado el 2026-11-04 y el catálogo de `docs/referencia/catalogo-cuentas-modelo.csv`.
 Sirven para comprobar el modelo en Power BI Desktop después de actualizar. Cifras en miles de millones de pesos.
+Cómo comprobar: en una matriz de Power BI, ponga `dm_Cuentas[Modalidad]` (o `Línea`) en filas, filtre `Calendario[Fecha]` al corte y agregue las medidas base (`Saldo total`, `Cartera total cuenta 84`, `Tasa riesgo`, `Tasa mora`, `Riesgo/Mora`, `Deterioro total`, `Cobertura cartera en riesgo`, `Deterioro sobre cartera bruta`, `Cobertura individual CDE`). Para una entidad, filtre `dm_Entidades[CODIGO ENTIDAD]`.
 En las filas por modalidad o línea, la cobertura usa solo el deterioro individual; en el total suma también el deterioro general.
 
 ### Sector (todas las entidades)

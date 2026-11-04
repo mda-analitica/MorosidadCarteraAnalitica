@@ -4,26 +4,25 @@ Referencia técnica del modelo semántico y del informe, escrita para consulta f
 Cubre tablas, columnas, relaciones, catálogo de cuentas, medidas (con su lógica y dónde se usan), parámetros de campos y páginas.
 Complementa a `docs/conocimiento-informe.md`, que guarda el contexto de negocio, las decisiones y los pendientes.
 
-Última actualización: 2026-11-03. Fuente: archivos del proyecto PBIP y lectura del caché `cache.abf` (datos de enero de 2025 a agosto de 2026).
+Última actualización: 2026-11-04. Fuente: archivos del proyecto PBIP, datos del `.pbix` entregado el 2026-11-04 (septiembre de 2025 a agosto de 2026), Circular Básica Contable y Financiera, Título V, y su anexo técnico de indicadores.
 
 ---
 
 ## 1. Flujo de datos
 
-1. **Fuente pública:** la Superintendencia de la Economía Solidaria publica la información financiera de las entidades vigiladas en https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion (confirmado por el dueño).
+1. **Fuente pública:** la Superintendencia de la Economía Solidaria publica la información financiera de las entidades vigiladas en https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion.
 2. **Dataflows de Power BI Service:** los datos se cargan y limpian en dataflows y de ahí pasan al modelo semántico. El código de esos dataflows no está en este repo.
 3. **Modelo semántico** (`MorosidadSectorSolidario.SemanticModel`, cultura `es-CO`, modo Import).
-4. **Informe** (`MorosidadSectorSolidario.Report`): 5 páginas visibles (incluida "Cantidad Entidades") y 2 tooltips ocultos, publicado en Power BI Service y embebido en un iframe público (sin inicio de sesión).
+4. **Informe** (`MorosidadSectorSolidario.Report`): 5 páginas visibles y 2 tooltips ocultos, publicado en Power BI Service y embebido en un iframe público (sin inicio de sesión).
 
-Alcance actual (confirmado): solo cooperativas de ahorro y crédito, y solo desde 2025-01-01, porque desde esa fecha hay información de cartera en mora.
+Alcance (confirmado): solo cooperativas de ahorro y crédito, y solo desde el corte de **octubre de 2025** (decisión del 2026-11-04; septiembre de 2025 llegó con 11 entidades).
 
 | Tabla del modelo | Origen |
 |---|---|
 | `tb_Balance` | Dataflow `210af2db-4205-47ea-b3cf-a4b57747d9f8` (workspace `ca53e802-ef7f-4429-b643-fe316dbbff4b`), entidad `tb_Balance` |
 | `dm_Entidades` | Dataflow `cc8c038e-23dd-4a57-97cd-4bfe5e79b796` (mismo workspace), entidad `Entidades_PUC` |
 | `Calendario` | Dataflow `3103eda1-7a05-4d3d-8016-d3dcdd60938c` (workspace `7d7a12b8-9d3c-48ad-ab9b-018ceb413f07`), entidad `Calendario` |
-| `dm_Cuentas` | Tabla escrita a mano dentro del modelo (datos incrustados) |
-| `dm_CuentasIndice` | Consulta auxiliar escrita a mano (solo se usa para armar `dm_Cuentas`; no se carga como tabla) |
+| `dm_Cuentas` | Tabla escrita en Power Query (`#table`) dentro del modelo. Copia legible en `docs/referencia/catalogo-cuentas-modelo.csv` |
 | `dm_EntidadSeleccionada` | Copia de `dm_Entidades` (referencia de la consulta) |
 | `Medidas` | Tabla vacía que solo contiene las medidas |
 | `Parámetro`, `Parámetro 2`, `Indicadores gráfico de líneas` | Parámetros de campos (tablas calculadas) |
@@ -31,59 +30,59 @@ Alcance actual (confirmado): solo cooperativas de ahorro y crédito, y solo desd
 ## 2. Tablas y columnas
 
 ### `tb_Balance` (hechos)
-Una fila por fecha, entidad y cuenta del PUC. 5.689.979 filas en el caché (enero de 2025 a agosto de 2026).
-
-Archivos fuente: `Supersolidaria_PUC_AAAA_MM_DD.xlsx`, con las columnas `CODIGO ENTIDAD`, `CODRENGLON`, `NOMBRE CUENTA` y `VALOR EN PESOS`. Desde 2026 los archivos pueden venir en varias hojas (`Parte 1`, `Parte 2`) y con los códigos como número. Ver `docs/diagnostico-datos-2026.md`.
+Una fila por fecha, entidad y cuenta del PUC (todas las clases, 1 a 9, a 6 dígitos; incluye las filas de total de cada cuenta, terminadas en `00`).
 
 | Columna | Tipo | Descripción |
 |---|---|---|
-| `Fecha reporte` | Fecha | Cierre de mes del reporte (último día del mes). Se filtra `>= 2025-01-01`. |
+| `Fecha reporte` | Fecha | Cierre de mes del reporte. Se filtra `>= 2025-10-01`. |
 | `CODIGO ENTIDAD` | Texto | Código de la entidad en la Supersolidaria. Une con `dm_Entidades`. |
-| `CODRENGLON` | Texto | Código de cuenta del PUC (renglón). Une con `dm_Cuentas`. |
-| `VALOR EN PESOS` | Entero | Saldo de la cuenta en pesos colombianos. Puede ser negativo. |
+| `CODRENGLON` | Texto | Código de cuenta del PUC. Une con `dm_Cuentas`. |
+| `VALOR EN PESOS` | Entero | Saldo de la cuenta en pesos. Las cuentas de deterioro (CR) vienen en positivo. |
 
-Lógica de carga: se filtran fechas desde 2025-01-01, se cruza con `dm_Entidades` y se descartan las filas cuya entidad no está allí (así solo quedan las entidades del alcance).
+Lógica de carga: fechas desde 2025-10-01, cruce con `dm_Entidades` y descarte de las filas cuya entidad no está allí.
 
 ### `dm_Entidades` (dimensión)
-174 entidades. Tipos: 140 Especializada de ahorro y crédito, 32 Multiactiva con ahorro y crédito, 2 Integral con ahorro y crédito. `CODIGO ENTIDAD` es único. Las entidades `1271` y `1376` no tienen balance.
+174 entidades: 140 especializadas, 32 multiactivas y 2 integrales, todas con ahorro y crédito. `CODIGO ENTIDAD` y `SIGLA` son únicos.
 
 | Columna | Tipo | Descripción |
 |---|---|---|
 | `CODIGO ENTIDAD` | Texto | Llave de la entidad. |
-| `TIPO ENTIDAD SOLIDARIA` | Texto | Tipo de entidad. Solo pasan los tres tipos de arriba. |
-| `MUNICIPIO` | Texto | Municipio del domicilio. |
-| `DEPARTAMENTO` | Texto | Departamento del domicilio. |
-| `SIGLA` | Texto | Sigla de la entidad. Si viene vacía se usa el nombre completo. Es lo que se muestra en los gráficos y segmentadores. |
-| `Filtros todos` | Texto (calculada) | Constante `"Sin filtros"`. Sirve como opción "sin dimensión" del parámetro `Parámetro 2`. |
+| `TIPO ENTIDAD SOLIDARIA` | Texto | Tipo de entidad. |
+| `MUNICIPIO`, `DEPARTAMENTO` | Texto | Domicilio. |
+| `SIGLA` | Texto | Sigla; si viene vacía se usa el nombre completo. |
+| `Filtros todos` | Texto (calculada) | Constante `"Sin filtros"`, opción "sin dimensión" de `Parámetro 2`. |
 
 ### `dm_EntidadSeleccionada`
-Copia de `dm_Entidades` con las columnas `CODIGO ENTIDAD`, `SIGLA`, `TIPO ENTIDAD SOLIDARIA`, `MUNICIPIO` y `DEPARTAMENTO`. Se usa en segmentadores para que el usuario elija **la** entidad que quiere analizar sin filtrar al resto (para poder compararla). Por decisión del dueño, la entidad la elige siempre el usuario (no hay valor por defecto).
+Copia de `dm_Entidades`. Se usa para elegir **la** entidad a analizar sin filtrar al resto. La elige siempre el usuario (no hay valor por defecto).
 
 ### `dm_Cuentas` (catálogo de cuentas)
-75 cuentas del PUC que se usan para calcular los indicadores. Ver catálogo completo en la sección 4.
+152 cuentas. Catálogo completo en `docs/referencia/catalogo-cuentas-modelo.csv`; resumen en la sección 4.
 
 | Columna | Tipo | Descripción |
 |---|---|---|
-| `CODRENGLON` | Texto | Código de cuenta. Se ordena por `Índice`. |
-| `Descripción` | Texto | Texto de la cuenta, tal como viene en el PUC. |
-| `Línea` | Texto | Línea de crédito: Vivienda, Consumo con libranza, Consumo sin libranza, Microcrédito, Comercial. |
-| `Estado` | Texto | `VERDADERO` si la cuenta cuenta para el indicador (ver sección 4); `FALSO` si no. |
-| `Tipo` | Texto | `Riesgo` (cuentas 14xx, cartera por categoría) o `Mora` (cuentas 84xx, cartera por rango de días). |
-| `Índice` | Entero | Orden de aparición en el catálogo. |
-| `Altura` | Texto | En `Riesgo`: categoría A a E. En `Mora`: rango de días de mora. |
+| `CODRENGLON` | Texto | Código de cuenta (6 dígitos). Se ordena por `Índice`. |
+| `Descripción` | Texto | Grupo de cuenta y categoría o franja. |
+| `Tipo` | Texto | `Riesgo` (14xx por calificación), `Mora` (84xx por altura de mora), `Deterioro` (deterioro individual de capital) o `Deterioro general` (1468). |
+| `Línea` | Texto | Vivienda, Consumo con libranza, Consumo sin libranza, Microcrédito, Comercial. **Vacía** en el deterioro de consumo (1445 y empleados consumo), que no separa con y sin libranza, y en el deterioro general. |
+| `Modalidad` | Texto | Vivienda, Consumo, Microcrédito, Comercial (ordenada por `Orden modalidad`). Agrupa las dos líneas de consumo. Es el nivel donde se calcula la cobertura. Vacía en el deterioro general. |
+| `Producto` | Texto | Detalle: Vivienda con / sin libranza, Consumo con / sin libranza, Empleados vivienda / consumo, Microcrédito inmobiliario / empresarial, **Productivo**, Comercial, Microcrédito y productivo (8420), Deterioro general. |
+| `Altura` | Texto | Riesgo y Deterioro: categoría A a E. Mora: franja numerada (`1. Hasta 30` … `5. De 121 o más`). |
+| `Estado` | Texto | Riesgo y Mora: `VERDADERO` si cuenta para el indicador (categorías B a E; franjas sobre el umbral de mora), `FALSO` si no. Vacío en deterioro. |
+| `Índice` | Entero | Orden del catálogo. |
+| `Orden modalidad` | Entero (oculta) | 1 Vivienda, 2 Consumo, 3 Microcrédito, 4 Comercial. |
 
 ### `Calendario`
-Fechas diarias (2.190 en el caché, hasta 2028). Filtro: `Fecha > 2025-01-01`. Las columnas son `Fecha`, `Año` (texto), `Mes` (número) y `Nombre Mes` (ordenado por `Mes`). Tiene una variación de jerarquía de fechas automática (`LocalDateTable_…`).
+Fechas diarias desde 2025-10-01 (hasta 2030). Columnas `Fecha`, `Año` (texto), `Mes`, `Nombre Mes` (ordenado por `Mes`). Tiene una jerarquía de fechas automática (`LocalDateTable_…`).
 
 ### Parámetros de campos
 | Tabla | Opciones | Uso |
 |---|---|---|
-| `Parámetro` | Riesgo/Mora, Saldo en mora, Saldo en riesgo, Saldo total, Tasa mora, Tasa riesgo (todas "con entidad seleccionada") | Elegir el indicador del gráfico de línea en **Por entidad** y **Por sector**. |
-| `Parámetro 2` | Departamento, Municipio, Tipo de entidad, Sin filtros | Elegir cómo desagregar el gráfico de línea en **Por sector**. |
-| `Indicadores gráfico de líneas` | Saldo en mora, Saldo en riesgo, Saldo total, Tasa mora, Tasa riesgo, Riesgo/Mora (versión sin sufijo) | Existe en el modelo, pero ningún visual lo usa. |
+| `Parámetro` | Riesgo/Mora, Saldo en mora, Saldo en riesgo, Saldo total, Tasa mora, Tasa riesgo, **Cobertura** (todas "con entidad seleccionada") | Indicador del gráfico de línea en **Por entidad** y **Por sector**. |
+| `Parámetro 2` | Departamento, Municipio, Tipo de entidad, Sin filtros | Desagregación del gráfico de línea en **Por sector**. |
+| `Indicadores gráfico de líneas` | Las mismas opciones de `Parámetro`, en versión sin sufijo | Ningún visual lo usa. |
 
 ## 3. Relaciones
-Todas son muchos a uno con filtro en una dirección (de la tabla "uno" a la tabla "muchos"), sin propiedades especiales en los archivos.
+Todas muchos a uno, filtro en una dirección.
 
 | Desde (muchos) | Hacia (uno) |
 |---|---|
@@ -92,193 +91,125 @@ Todas son muchos a uno con filtro en una dirección (de la tabla "uno" a la tabl
 | `tb_Balance[Fecha reporte]` | `Calendario[Fecha]` |
 | `dm_EntidadSeleccionada[CODIGO ENTIDAD]` | `dm_Entidades[CODIGO ENTIDAD]` |
 
-Consecuencia clave **[Inferido de la dirección del filtro]**: un segmentador sobre `dm_Entidades` filtra a `dm_EntidadSeleccionada` y a `tb_Balance`; un segmentador sobre `dm_EntidadSeleccionada` **no** filtra a `dm_Entidades` ni a `tb_Balance`. Por eso las medidas "con entidad seleccionada" y "sin filtros" usan `TREATAS` o `SELECTEDVALUE` para aplicar la entidad elegida a `tb_Balance`.
+Un segmentador sobre `dm_EntidadSeleccionada` no filtra `tb_Balance`; por eso la familia "con entidad seleccionada" usa `TREATAS`.
 
 ## 4. Catálogo de cuentas (`dm_Cuentas`)
 
-Cómo se interpreta:
-- **Riesgo (14xx):** saldo de cartera por categoría de calificación. La categoría A es riesgo normal (no cuenta como "en riesgo"); B a E sí.
-- **Mora (84xx):** saldo de capital por rango de días de mora. Cuenta como mora la cartera con más de 30 días (más de 60 en Vivienda).
-- `Cuenta para el indicador` = `Estado = VERDADERO`.
+Definiciones según el Título V (Circular Básica Contable y Financiera) y su anexo técnico.
 
-| Cuenta | Tipo | Línea | Altura | Cuenta para el indicador | Descripción |
-|---|---|---|---|---|---|
-| 140405 | Riesgo | Vivienda | A | No | Categoría a riesgo normal |
-| 140410 | Riesgo | Vivienda | B | Sí | Categoría b riesgo aceptable |
-| 140415 | Riesgo | Vivienda | C | Sí | Categoría c riesgo apreciable |
-| 140420 | Riesgo | Vivienda | D | Sí | Categoría d riesgo significativo |
-| 140425 | Riesgo | Vivienda | E | Sí | Categoría e riesgo de incobrabilidad |
-| 140505 | Riesgo | Vivienda | A | No | Categoría a riesgo normal |
-| 140510 | Riesgo | Vivienda | B | Sí | Categoría b riesgo aceptable |
-| 140515 | Riesgo | Vivienda | C | Sí | Categoría c riesgo apreciable |
-| 140520 | Riesgo | Vivienda | D | Sí | Categoría d riesgo significativo |
-| 140525 | Riesgo | Vivienda | E | Sí | Categoría e riesgo de incobrabilidad |
-| 144105 | Riesgo | Consumo con libranza | A | No | Categoría a riesgo normal |
-| 144110 | Riesgo | Consumo con libranza | B | Sí | Categoría b riesgo aceptable |
-| 144115 | Riesgo | Consumo con libranza | C | Sí | Categoría c riesgo apreciable |
-| 144120 | Riesgo | Consumo con libranza | D | Sí | Categoría d riesgo significativo |
-| 144125 | Riesgo | Consumo con libranza | E | Sí | Categoría e riesgo de incobrabilidad |
-| 144205 | Riesgo | Consumo sin libranza | A | No | Categoría a riesgo normal |
-| 144210 | Riesgo | Consumo sin libranza | B | Sí | Categoría b riesgo aceptable |
-| 144215 | Riesgo | Consumo sin libranza | C | Sí | Categoría c riesgo apreciable |
-| 144220 | Riesgo | Consumo sin libranza | D | Sí | Categoría d riesgo significativo |
-| 144225 | Riesgo | Consumo sin libranza | E | Sí | Categoría e riesgo de incobrabilidad |
-| 144805 | Riesgo | Microcrédito | A | No | Categoría a riesgo normal |
-| 144810 | Riesgo | Microcrédito | B | Sí | Categoría b riesgo aceptable |
-| 144815 | Riesgo | Microcrédito | C | Sí | Categoría c riesgo apreciable |
-| 144820 | Riesgo | Microcrédito | D | Sí | Categoría d riesgo significativo |
-| 144825 | Riesgo | Microcrédito | E | Sí | Categoría e riesgo de incobrabilidad |
-| 145505 | Riesgo | Microcrédito | A | No | Categoría a riesgo normal |
-| 145510 | Riesgo | Microcrédito | B | Sí | Categoría b riesgo aceptable |
-| 145515 | Riesgo | Microcrédito | C | Sí | Categoría c riesgo apreciable |
-| 145520 | Riesgo | Microcrédito | D | Sí | Categoría d riesgo significativo |
-| 145525 | Riesgo | Microcrédito | E | Sí | Categoría e riesgo de incobrabilidad |
-| 146205 | Riesgo | Comercial | A | No | Categoría a riesgo normal |
-| 146210 | Riesgo | Comercial | B | Sí | Categoría b riesgo aceptable |
-| 146215 | Riesgo | Comercial | C | Sí | Categoría c riesgo apreciable |
-| 146220 | Riesgo | Comercial | D | Sí | Categoría d riesgo significativo |
-| 146225 | Riesgo | Comercial | E | Sí | Categoría e riesgo de incobrabilidad |
-| 146905 | Riesgo | Vivienda | A | No | Categoría a riesgo normal, vivienda |
-| 146910 | Riesgo | Vivienda | B | Sí | Categoría b riesgo aceptable, vivienda |
-| 146915 | Riesgo | Vivienda | C | Sí | Categoría c riesgo apreciable, vivienda |
-| 146920 | Riesgo | Vivienda | D | Sí | Categoría d riesgo significativo, vivienda |
-| 146925 | Riesgo | Vivienda | E | Sí | Categoría e riesgo de incobrabilidad, vivienda |
-| 146930 | Riesgo | Consumo con libranza | A | No | Categoría a riesgo normal, consumo |
-| 146935 | Riesgo | Consumo con libranza | B | Sí | Categoría b riesgo aceptable, consumo |
-| 146940 | Riesgo | Consumo con libranza | C | Sí | Categoría c riesgo apreciable, consumo |
-| 146945 | Riesgo | Consumo con libranza | D | Sí | Categoría d riesgo significativo, consumo |
-| 146950 | Riesgo | Consumo con libranza | E | Sí | Categoría e riesgo de incobrabilidad, consumo |
-| 147605 | Riesgo | Microcrédito | A | No | Categoría a riesgo normal |
-| 147610 | Riesgo | Microcrédito | B | Sí | Categoría b riesgo aceptable |
-| 147615 | Riesgo | Microcrédito | C | Sí | Categoría c riesgo apreciable |
-| 147620 | Riesgo | Microcrédito | D | Sí | Categoría d riesgo significativo |
-| 147625 | Riesgo | Microcrédito | E | Sí | Categoría e riesgo de incobrabilidad |
-| 840505 | Mora | Vivienda | Hasta 60 | No | Capital vigente y hasta 60 días de mora |
-| 840510 | Mora | Vivienda | De 61 a 150 | Sí | Capital con mora mayor a 60 días y hasta 150 días |
-| 840515 | Mora | Vivienda | De 151 a 360 | Sí | Capital con mora mayor a 150 días y hasta 360 días |
-| 840520 | Mora | Vivienda | De 361 a 540 | Sí | Capital con mora mayor a 360 días y hasta 540 días |
-| 840525 | Mora | Vivienda | De 541 en adelante | Sí | Capital con mora mayor a 540 días |
-| 841005 | Mora | Consumo con libranza | Hasta 30 | No | Capital vigente y hasta 30 días de mora |
-| 841010 | Mora | Consumo con libranza | De 31 a 60 | Sí | Capital con mora mayor a 30 días y hasta 60 días |
-| 841015 | Mora | Consumo con libranza | De 61 a 90 | Sí | Capital con mora mayor a 60 días y hasta 90 días |
-| 841020 | Mora | Consumo con libranza | De 91 a 180 | Sí | Capital con mora mayor a 90 días y hasta 180 días |
-| 841025 | Mora | Consumo con libranza | De 181 en adelante | Sí | Capital con mora mayor a 180 días |
-| 841505 | Mora | Consumo sin libranza | Hasta 30 | No | Capital vigente y hasta 30 días de mora |
-| 841510 | Mora | Consumo sin libranza | De 31 a 60 | Sí | Capital con mora mayor a 30 días y hasta 60 días |
-| 841515 | Mora | Consumo sin libranza | De 61 a 90 | Sí | Capital con mora mayor a 60 días y hasta 90 días |
-| 841520 | Mora | Consumo sin libranza | De 91 a 180 | Sí | Capital con mora mayor a 90 días y hasta 180 días |
-| 841525 | Mora | Consumo sin libranza | De 181 en adelante | Sí | Capital con mora mayor a 180 días |
-| 842005 | Mora | Microcrédito | Hasta 30 | No | Capital vigente y hasta 30 días de mora |
-| 842010 | Mora | Microcrédito | De 31 a 60 | Sí | Capital con mora mayor a 30 días y hasta 60 días |
-| 842015 | Mora | Microcrédito | De 61 a 90 | Sí | Capital con mora mayor a 60 días y hasta 90 días |
-| 842020 | Mora | Microcrédito | De 91 a 120 | Sí | Capital con mora mayor a 90 días y hasta 120 días |
-| 842025 | Mora | Microcrédito | De 121 en adelante | Sí | Capital con mora mayor a 120 días |
-| 842505 | Mora | Comercial | Hasta 30 | No | Capital vigente y hasta 30 días de mora |
-| 842510 | Mora | Comercial | De 31 a 90 | Sí | Capital con mora mayor a 30 días y hasta 90 días |
-| 842515 | Mora | Comercial | De 91 a 120 | Sí | Capital con mora mayor a 90 días y hasta 120 días |
-| 842520 | Mora | Comercial | De 121 a 150 | Sí | Capital con mora mayor a 120 días y hasta 150 días |
-| 842525 | Mora | Comercial | De 151 en adelante | Sí | Capital con mora mayor a 150 días |
+### Cartera por calificación (Tipo `Riesgo`, subcuentas 05 A, 10 B, 15 C, 20 D, 25 E)
+| Grupo | Nombre | Línea | Modalidad | Producto |
+|---|---|---|---|---|
+| 1404 | Vivienda con libranza | Vivienda | Vivienda | Vivienda con libranza |
+| 1405 | Vivienda sin libranza | Vivienda | Vivienda | Vivienda sin libranza |
+| 1469 (05 a 25) | Empleados, vivienda | Vivienda | Vivienda | Empleados vivienda |
+| 1411, 1441 | Consumo con libranza | Consumo con libranza | Consumo | Consumo con libranza |
+| 1469 (30 a 50) | Empleados, consumo | Consumo con libranza | Consumo | Empleados consumo |
+| 1412, 1442 | Consumo sin libranza | Consumo sin libranza | Consumo | Consumo sin libranza |
+| 1448 | Microcrédito inmobiliario | Microcrédito | Microcrédito | Microcrédito inmobiliario |
+| 1454, 1455 | Microcrédito empresarial | Microcrédito | Microcrédito | Microcrédito empresarial |
+| 1476 | Créditos productivos | Microcrédito | Microcrédito | Productivo |
+| 1461, 1462 | Comercial | Comercial | Comercial | Comercial |
 
-Grupos de cuentas por línea (saldos de diciembre de 2025, en miles de millones de pesos):
-- Vivienda: 1404 (285), 1405 (602), 1469 (10).
-- Consumo con libranza: 1441 (6.783), 1469 (24).
-- Consumo sin libranza: 1442 (7.531).
-- Microcrédito: 1448 (0), 1455 (177), 1476 (1.765).
-- Comercial: 1462 (2.304).
-- Mora: 8405 Vivienda, 8410 Consumo con libranza, 8415 Consumo sin libranza, 8420 Microcrédito, 8425 Comercial.
-- **[Inferido]** 1469 sería cartera de empleados (pendiente de confirmar con el PUC).
+1411, 1412, 1454 y 1461 son cuentas del anexo técnico que no están en el catálogo de 2023; hoy están en $0, se incluyen para cuando tengan saldo.
 
-## 5. Rangos de mora (`Altura` en cuentas de Mora)
+**Productivos (1476):** la cartera productiva reemplaza al microcrédito (confirmado por el dueño), así que va en la línea y modalidad Microcrédito. En la cuenta 84 no tiene renglón propio: se reporta dentro de 8420 (validado: en 38 de 43 entidades 8420 = 1448 + 1455 + 1476 al peso).
 
-| Línea | Rangos (el primero no cuenta como mora) |
-|---|---|
-| Vivienda | Hasta 60 / 61 a 150 / 151 a 360 / 361 a 540 / 541 o más |
-| Consumo con libranza | Hasta 30 / 31 a 60 / 61 a 90 / 91 a 180 / 181 o más |
-| Consumo sin libranza | Hasta 30 / 31 a 60 / 61 a 90 / 91 a 180 / 181 o más |
-| Microcrédito | Hasta 30 / 31 a 60 / 61 a 90 / 91 a 120 / 121 o más |
-| Comercial | Hasta 30 / 31 a 90 / 91 a 120 / 121 a 150 / 151 o más |
-
-Los rangos cambian de nombre según la línea. `dm_CuentasIndice` agrega el prefijo numérico para ordenar y reemplaza "en adelante" por "o más". Además hay un reemplazo manual de `"4. De 91 a 120"` por `"3. De 91 a 120"` para que "De 91 a 120" quede en la misma posición en Microcrédito (4.º rango) y Comercial (3.º rango). Es un parche frágil.
-
-## 6. Medidas (tabla `Medidas`)
-
-Notación: **Estado** = `Estado = "VERDADERO"` y `Línea` no vacía. Los números de página son las páginas del informe donde se usa cada una.
-
-### Base
-| Medida | Lógica | Formato | Dónde se usa |
+### Cartera por altura de mora (Tipo `Mora`, cuenta 84)
+| Grupo | Línea | Modalidad | Franjas (la primera no es mora) |
 |---|---|---|---|
-| `Saldo` | `SUM(tb_Balance[VALOR EN PESOS])` | Moneda | No se usa |
-| `Saldo en mora` | Suma de `VALOR EN PESOS` con `Tipo = "Mora"` y Estado | `0.00` (sin `$`) | Por entidades (tarjeta) |
-| `Saldo en riesgo` | Suma con `Tipo = "Riesgo"` y Estado (categorías B a E) | Moneda | Por entidades (tarjeta) |
-| `Saldo total` | Suma de las cuentas `Tipo = "Riesgo"` sin filtrar `dm_Cuentas` (categorías A a E) | Moneda | Por entidades (tarjeta) |
-| `Tasa mora` | `DIVIDE([Saldo en mora], [Saldo total], 0)` | `0.00 %` | Por entidades (tarjeta y barras), Por sector (barras) |
-| `Tasa riesgo` | `DIVIDE([Saldo en riesgo], [Saldo total], 0)` | `0.00 %` | Por entidades (tarjeta y barras) |
-| `Riesgo/Mora` | `DIVIDE([Saldo en riesgo], [Saldo en mora], BLANK())` | General | Por entidades (tarjeta y barras) |
-| `Ranking Mora` | `RANKX(ALL(dm_Entidades[SIGLA]), [Tasa mora])` | Entero | No se usa |
+| 8405 | Vivienda | Vivienda | 1. Hasta 60 / 2. De 61 a 150 / 3. De 151 a 360 / 4. De 361 a 540 / 5. De 541 o más |
+| 8410 | Consumo con libranza | Consumo | 1. Hasta 30 / 2. De 31 a 60 / 3. De 61 a 90 / 4. De 91 a 180 / 5. De 181 o más |
+| 8415 | Consumo sin libranza | Consumo | igual que 8410 |
+| 8420 | Microcrédito (incluye productivos) | Microcrédito | 1. Hasta 30 / 2. De 31 a 60 / 3. De 61 a 90 / 4. De 91 a 120 / 5. De 121 o más |
+| 8425 | Comercial | Comercial | 1. Hasta 30 / 2. De 31 a 90 / 3. De 91 a 120 / 4. De 121 a 150 / 5. De 151 o más |
 
-### Entidad seleccionada, familia "con entidad seleccionada"
-Mismas fórmulas base, con `TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD])`.
+Umbral de mora: más de 30 días, más de 60 en vivienda (anexo técnico). El catálogo de cuentas de 2023 no trae la cuenta 84 (se creó en 2025); su estructura se dedujo de los datos.
 
-| Medida | Dónde se usa |
+### Deterioro (Tipo `Deterioro` y `Deterioro general`)
+| Grupo | Nombre | Línea | Modalidad | Subcuentas por categoría |
+|---|---|---|---|---|
+| 1408 | Deterioro vivienda | Vivienda | Vivienda | 05 A … 25 E |
+| 1471 (05 a 25) | Deterioro empleados vivienda | Vivienda | Vivienda | 05 A … 25 E |
+| 1445 | Deterioro consumo | (vacía) | Consumo | 10 A, 20 B, 30 C, 40 D, 50 E (y 05, 15, 25, 35, 45 del anexo, hoy en $0) |
+| 1471 (30 a 50) | Deterioro empleados consumo | (vacía) | Consumo | 30 A … 50 E |
+| 1451 | Deterioro microcrédito inmobiliario | Microcrédito | Microcrédito | 05 A … 25 E |
+| 1458 | Deterioro microcrédito empresarial | Microcrédito | Microcrédito | como 1445 |
+| 1479 | Deterioro créditos productivos | Microcrédito | Microcrédito | 05 A … 25 E |
+| 1465 | Deterioro comercial | Comercial | Comercial | como 1445 |
+| 146805, 146810 | Deterioro general y general adicional | (vacía) | (vacía) | — |
+
+El deterioro se toma por subcuenta (como en el anexo técnico) para poder calcular la cobertura C, D y E. En agosto de 2026 la suma de subcuentas difiere del total de la cuenta en menos de 0,1 %.
+
+## 5. Medidas (tabla `Medidas`)
+
+Patrón de los denominadores: `ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto])` quita los filtros de `Tipo`, `Estado` y `Altura`, y conserva la línea, la modalidad y el producto del contexto. Así cada tasa se divide por la cartera **de su misma línea**.
+
+### Saldos
+| Medida | Lógica | Formato |
+|---|---|---|
+| `Saldo en riesgo` | Cuenta 14, categorías B a E (`Tipo = Riesgo`, `Estado = VERDADERO`) | Moneda |
+| `Saldo en mora` | Cuenta 84, franjas sobre el umbral (`Tipo = Mora`, `Estado = VERDADERO`) | Moneda |
+| `Saldo total` | Cartera bruta: cuenta 14, categorías A a E, de la línea del contexto | Moneda |
+| `Cartera total cuenta 84` | Cuenta 84, todas las franjas, de la línea del contexto | Moneda |
+| `Saldo` | `SUM(VALOR EN PESOS)` sin filtros de cuenta (sin uso) | Moneda |
+
+### Indicadores de calidad
+| Medida | Lógica | Referencia |
+|---|---|---|
+| `Tasa riesgo` | `Saldo en riesgo / Saldo total` | Indicador de calidad por riesgo |
+| `Tasa mora` | `Saldo en mora / Cartera total cuenta 84`. En blanco si la entidad no reportó la cuenta 84 | Indicador de cartera por mora (el denominador sale de la misma cuenta 84, decisión del dueño) |
+| `Riesgo/Mora` | `Tasa riesgo / Tasa mora` | Relación de cartera por riesgo y por mora |
+
+En el total de una entidad o del sector, `Saldo total` y `Cartera total cuenta 84` son prácticamente iguales (agosto de 2026: 20.954,4 mil millones en ambas). Por línea pueden diferir cuando una entidad clasifica distinto en la 14 y en la 84 (sección 7).
+
+### Deterioro y cobertura
+| Medida | Lógica |
 |---|---|
-| `Saldo en mora con entidad seleccionada` | Por entidad (torta), Por sector (torta), Tooltip-Mora |
-| `Saldo en riesgo con entidad seleccionada` | Tooltip-Riesgo |
-| `Saldo total con entidad seleccionada` | Tooltip-Mora y Tooltip-Riesgo (tarjeta) |
-| `Tasa mora con entidad seleccionada` (= mora / total) | Por entidad (línea y barras), Por sector (línea), Tooltip-Mora |
-| `Tasa riesgo con entidad seleccionada` (= riesgo / total) | Por entidad y Por sector (barras), Tooltip-Riesgo |
-| `Riesgo/Mora con entidad seleccionada` | Por sector (línea) |
+| `Deterioro individual` | Suma del deterioro individual de capital de la modalidad del contexto |
+| `Deterioro general` | 1468. Queda en blanco cuando hay filtro de línea, modalidad o producto |
+| `Deterioro total` | Individual + general |
+| `Cobertura cartera en riesgo` | `Deterioro total / Saldo en riesgo`. **Por modalidad** solo entra el deterioro individual; **en el total** se suma el general (decisión del dueño) |
+| `Deterioro sobre cartera bruta` | `Deterioro total / Saldo total` (fórmula literal del anexo para la "cobertura de la cartera total en riesgo"; indicador secundario) |
+| `Cobertura individual CDE` | Deterioro individual de categorías C, D y E / cartera en C, D y E |
 
-### Entidad seleccionada, familia "sin filtros"
-Fijan la entidad con `dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])` y quitan los demás filtros de `SIGLA`. Sirven para comparar la entidad con el contexto filtrado.
+La cobertura se calcula por **modalidad**: en consumo el deterioro no separa con y sin libranza, así que por `Línea` la cobertura de consumo queda en blanco.
 
+### Familia "con entidad seleccionada"
+`CALCULATE([medida base], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))` para: Saldo en mora, Saldo en riesgo, Saldo total, Cartera total cuenta 84, Tasa mora, Tasa riesgo, Riesgo/Mora, Deterioro individual, Deterioro general, Deterioro total, Cobertura cartera en riesgo, Deterioro sobre cartera bruta y Cobertura individual CDE. Sin entidad elegida, equivale al conjunto de entidades visibles (el sector filtrado).
+
+### Familia "sin filtros"
 | Medida | Lógica | Dónde se usa |
 |---|---|---|
-| `Tasa mora sin filtros` | `CALCULATE([Tasa mora], ALL(dm_Entidades[SIGLA]), SIGLA = entidad seleccionada)` | Por entidad (barras por línea) |
-| `Tasa riesgo sin filtros` | Igual con `[Tasa riesgo]` | Por entidad (barras por línea) |
-| `Riesgo/Mora sin filtros` | `CALCULATE(DIVIDE([Saldo en riesgo], [Saldo en mora], BLANK()))` (no fija la entidad) | Por entidad y Por sector (barras por línea) |
-| `Saldo en riesgo sin filtros` | Fija la entidad con `SELECTEDVALUE` | No se usa |
-| `Saldo en mora sin filtros` | Fórmula igual a `Saldo en mora` (no fija la entidad) | No se usa |
+| `Tasa mora sin filtros`, `Tasa riesgo sin filtros` | Fijan la entidad con `SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])` | Filtros de las barras por línea de Por entidad |
+| `Riesgo/Mora sin filtros` | Igual a `Riesgo/Mora` (no quita filtros; se conserva el nombre porque lo usan visuales) | Barras de Por entidad y Por sector |
+| `Saldo en riesgo sin filtros` | Fija la entidad | Sin uso |
+| `Saldo en mora sin filtros` | Igual a `Saldo en mora` | Sin uso |
 
-### Control
-| Medida | Lógica | Dónde se usa |
-|---|---|---|
-| `Cantidad de entidades` | `DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD])` | Cantidad Entidades |
+### Otras
+| Medida | Uso |
+|---|---|
+| `Ranking Mora` | Sin uso |
+| `Cantidad de entidades` | Control de cobertura de datos |
+| `Color barra seleccionada` | Resalta la entidad seleccionada en Por entidades |
+| `Nombre de usuario`, `Saludo de bienvenida` | Sin uso (el informe es público, no hay usuario autenticado) |
 
-### Apoyo visual
-| Medida | Lógica | Dónde se usa |
-|---|---|---|
-| `Color barra seleccionada` | `#FF8C42` (naranja) si `SELECTEDVALUE(dm_Entidades[SIGLA]) = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])`, si no `#1E88E5` (azul) | Por entidades: color de las 3 barras |
-| `Nombre de usuario` | Parte de `USERNAME()` anterior a `\` con la primera letra en mayúscula | No se usa |
-| `Saludo de bienvenida` | "Buenos días/tardes/noches" según `HOUR(NOW())` + nombre de usuario | No se usa |
+## 6. Páginas y visuales
 
-Seis medidas no están en ningún visual: `Saldo`, `Ranking Mora`, `Saldo en mora sin filtros`, `Saldo en riesgo sin filtros`, `Saludo de bienvenida` y `Nombre de usuario`. Dos de ellas, las de usuario, dependen de `USERNAME()`, que no sirve en un informe público (nadie inicia sesión).
+| Página | Contenido |
+|---|---|
+| **Inicio** | Portada con botones de navegación y segmentadores de mes y entidades |
+| **Por entidades** | Tarjeta con 6 indicadores; barras de Tasa mora, Tasa riesgo y Riesgo/Mora por entidad, con la entidad seleccionada resaltada |
+| **Por entidad** | Línea de tiempo con indicador elegible (incluye Cobertura); barras por línea; torta de composición de la mora |
+| **Por sector** | Igual que Por entidad, con desagregación elegible |
+| **Cobertura de cartera** (nueva, 2026-11-04) | Tendencia de la cobertura; tarjetas (cobertura, deterioro / cartera bruta, cobertura C-D-E, deterioro total); barras por modalidad de cobertura, cobertura C-D-E y tasa de riesgo. Usa la familia "con entidad seleccionada": sin entidad elegida muestra el sector |
+| **Tooltip-Mora**, **Tooltip-Riesgo** (ocultas) | Saldo y tasa por franja de mora o por categoría |
 
-## 7. Páginas y visuales
+La página "Cobertura de cartera" no tiene botón en Inicio (las páginas existentes no se modificaron); se llega por la lista de páginas.
 
-Todas miden 1280×720 (los tooltips son más chicos). Navegación: **Inicio** → Por entidades / Por entidad / Por sector, y cada página tiene un botón para volver a Inicio. Cuatro marcadores controlan el panel de ayuda (`InfoPanelEntidades`, `InfoPanelEntidadesOcultar`, `InfoPanelEntidad`, `InfoPanelEntidadOcultar`).
+## 7. Calidad de datos conocida
 
-| Página | Contenido | Segmentadores |
-|---|---|---|
-| **Inicio** | Portada con 3 botones de navegación | Mes (`Calendario[Nombre Mes]`), entidades (`dm_Entidades[SIGLA]`), entidad seleccionada (`dm_EntidadSeleccionada[SIGLA]`) |
-| **Por entidades** (benchmarking) | Tarjeta con 6 indicadores; barras de `Tasa mora`, `Tasa riesgo` y `Riesgo/Mora` por entidad, con la entidad seleccionada resaltada | Mes, entidades, entidad seleccionada, `Línea` |
-| **Por entidad** | Línea de tiempo con indicador elegible; barras por línea de `Tasa mora`, `Tasa riesgo` y `Riesgo/Mora`; torta de composición de la mora | Mes, rango de fechas, entidad seleccionada, indicador (`Parámetro`) |
-| **Por sector** | Igual que Por entidad, pero con desagregación elegible (departamento, municipio, tipo de entidad o sin filtros) | Mes, rango de fechas, tipo de entidad, departamento, municipio, indicador, dimensión |
-| **Cantidad Entidades** | Página nueva del dueño (2026-11-03) con un visual de cantidad de entidades | |
-| **Tooltip-Mora** (oculta) | Saldo total y tabla de saldo y tasa de mora por rango de días (`Altura`) | |
-| **Tooltip-Riesgo** (oculta) | Saldo total y tabla de saldo y tasa de riesgo por categoría | |
-
-El fondo de las páginas son imágenes estáticas (6 PNG en `StaticResources/RegisteredResources`, incluido el logo MDA). El tema base es `CY24SU10`, sin paleta propia.
-
-Filtro a nivel de informe: se excluyen las filas con `dm_Entidades[SIGLA]` nula (bloqueado para el usuario).
-
-## 8. Calidad de datos conocida
-
-El diagnóstico completo de 2026 y el plan de corrección están en `docs/diagnostico-datos-2026.md`. Resumen: en 2026 el dataflow solo carga la primera hoja del Excel y se pierden unas 80 entidades por mes.
-
-
-- **Septiembre 2025:** solo 11 entidades (172 en los otros meses), 10.216 filas en grupos duplicados y negativos en la entidad `2773`. Las tasas de ese mes no son válidas.
-- **Enero 2025:** la mora (84xx) del sector es la mitad de la de febrero, así que su tasa de mora (3,89 %) no es comparable con las demás (alrededor de 6,2 % a 6,6 %). Coincide con la fecha desde la que hay datos de mora (confirmado por el dueño), lo que sugiere que enero llegó incompleto.
-- **Abril (167), enero y noviembre (171), diciembre (170):** menos entidades que las 172 típicas.
-- **Diciembre:** 3.409 cuentas distintas (2.180 en los otros meses); no afecta al catálogo.
-- **Conciliación:** las cuentas de mora (84xx) no suman lo mismo que las de cartera (14xx) en Vivienda, Comercial y Consumo sin libranza (diciembre de 2025).
-- **Pendiente:** el modelo no sabe qué entidades se fusionan, cambian de nombre o se liquidan (confirmado por el dueño).
+- **Septiembre 2025:** 11 entidades. Fuera del alcance desde el 2026-11-04.
+- **Clasificación distinta entre la cuenta 14 y la 84** (validado de octubre de 2025 a agosto de 2026): en el 94,5 % de los casos entidad-mes, (1448 + 1454 + 1455 + 1476) = 8420 y (1461 + 1462) = 8425 al peso. Excepciones recurrentes: `3246` (unos $197 mil millones al mes de microcrédito o productivo reportados como comercial en la 84), `1198` (unos $15 mil millones) y `3341` (unos $7 mil millones). `561` no reporta la 8425 en febrero y junio de 2026. Por eso la tasa de mora usa como denominador la propia cuenta 84.
+- El diagnóstico de 2026 (hojas del Excel, tipos de dato, directorio estático) está en `docs/diagnostico-datos-2026.md`. Con los datos del 2026-11-04, agosto de 2026 ya tiene 167 entidades.
+- **Pendiente:** el modelo no sabe qué entidades se fusionan, cambian de nombre o se liquidan.

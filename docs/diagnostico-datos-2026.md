@@ -6,6 +6,8 @@ Fecha: 2026-11-03. Insumos revisados:
 
 Convenciones: **[Verificado]** comprobado cruzando el modelo con los archivos fuente. **[Inferido]** es una hipótesis que falta confirmar.
 
+> **Actualización 2026-11-04:** con los datos del `.pbix` entregado ese día, agosto de 2026 tiene 167 entidades y marzo y junio de 2026 tienen 169: el problema P1 (segunda hoja del Excel) y el P3 de 2026 quedaron resueltos en el dataflow. Septiembre de 2025 sigue con 11 entidades y quedó fuera del alcance (el modelo carga desde octubre de 2025). Ver los valores vigentes en `docs/validacion-medidas.md`.
+
 ---
 
 ## 1. Resumen
