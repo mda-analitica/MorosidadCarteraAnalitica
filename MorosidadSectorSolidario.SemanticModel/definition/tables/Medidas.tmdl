@@ -53,11 +53,11 @@ table Medidas
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: ffb238bc-ca6f-5d2a-a645-f341bb66c39e
 
-	/// Indicador de cartera por mora: Saldo en mora / Cartera total cuenta 84, de la misma línea o modalidad. Queda en blanco si la entidad no reportó la cuenta 84.
+	/// Indicador de cartera por mora: Saldo en mora / Cartera total cuenta 84, de la misma línea o modalidad. Queda en blanco si la entidad no reportó la cuenta 84 o si no hay saldo para esa franja (así el tooltip por altura solo muestra las franjas de la línea).
 	measure 'Tasa mora' =
 			VAR Base = [Cartera total cuenta 84]
 			RETURN
-			    IF(NOT ISBLANK(Base) && Base <> 0, DIVIDE([Saldo en mora] + 0, Base))
+			    IF(NOT ISBLANK(Base) && Base <> 0, DIVIDE([Saldo en mora], Base))
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: fdc7223e-ff9d-4192-99c3-f916614670d7
 
@@ -65,7 +65,7 @@ table Medidas
 	measure 'Tasa riesgo' =
 			VAR Base = [Saldo total]
 			RETURN
-			    IF(NOT ISBLANK(Base) && Base <> 0, DIVIDE([Saldo en riesgo] + 0, Base))
+			    IF(NOT ISBLANK(Base) && Base <> 0, DIVIDE([Saldo en riesgo], Base))
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 66b4a2bf-7a9a-4c40-816f-08c7a018ea26
 

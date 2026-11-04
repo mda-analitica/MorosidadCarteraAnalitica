@@ -158,7 +158,7 @@ Patrón de los denominadores: `ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuen
 | Medida | Lógica | Referencia |
 |---|---|---|
 | `Tasa riesgo` | `Saldo en riesgo / Saldo total` | Indicador de calidad por riesgo |
-| `Tasa mora` | `Saldo en mora / Cartera total cuenta 84`. En blanco si la entidad no reportó la cuenta 84 | Indicador de cartera por mora (el denominador sale de la misma cuenta 84, decisión del dueño) |
+| `Tasa mora` | `Saldo en mora / Cartera total cuenta 84`. En blanco si la entidad no reportó la cuenta 84 o si no hay saldo en esa franja. No se fuerza a 0: si se forzara, el tooltip por altura mostraría con 0 % las franjas de todas las líneas | Indicador de cartera por mora (el denominador sale de la misma cuenta 84, decisión del dueño) |
 | `Riesgo/Mora` | `Tasa riesgo / Tasa mora` | Relación de cartera por riesgo y por mora |
 
 En el total de una entidad o del sector, `Saldo total` y `Cartera total cuenta 84` son prácticamente iguales (agosto de 2026: 20.954,4 mil millones en ambas). Por línea pueden diferir cuando una entidad clasifica distinto en la 14 y en la 84 (sección 7).
