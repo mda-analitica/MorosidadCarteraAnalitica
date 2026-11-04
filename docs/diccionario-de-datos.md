@@ -203,7 +203,7 @@ La cobertura se calcula por **modalidad**: en consumo el deterioro no separa con
 | **Por entidad** | Línea de tiempo con indicador elegible (incluye Cobertura); barras por línea; torta de composición de la mora |
 | **Por sector** | Igual que Por entidad, con desagregación elegible |
 | **Cobertura de cartera** (nueva, 2026-11-04) | Tendencia de la cobertura; tarjetas (cobertura, deterioro / cartera bruta, cobertura C-D-E, deterioro total); barras por modalidad de cobertura, cobertura C-D-E y tasa de riesgo. Usa la familia "con entidad seleccionada": sin entidad elegida muestra el sector |
-| **Tooltip-Mora**, **Tooltip-Riesgo** (ocultas) | Saldo y tasa por franja de mora o por categoría |
+| **Tooltip-Mora**, **Tooltip-Riesgo** (ocultas) | Tarjeta con la cartera bruta de la línea y tabla de saldo y tasa por franja de mora o por categoría. Filtros del visual de tabla: Tooltip-Mora `Tipo = Mora` y `Estado = VERDADERO` (franjas en mora de la cuenta 84); Tooltip-Riesgo `Tipo = Riesgo` y `Estado = VERDADERO` (categorías B a E). Reemplazan el filtro anterior por `Altura`, que listaba etiquetas de franjas que ya no existían (2026-11-04) |
 
 Inicio tiene un cuarto botón, "Ver cobertura de cartera" (agregado el 2026-11-04 a pedido del dueño; las cuatro filas de botones se reacomodaron para que quepan).
 
