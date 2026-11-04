@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["tb_Balance","dm_Entidades","Medidas","dm_Cuentas","dm_EntidadSeleccionada","Calendario","dm_CuentasIndice"]
+annotation PBI_QueryOrder = ["tb_Balance","dm_Entidades","Medidas","dm_Cuentas","dm_EntidadSeleccionada","Calendario"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 

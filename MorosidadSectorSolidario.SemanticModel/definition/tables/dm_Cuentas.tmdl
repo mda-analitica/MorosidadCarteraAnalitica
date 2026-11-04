@@ -28,6 +28,25 @@ table dm_Cuentas
 
 		annotation SummarizationSetBy = Automatic
 
+	column Modalidad
+		dataType: string
+		lineageTag: fa7f8732-035c-5601-9c3f-997866f2c72f
+		summarizeBy: none
+		sourceColumn: Modalidad
+		sortByColumn: 'Orden modalidad'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Producto
+		dataType: string
+		lineageTag: f1e585b2-d366-592e-9664-017d4dfb557b
+		summarizeBy: none
+		sourceColumn: Producto
+
+		annotation SummarizationSetBy = Automatic
+
 	column Estado
 		dataType: string
 		lineageTag: 20595916-80ef-4ea3-9650-f375d8f51114
@@ -61,21 +80,183 @@ table dm_Cuentas
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Orden modalidad'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36661e53-5f96-5f2e-b044-eeb5af0461d6
+		summarizeBy: none
+		sourceColumn: Orden modalidad
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dm_Cuentas = m
 		mode: import
 		source =
 				let
-				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("tZjNbqMwFIVfxcq6i2AwhaUDNEVKQkUykaqqCyZFI6Q2SElnFvMO8yDzHH2xMenkz8TX95JSqWraROf48h2OXZ6eBo439IZicDNg+69ILpJxln/8kUyyPE3m44zNsnwqJ+pTy+pXVa5fCvVSqu87OZln6mdeldsf9eD55lPQGRoER3tBGSUPCzmaJOeao+bXJI9lnOSXdE0LjQ66D3kSpW3hCBbmpgXHe+F5Op6ld6l6K11m59qxRdu06GSvHScsnUXZKJejdJIqnXP9BNQXX01P9ERP9EVP9EhP9EtP3Sl4elG93v58q9mqXrPX6vumWP8GSXoOjaRBH6SqPGhUDSYgYc+hEzb4gLSVTyfaBi+YPO9AflshyfNu5DV9mDzvSF4zgcnz7uQ1H5g8v4685gWTDwjkp9VqU682H39fqvcaRB7QkOvCMOuAyFpXhyEHdMi6AUw36EZXNwGxCspGjMYqiLsxCaugbskkrKLDvkzCKjpuziSsPq2n38rNqipeIaQ+uZyPoiBOn97IR2UQpd+pho/iIEa/c/ceDWCEIRbhDVumyzSZxQ08zGHZDwksTeow1JAC1WQB0w2JdE0uMOawA2aTk4W3a5qnxTvKZvNvU+DACKB3TfNcQm81sqTAM410MQVWN0sgPNNopkBYDS3ZEKbxoGxYTcGY3Pp9bNi3fo8bthLvccO+9XvesJVB3xt20HogsvN5SBdyorpknMwWCXtk93K+kMwfsliZzxvTaZZrHXNfbN8L9ZkT0tN6Uxxszjmf2KhY7uTYVD5mOTvx2Rs74v9ftP4sme+wonlbm/Dc2DRfy/jgc3B2fZOzIxpr1wetOXpmtzW08EzW7m5q4cHW6KnNRsJzWLlmxUv5WqzfS7OdM0SHyG2HyNBGn4FyDYFyhvhAufq1PaFq6l91mZurDPFVS0Bf5BbeELOEHegQXAI+YmHrtgowawh3t1gALwJ/i6E8nQAbPHx7AcHTHkdYgkdoMkzw9OcumOAROg0TvPYS7MEjdBsqeO01IIJHaDmcJzp4/KrG03doOHH8i6qudfhARI1/Ucdd8LZmjF9Vbhw0/wwXh93x4YLNHI5N1ZV1dvwP35KoazrsrEBOHlr8TxNIlFBcIFHNGEGT0FcHo4sHUM26YWs5gnJKTQFOwp6i538=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Cuenta = _t, Descripción = _t, Línea = _t, Altura = _t, Estado = _t, Tipo = _t]),
-				    #"Columnas con nombre cambiado" = Table.RenameColumns(Origen,{{"Cuenta", "CODRENGLON"}}),
-				    #"Índice agregado" = Table.AddIndexColumn(#"Columnas con nombre cambiado", "Índice", 0, 1, Int64.Type),
-				    #"Consultas combinadas" = Table.NestedJoin(#"Índice agregado", {"Altura"}, dm_CuentasIndice, {"key Altura"}, "dm_CuentasIndice", JoinKind.LeftOuter),
-				    #"Se expandió dm_CuentasIndice" = Table.ExpandTableColumn(#"Consultas combinadas", "dm_CuentasIndice", {"Altura"}, {"Altura.1"}),
-				    #"Columna condicional agregada" = Table.AddColumn(#"Se expandió dm_CuentasIndice", "Personalizado", each if [Altura.1] = null then [Altura] else [Altura.1], type text),
-				    #"Columnas quitadas1" = Table.RemoveColumns(#"Columna condicional agregada",{"Altura", "Altura.1"}),
-				    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Columnas quitadas1",{{"Personalizado", "Altura"}}),
-				    #"Valor reemplazado" = Table.ReplaceValue(#"Columnas con nombre cambiado1","4. De 91 a 120","3. De 91 a 120",Replacer.ReplaceText,{"Altura"})
+				    // Catálogo de cuentas del informe. Documentado en docs/diccionario-de-datos.md
+				    // Tipo: Riesgo (cuenta 14, por calificación), Mora (cuenta 84, por altura de mora),
+				    // Deterioro (deterioro individual de capital) y Deterioro general (1468).
+				    Origen = #table(
+				        type table [CODRENGLON = text, Descripción = text, Tipo = text, Línea = text, Modalidad = text, Producto = text, Altura = text, Estado = text, #"Orden modalidad" = Int64.Type],
+				        {
+						{"140405", "Créditos de vivienda con libranza - Categoría A riesgo normal", "Riesgo", "Vivienda", "Vivienda", "Vivienda con libranza", "A", "FALSO", 1},
+						{"140410", "Créditos de vivienda con libranza - Categoría B riesgo aceptable", "Riesgo", "Vivienda", "Vivienda", "Vivienda con libranza", "B", "VERDADERO", 1},
+						{"140415", "Créditos de vivienda con libranza - Categoría C riesgo apreciable", "Riesgo", "Vivienda", "Vivienda", "Vivienda con libranza", "C", "VERDADERO", 1},
+						{"140420", "Créditos de vivienda con libranza - Categoría D riesgo significativo", "Riesgo", "Vivienda", "Vivienda", "Vivienda con libranza", "D", "VERDADERO", 1},
+						{"140425", "Créditos de vivienda con libranza - Categoría E riesgo de incobrabilidad", "Riesgo", "Vivienda", "Vivienda", "Vivienda con libranza", "E", "VERDADERO", 1},
+						{"140505", "Créditos de vivienda sin libranza - Categoría A riesgo normal", "Riesgo", "Vivienda", "Vivienda", "Vivienda sin libranza", "A", "FALSO", 1},
+						{"140510", "Créditos de vivienda sin libranza - Categoría B riesgo aceptable", "Riesgo", "Vivienda", "Vivienda", "Vivienda sin libranza", "B", "VERDADERO", 1},
+						{"140515", "Créditos de vivienda sin libranza - Categoría C riesgo apreciable", "Riesgo", "Vivienda", "Vivienda", "Vivienda sin libranza", "C", "VERDADERO", 1},
+						{"140520", "Créditos de vivienda sin libranza - Categoría D riesgo significativo", "Riesgo", "Vivienda", "Vivienda", "Vivienda sin libranza", "D", "VERDADERO", 1},
+						{"140525", "Créditos de vivienda sin libranza - Categoría E riesgo de incobrabilidad", "Riesgo", "Vivienda", "Vivienda", "Vivienda sin libranza", "E", "VERDADERO", 1},
+						{"141105", "Créditos de consumo con libranza (1411) - Categoría A riesgo normal", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "A", "FALSO", 2},
+						{"141110", "Créditos de consumo con libranza (1411) - Categoría B riesgo aceptable", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "B", "VERDADERO", 2},
+						{"141115", "Créditos de consumo con libranza (1411) - Categoría C riesgo apreciable", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "C", "VERDADERO", 2},
+						{"141120", "Créditos de consumo con libranza (1411) - Categoría D riesgo significativo", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "D", "VERDADERO", 2},
+						{"141125", "Créditos de consumo con libranza (1411) - Categoría E riesgo de incobrabilidad", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "E", "VERDADERO", 2},
+						{"141205", "Créditos de consumo sin libranza (1412) - Categoría A riesgo normal", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "A", "FALSO", 2},
+						{"141210", "Créditos de consumo sin libranza (1412) - Categoría B riesgo aceptable", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "B", "VERDADERO", 2},
+						{"141215", "Créditos de consumo sin libranza (1412) - Categoría C riesgo apreciable", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "C", "VERDADERO", 2},
+						{"141220", "Créditos de consumo sin libranza (1412) - Categoría D riesgo significativo", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "D", "VERDADERO", 2},
+						{"141225", "Créditos de consumo sin libranza (1412) - Categoría E riesgo de incobrabilidad", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "E", "VERDADERO", 2},
+						{"144105", "Créditos de consumo con libranza - Categoría A riesgo normal", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "A", "FALSO", 2},
+						{"144110", "Créditos de consumo con libranza - Categoría B riesgo aceptable", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "B", "VERDADERO", 2},
+						{"144115", "Créditos de consumo con libranza - Categoría C riesgo apreciable", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "C", "VERDADERO", 2},
+						{"144120", "Créditos de consumo con libranza - Categoría D riesgo significativo", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "D", "VERDADERO", 2},
+						{"144125", "Créditos de consumo con libranza - Categoría E riesgo de incobrabilidad", "Riesgo", "Consumo con libranza", "Consumo", "Consumo con libranza", "E", "VERDADERO", 2},
+						{"144205", "Créditos de consumo sin libranza - Categoría A riesgo normal", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "A", "FALSO", 2},
+						{"144210", "Créditos de consumo sin libranza - Categoría B riesgo aceptable", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "B", "VERDADERO", 2},
+						{"144215", "Créditos de consumo sin libranza - Categoría C riesgo apreciable", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "C", "VERDADERO", 2},
+						{"144220", "Créditos de consumo sin libranza - Categoría D riesgo significativo", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "D", "VERDADERO", 2},
+						{"144225", "Créditos de consumo sin libranza - Categoría E riesgo de incobrabilidad", "Riesgo", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "E", "VERDADERO", 2},
+						{"144805", "Microcrédito inmobiliario - Categoría A riesgo normal", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "A", "FALSO", 3},
+						{"144810", "Microcrédito inmobiliario - Categoría B riesgo aceptable", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "B", "VERDADERO", 3},
+						{"144815", "Microcrédito inmobiliario - Categoría C riesgo apreciable", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "C", "VERDADERO", 3},
+						{"144820", "Microcrédito inmobiliario - Categoría D riesgo significativo", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "D", "VERDADERO", 3},
+						{"144825", "Microcrédito inmobiliario - Categoría E riesgo de incobrabilidad", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "E", "VERDADERO", 3},
+						{"145405", "Microcrédito (1454) - Categoría A riesgo normal", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "A", "FALSO", 3},
+						{"145410", "Microcrédito (1454) - Categoría B riesgo aceptable", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "B", "VERDADERO", 3},
+						{"145415", "Microcrédito (1454) - Categoría C riesgo apreciable", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "C", "VERDADERO", 3},
+						{"145420", "Microcrédito (1454) - Categoría D riesgo significativo", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "D", "VERDADERO", 3},
+						{"145425", "Microcrédito (1454) - Categoría E riesgo de incobrabilidad", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "E", "VERDADERO", 3},
+						{"145505", "Microcrédito empresarial - Categoría A riesgo normal", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "A", "FALSO", 3},
+						{"145510", "Microcrédito empresarial - Categoría B riesgo aceptable", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "B", "VERDADERO", 3},
+						{"145515", "Microcrédito empresarial - Categoría C riesgo apreciable", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "C", "VERDADERO", 3},
+						{"145520", "Microcrédito empresarial - Categoría D riesgo significativo", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "D", "VERDADERO", 3},
+						{"145525", "Microcrédito empresarial - Categoría E riesgo de incobrabilidad", "Riesgo", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "E", "VERDADERO", 3},
+						{"147605", "Créditos productivos - Categoría A riesgo normal", "Riesgo", "Microcrédito", "Microcrédito", "Productivo", "A", "FALSO", 3},
+						{"147610", "Créditos productivos - Categoría B riesgo aceptable", "Riesgo", "Microcrédito", "Microcrédito", "Productivo", "B", "VERDADERO", 3},
+						{"147615", "Créditos productivos - Categoría C riesgo apreciable", "Riesgo", "Microcrédito", "Microcrédito", "Productivo", "C", "VERDADERO", 3},
+						{"147620", "Créditos productivos - Categoría D riesgo significativo", "Riesgo", "Microcrédito", "Microcrédito", "Productivo", "D", "VERDADERO", 3},
+						{"147625", "Créditos productivos - Categoría E riesgo de incobrabilidad", "Riesgo", "Microcrédito", "Microcrédito", "Productivo", "E", "VERDADERO", 3},
+						{"146105", "Créditos comerciales (1461) - Categoría A riesgo normal", "Riesgo", "Comercial", "Comercial", "Comercial", "A", "FALSO", 4},
+						{"146110", "Créditos comerciales (1461) - Categoría B riesgo aceptable", "Riesgo", "Comercial", "Comercial", "Comercial", "B", "VERDADERO", 4},
+						{"146115", "Créditos comerciales (1461) - Categoría C riesgo apreciable", "Riesgo", "Comercial", "Comercial", "Comercial", "C", "VERDADERO", 4},
+						{"146120", "Créditos comerciales (1461) - Categoría D riesgo significativo", "Riesgo", "Comercial", "Comercial", "Comercial", "D", "VERDADERO", 4},
+						{"146125", "Créditos comerciales (1461) - Categoría E riesgo de incobrabilidad", "Riesgo", "Comercial", "Comercial", "Comercial", "E", "VERDADERO", 4},
+						{"146205", "Créditos comerciales - Categoría A riesgo normal", "Riesgo", "Comercial", "Comercial", "Comercial", "A", "FALSO", 4},
+						{"146210", "Créditos comerciales - Categoría B riesgo aceptable", "Riesgo", "Comercial", "Comercial", "Comercial", "B", "VERDADERO", 4},
+						{"146215", "Créditos comerciales - Categoría C riesgo apreciable", "Riesgo", "Comercial", "Comercial", "Comercial", "C", "VERDADERO", 4},
+						{"146220", "Créditos comerciales - Categoría D riesgo significativo", "Riesgo", "Comercial", "Comercial", "Comercial", "D", "VERDADERO", 4},
+						{"146225", "Créditos comerciales - Categoría E riesgo de incobrabilidad", "Riesgo", "Comercial", "Comercial", "Comercial", "E", "VERDADERO", 4},
+						{"146905", "Créditos a empleados - vivienda - Categoría A riesgo normal", "Riesgo", "Vivienda", "Vivienda", "Empleados vivienda", "A", "FALSO", 1},
+						{"146910", "Créditos a empleados - vivienda - Categoría B riesgo aceptable", "Riesgo", "Vivienda", "Vivienda", "Empleados vivienda", "B", "VERDADERO", 1},
+						{"146915", "Créditos a empleados - vivienda - Categoría C riesgo apreciable", "Riesgo", "Vivienda", "Vivienda", "Empleados vivienda", "C", "VERDADERO", 1},
+						{"146920", "Créditos a empleados - vivienda - Categoría D riesgo significativo", "Riesgo", "Vivienda", "Vivienda", "Empleados vivienda", "D", "VERDADERO", 1},
+						{"146925", "Créditos a empleados - vivienda - Categoría E riesgo de incobrabilidad", "Riesgo", "Vivienda", "Vivienda", "Empleados vivienda", "E", "VERDADERO", 1},
+						{"146930", "Créditos a empleados - consumo - Categoría A riesgo normal", "Riesgo", "Consumo con libranza", "Consumo", "Empleados consumo", "A", "FALSO", 2},
+						{"146935", "Créditos a empleados - consumo - Categoría B riesgo aceptable", "Riesgo", "Consumo con libranza", "Consumo", "Empleados consumo", "B", "VERDADERO", 2},
+						{"146940", "Créditos a empleados - consumo - Categoría C riesgo apreciable", "Riesgo", "Consumo con libranza", "Consumo", "Empleados consumo", "C", "VERDADERO", 2},
+						{"146945", "Créditos a empleados - consumo - Categoría D riesgo significativo", "Riesgo", "Consumo con libranza", "Consumo", "Empleados consumo", "D", "VERDADERO", 2},
+						{"146950", "Créditos a empleados - consumo - Categoría E riesgo de incobrabilidad", "Riesgo", "Consumo con libranza", "Consumo", "Empleados consumo", "E", "VERDADERO", 2},
+						{"840505", "Capital vivienda - vigente y hasta 60 días de mora", "Mora", "Vivienda", "Vivienda", "Vivienda", "1. Hasta 60", "FALSO", 1},
+						{"840510", "Capital vivienda - de 61 a 150 días de mora", "Mora", "Vivienda", "Vivienda", "Vivienda", "2. De 61 a 150", "VERDADERO", 1},
+						{"840515", "Capital vivienda - de 151 a 360 días de mora", "Mora", "Vivienda", "Vivienda", "Vivienda", "3. De 151 a 360", "VERDADERO", 1},
+						{"840520", "Capital vivienda - de 361 a 540 días de mora", "Mora", "Vivienda", "Vivienda", "Vivienda", "4. De 361 a 540", "VERDADERO", 1},
+						{"840525", "Capital vivienda - de 541 o más días de mora", "Mora", "Vivienda", "Vivienda", "Vivienda", "5. De 541 o más", "VERDADERO", 1},
+						{"841005", "Capital consumo con libranza - vigente y hasta 30 días de mora", "Mora", "Consumo con libranza", "Consumo", "Consumo con libranza", "1. Hasta 30", "FALSO", 2},
+						{"841010", "Capital consumo con libranza - de 31 a 60 días de mora", "Mora", "Consumo con libranza", "Consumo", "Consumo con libranza", "2. De 31 a 60", "VERDADERO", 2},
+						{"841015", "Capital consumo con libranza - de 61 a 90 días de mora", "Mora", "Consumo con libranza", "Consumo", "Consumo con libranza", "3. De 61 a 90", "VERDADERO", 2},
+						{"841020", "Capital consumo con libranza - de 91 a 180 días de mora", "Mora", "Consumo con libranza", "Consumo", "Consumo con libranza", "4. De 91 a 180", "VERDADERO", 2},
+						{"841025", "Capital consumo con libranza - de 181 o más días de mora", "Mora", "Consumo con libranza", "Consumo", "Consumo con libranza", "5. De 181 o más", "VERDADERO", 2},
+						{"841505", "Capital consumo sin libranza - vigente y hasta 30 días de mora", "Mora", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "1. Hasta 30", "FALSO", 2},
+						{"841510", "Capital consumo sin libranza - de 31 a 60 días de mora", "Mora", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "2. De 31 a 60", "VERDADERO", 2},
+						{"841515", "Capital consumo sin libranza - de 61 a 90 días de mora", "Mora", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "3. De 61 a 90", "VERDADERO", 2},
+						{"841520", "Capital consumo sin libranza - de 91 a 180 días de mora", "Mora", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "4. De 91 a 180", "VERDADERO", 2},
+						{"841525", "Capital consumo sin libranza - de 181 o más días de mora", "Mora", "Consumo sin libranza", "Consumo", "Consumo sin libranza", "5. De 181 o más", "VERDADERO", 2},
+						{"842005", "Capital microcrédito y productivo - vigente y hasta 30 días de mora", "Mora", "Microcrédito", "Microcrédito", "Microcrédito y productivo", "1. Hasta 30", "FALSO", 3},
+						{"842010", "Capital microcrédito y productivo - de 31 a 60 días de mora", "Mora", "Microcrédito", "Microcrédito", "Microcrédito y productivo", "2. De 31 a 60", "VERDADERO", 3},
+						{"842015", "Capital microcrédito y productivo - de 61 a 90 días de mora", "Mora", "Microcrédito", "Microcrédito", "Microcrédito y productivo", "3. De 61 a 90", "VERDADERO", 3},
+						{"842020", "Capital microcrédito y productivo - de 91 a 120 días de mora", "Mora", "Microcrédito", "Microcrédito", "Microcrédito y productivo", "4. De 91 a 120", "VERDADERO", 3},
+						{"842025", "Capital microcrédito y productivo - de 121 o más días de mora", "Mora", "Microcrédito", "Microcrédito", "Microcrédito y productivo", "5. De 121 o más", "VERDADERO", 3},
+						{"842505", "Capital comercial - vigente y hasta 30 días de mora", "Mora", "Comercial", "Comercial", "Comercial", "1. Hasta 30", "FALSO", 4},
+						{"842510", "Capital comercial - de 31 a 90 días de mora", "Mora", "Comercial", "Comercial", "Comercial", "2. De 31 a 90", "VERDADERO", 4},
+						{"842515", "Capital comercial - de 91 a 120 días de mora", "Mora", "Comercial", "Comercial", "Comercial", "3. De 91 a 120", "VERDADERO", 4},
+						{"842520", "Capital comercial - de 121 a 150 días de mora", "Mora", "Comercial", "Comercial", "Comercial", "4. De 121 a 150", "VERDADERO", 4},
+						{"842525", "Capital comercial - de 151 o más días de mora", "Mora", "Comercial", "Comercial", "Comercial", "5. De 151 o más", "VERDADERO", 4},
+						{"140805", "Deterioro créditos de vivienda - Categoría A riesgo normal", "Deterioro", "Vivienda", "Vivienda", "Vivienda", "A", null, 1},
+						{"140810", "Deterioro créditos de vivienda - Categoría B riesgo aceptable", "Deterioro", "Vivienda", "Vivienda", "Vivienda", "B", null, 1},
+						{"140815", "Deterioro créditos de vivienda - Categoría C riesgo apreciable", "Deterioro", "Vivienda", "Vivienda", "Vivienda", "C", null, 1},
+						{"140820", "Deterioro créditos de vivienda - Categoría D riesgo significativo", "Deterioro", "Vivienda", "Vivienda", "Vivienda", "D", null, 1},
+						{"140825", "Deterioro créditos de vivienda - Categoría E riesgo de incobrabilidad", "Deterioro", "Vivienda", "Vivienda", "Vivienda", "E", null, 1},
+						{"144510", "Deterioro créditos de consumo - Categoría A riesgo normal", "Deterioro", null, "Consumo", "Consumo", "A", null, 2},
+						{"144520", "Deterioro créditos de consumo - Categoría B riesgo aceptable", "Deterioro", null, "Consumo", "Consumo", "B", null, 2},
+						{"144530", "Deterioro créditos de consumo - Categoría C riesgo apreciable", "Deterioro", null, "Consumo", "Consumo", "C", null, 2},
+						{"144540", "Deterioro créditos de consumo - Categoría D riesgo significativo", "Deterioro", null, "Consumo", "Consumo", "D", null, 2},
+						{"144550", "Deterioro créditos de consumo - Categoría E riesgo de incobrabilidad", "Deterioro", null, "Consumo", "Consumo", "E", null, 2},
+						{"144505", "Deterioro créditos de consumo - Categoría A riesgo normal", "Deterioro", null, "Consumo", "Consumo", "A", null, 2},
+						{"144515", "Deterioro créditos de consumo - Categoría B riesgo aceptable", "Deterioro", null, "Consumo", "Consumo", "B", null, 2},
+						{"144525", "Deterioro créditos de consumo - Categoría C riesgo apreciable", "Deterioro", null, "Consumo", "Consumo", "C", null, 2},
+						{"144535", "Deterioro créditos de consumo - Categoría D riesgo significativo", "Deterioro", null, "Consumo", "Consumo", "D", null, 2},
+						{"144545", "Deterioro créditos de consumo - Categoría E riesgo de incobrabilidad", "Deterioro", null, "Consumo", "Consumo", "E", null, 2},
+						{"145105", "Deterioro microcrédito inmobiliario - Categoría A riesgo normal", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "A", null, 3},
+						{"145110", "Deterioro microcrédito inmobiliario - Categoría B riesgo aceptable", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "B", null, 3},
+						{"145115", "Deterioro microcrédito inmobiliario - Categoría C riesgo apreciable", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "C", null, 3},
+						{"145120", "Deterioro microcrédito inmobiliario - Categoría D riesgo significativo", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "D", null, 3},
+						{"145125", "Deterioro microcrédito inmobiliario - Categoría E riesgo de incobrabilidad", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito inmobiliario", "E", null, 3},
+						{"145810", "Deterioro microcrédito empresarial - Categoría A riesgo normal", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "A", null, 3},
+						{"145820", "Deterioro microcrédito empresarial - Categoría B riesgo aceptable", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "B", null, 3},
+						{"145830", "Deterioro microcrédito empresarial - Categoría C riesgo apreciable", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "C", null, 3},
+						{"145840", "Deterioro microcrédito empresarial - Categoría D riesgo significativo", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "D", null, 3},
+						{"145850", "Deterioro microcrédito empresarial - Categoría E riesgo de incobrabilidad", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "E", null, 3},
+						{"145805", "Deterioro microcrédito empresarial - Categoría A riesgo normal", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "A", null, 3},
+						{"145815", "Deterioro microcrédito empresarial - Categoría B riesgo aceptable", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "B", null, 3},
+						{"145825", "Deterioro microcrédito empresarial - Categoría C riesgo apreciable", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "C", null, 3},
+						{"145835", "Deterioro microcrédito empresarial - Categoría D riesgo significativo", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "D", null, 3},
+						{"145845", "Deterioro microcrédito empresarial - Categoría E riesgo de incobrabilidad", "Deterioro", "Microcrédito", "Microcrédito", "Microcrédito empresarial", "E", null, 3},
+						{"147905", "Deterioro créditos productivos - Categoría A riesgo normal", "Deterioro", "Microcrédito", "Microcrédito", "Productivo", "A", null, 3},
+						{"147910", "Deterioro créditos productivos - Categoría B riesgo aceptable", "Deterioro", "Microcrédito", "Microcrédito", "Productivo", "B", null, 3},
+						{"147915", "Deterioro créditos productivos - Categoría C riesgo apreciable", "Deterioro", "Microcrédito", "Microcrédito", "Productivo", "C", null, 3},
+						{"147920", "Deterioro créditos productivos - Categoría D riesgo significativo", "Deterioro", "Microcrédito", "Microcrédito", "Productivo", "D", null, 3},
+						{"147925", "Deterioro créditos productivos - Categoría E riesgo de incobrabilidad", "Deterioro", "Microcrédito", "Microcrédito", "Productivo", "E", null, 3},
+						{"146510", "Deterioro créditos comerciales - Categoría A riesgo normal", "Deterioro", "Comercial", "Comercial", "Comercial", "A", null, 4},
+						{"146520", "Deterioro créditos comerciales - Categoría B riesgo aceptable", "Deterioro", "Comercial", "Comercial", "Comercial", "B", null, 4},
+						{"146530", "Deterioro créditos comerciales - Categoría C riesgo apreciable", "Deterioro", "Comercial", "Comercial", "Comercial", "C", null, 4},
+						{"146540", "Deterioro créditos comerciales - Categoría D riesgo significativo", "Deterioro", "Comercial", "Comercial", "Comercial", "D", null, 4},
+						{"146550", "Deterioro créditos comerciales - Categoría E riesgo de incobrabilidad", "Deterioro", "Comercial", "Comercial", "Comercial", "E", null, 4},
+						{"146505", "Deterioro créditos comerciales - Categoría A riesgo normal", "Deterioro", "Comercial", "Comercial", "Comercial", "A", null, 4},
+						{"146515", "Deterioro créditos comerciales - Categoría B riesgo aceptable", "Deterioro", "Comercial", "Comercial", "Comercial", "B", null, 4},
+						{"146525", "Deterioro créditos comerciales - Categoría C riesgo apreciable", "Deterioro", "Comercial", "Comercial", "Comercial", "C", null, 4},
+						{"146535", "Deterioro créditos comerciales - Categoría D riesgo significativo", "Deterioro", "Comercial", "Comercial", "Comercial", "D", null, 4},
+						{"146545", "Deterioro créditos comerciales - Categoría E riesgo de incobrabilidad", "Deterioro", "Comercial", "Comercial", "Comercial", "E", null, 4},
+						{"147105", "Deterioro créditos a empleados - vivienda - Categoría A riesgo normal", "Deterioro", "Vivienda", "Vivienda", "Empleados vivienda", "A", null, 1},
+						{"147110", "Deterioro créditos a empleados - vivienda - Categoría B riesgo aceptable", "Deterioro", "Vivienda", "Vivienda", "Empleados vivienda", "B", null, 1},
+						{"147115", "Deterioro créditos a empleados - vivienda - Categoría C riesgo apreciable", "Deterioro", "Vivienda", "Vivienda", "Empleados vivienda", "C", null, 1},
+						{"147120", "Deterioro créditos a empleados - vivienda - Categoría D riesgo significativo", "Deterioro", "Vivienda", "Vivienda", "Empleados vivienda", "D", null, 1},
+						{"147125", "Deterioro créditos a empleados - vivienda - Categoría E riesgo de incobrabilidad", "Deterioro", "Vivienda", "Vivienda", "Empleados vivienda", "E", null, 1},
+						{"147130", "Deterioro créditos a empleados - consumo - Categoría A riesgo normal", "Deterioro", null, "Consumo", "Empleados consumo", "A", null, 2},
+						{"147135", "Deterioro créditos a empleados - consumo - Categoría B riesgo aceptable", "Deterioro", null, "Consumo", "Empleados consumo", "B", null, 2},
+						{"147140", "Deterioro créditos a empleados - consumo - Categoría C riesgo apreciable", "Deterioro", null, "Consumo", "Empleados consumo", "C", null, 2},
+						{"147145", "Deterioro créditos a empleados - consumo - Categoría D riesgo significativo", "Deterioro", null, "Consumo", "Empleados consumo", "D", null, 2},
+						{"147150", "Deterioro créditos a empleados - consumo - Categoría E riesgo de incobrabilidad", "Deterioro", null, "Consumo", "Empleados consumo", "E", null, 2},
+						{"146805", "Deterioro general de cartera de créditos", "Deterioro general", null, null, "Deterioro general", null, null, null},
+						{"146810", "Deterioro general adicional de cartera de créditos", "Deterioro general", null, null, "Deterioro general", null, null, null}
+				        }
+				    ),
+				    #"Índice agregado" = Table.AddIndexColumn(Origen, "Índice", 0, 1, Int64.Type)
 				in
-				    #"Valor reemplazado"
+				    #"Índice agregado"
 
 	annotation PBI_NavigationStepName = Navegación
 
