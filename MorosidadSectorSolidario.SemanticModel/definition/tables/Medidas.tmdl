@@ -145,6 +145,11 @@ table Medidas
 			    "#1E88E5") //Azul
 		lineageTag: 5bdabf19-95f4-438b-b656-c8e64f87d506
 
+	measure 'Color barra seleccionada móvil' =
+			IF(SELECTEDVALUE(dm_Entidades[SIGLA]) = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]), "#008282",  // teal de marca
+			    "#2A7560") // verde 2
+		lineageTag: 6f1c2a4e-3b7d-4c59-9a61-0d8e5b7c1f23
+
 	measure 'Tasa mora sin filtros' = CALCULATE([Tasa mora], ALL(dm_Entidades[SIGLA]), dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]))
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 2c4bc232-4d6d-4d21-ae66-940a5094d23e

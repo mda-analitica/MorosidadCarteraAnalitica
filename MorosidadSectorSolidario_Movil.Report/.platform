@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "MorosidadSectorSolidario_Movil"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d81a884b-5bfd-4192-a536-91101fc63089"
+  }
+}
