@@ -67,3 +67,74 @@ Escala de 1 (bajo) a 5 (alto).
 4. **#6:** ¿qué filtros deben viajar entre páginas?
 5. **#7c y #8:** ¿la fecha de la Supersolidaria se lee automáticamente de su página o se escribe a mano? ¿Dónde vive la bitácora (SharePoint, Excel o el flujo de datos)?
 6. **#9:** ¿la tarjeta oscura de cobertura queda sola arriba, o se pasa a una cuadrícula 2×2?
+
+---
+
+## Decisiones del usuario (9 nov. 2026)
+1. **Modelo:** por ahora el móvil usa su propia copia (`MorosidadSectorSolidario_Movil.SemanticModel`). Se unificarán después.
+2. **Ranking:** va en Por entidades, para tasa de mora, tasa de riesgo y riesgo/mora. Además, una gráfica nueva de saldo de cartera total y saldo en mora. Debajo de cada gráfica va una frase del tipo "COOPRUDEA es la número 10 entre 100 entidades en …".
+3. **Tooltip:** en Por entidad, al tocar una línea de crédito en "Tasa de mora" o "Tasa de riesgo", aparece debajo el detalle (el contenido de Tooltip-Mora o Tooltip-Riesgo). Si no hay selección, el recuadro sale vacío e invita a tocar una línea.
+4. **Sincronización:** todos los filtros. La fecha deja de ser un filtro: siempre se usa el último corte y el informe lo muestra.
+5. **Fechas:** solo la fecha que publica la Supersolidaria en su página. No se hace la bitácora (#8 queda fuera por ahora).
+6. **Cobertura:** cuadrícula de KPIs, y el selector de la línea de tiempo usa los mismos indicadores de la cuadrícula.
+
+## Fase 3 · Plan paso a paso (todo sobre el modelo y el informe móvil)
+
+### Ola 1 · Ajustes rápidos
+**#10 Tooltips en verde**
+1. En Tooltip-Mora y Tooltip-Riesgo: fondo de página blanco, encabezados de la tabla en `#1B4B3D` con texto blanco, filas alternas en `#F3F5F4`, textos en `#252423` y la tarjeta del título en `#008282`.
+2. Verificar en Desktop, pasando el cursor sobre las barras de Por sector.
+
+**#9 + #5 Cobertura: cuadrícula de KPIs y selector de indicador**
+1. Medida nueva `Cobertura individual` = Deterioro individual ÷ Saldo en riesgo, más su versión "con entidad seleccionada".
+2. Tarjetas en filas de 2: Cobertura total · Cobertura individual / Cobertura C-D-E · Deterioro sobre cartera bruta (la distribución exacta se confirma; ver dudas).
+3. Parámetro de campos nuevo `Indicador cobertura` con los indicadores de la cuadrícula. Su segmentador va encima de la línea de tiempo, que pasa a usar ese parámetro.
+
+### Ola 2 · Cimientos
+**#11 Siempre el último corte**
+1. Columna calculada `Calendario[Es último corte]` = la fecha del mes es igual a `MAX(tb_Balance[Fecha reporte])`. Se recalcula en cada actualización.
+2. Filtro de página `Es último corte = Verdadero` en Inicio y Por entidades. En Por sector, Por entidad y Cobertura, el filtro va a nivel de visual: todos excepto las líneas de tiempo, que muestran el histórico desde octubre de 2025.
+3. Quitar los segmentadores de mes de las 5 páginas.
+4. Revisar las medidas "sin filtros" y los tooltips, para que tampoco sumen meses.
+5. Validar: los valores de agosto de 2026 deben coincidir con `docs/validacion-medidas.md`.
+
+**#7 Fechas visibles**
+1. Medida `Fecha de corte` = `MAX(Fecha reporte)`, con formato "agosto de 2026". Va en el encabezado de cada página ("Datos a agosto de 2026").
+2. Fecha de la Supersolidaria: una consulta de Power Query lee la página pública y extrae "Fecha de actualización". Se guarda en una tabla de una fila y se muestra en Inicio. Requiere la URL exacta (ver dudas).
+3. Probar la actualización en el servicio: si la página no se puede leer sin puerta de enlace, se reemplaza por una tabla escrita a mano.
+
+**#6 Sincronizar todos los filtros**
+1. Grupos de sincronización por campo: Su entidad (`dm_EntidadSeleccionada[SIGLA]`), Entidades a comparar (`dm_Entidades[SIGLA]`), Línea, Tipo de entidad, Departamento, Municipio y "Ver por".
+2. En las páginas donde un filtro no se ve, agregar un segmentador oculto sincronizado, para que el filtro se aplique igual.
+3. Revisar el efecto cruzado: por ejemplo, filtrar Departamento en Por sector también reduce las entidades de Por entidades. Mostrar un aviso de filtros activos.
+
+### Ola 3 · Valor analítico
+**#4 Ranking en Por entidades**
+1. Medidas de ranking con `RANKX` sobre todas las entidades con datos en el último corte, para la entidad de "Su entidad":
+   - tasa de mora y tasa de riesgo: menor es mejor (puesto 1 = la de menor tasa);
+   - riesgo/mora;
+   - saldo total y saldo en mora: mayor = puesto 1.
+2. Medida `Total entidades` = número de entidades con cartera en el último corte.
+3. Medidas de texto: "COMEDAL es la número 34 entre 180 entidades en tasa de mora (1 = la más baja)". Van en un cuadro de texto debajo de cada gráfica.
+4. Gráfica nueva: barras de saldo de cartera total y saldo en mora por entidad comparada, con su frase de ranking.
+5. Validar el ranking en Python con los mismos datos.
+
+**#2 Definición de indicadores**
+1. Página nueva "Glosario", con fórmula, explicación en lenguaje sencillo y ejemplo de cada indicador. Se toma de `docs/diccionario-de-datos.md`.
+2. Un botón "i" junto al título de cada tarjeta o gráfica que lleva al Glosario, y un botón "Volver".
+
+### Ola 4 · Experiencia
+**#3 Detalle debajo de las barras en Por entidad**
+1. Debajo de "Tasa de mora por línea" y de "Tasa de riesgo por línea" va una tabla con el mismo contenido de Tooltip-Mora o Tooltip-Riesgo (franjas de mora o calificación A-E).
+2. Interacciones: cada barra filtra solo su tabla de detalle.
+3. Una medida que detecta si hay una línea seleccionada. Sin selección, la tabla queda vacía y un texto dice "Toca una línea de crédito en la gráfica de arriba para ver el detalle".
+4. Desactivar el tooltip emergente en esas dos gráficas, para no duplicarlo.
+
+**#1 Filtros ocultos en Inicio**
+1. Sin el mes, en Inicio quedan Su entidad y Entidades a comparar.
+2. Los filtros se ocultan con marcadores. Al tocar "Informe por entidad", "Cobertura" o "Benchmarking" aparece el filtro necesario, con un botón "Ver informe". "Indicadores por sector" va directo, sin filtro.
+3. Probar que los marcadores no reinicien los filtros (marcadores sin "Datos", solo "Visualización").
+
+### Fuera de alcance por ahora
+- **#8** bitácora de actualizaciones.
+- La unificación de los modelos de escritorio y móvil.
