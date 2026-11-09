@@ -150,3 +150,12 @@ Escala de 1 (bajo) a 5 (alto).
   - En las tasas, el puesto 1 es la de menor valor (la mejor). En los saldos, el puesto 1 es la de mayor valor.
   - No se excluye ninguna entidad (tampoco COOTRAUNION): cuando la entidad corrija su reporte, no habrá que deshacer una regla.
 - **Fecha de la Supersolidaria (#7):** se toma de https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion, el enlace que ya está en el informe. Desde este entorno no se pudo abrir la página: el proxy rechaza el dominio. Hay que confirmar en Power BI Desktop dónde aparece la fecha y si Power Query la puede leer.
+
+## Avance
+- **Ola 1 implementada (9 nov. 2026)** sobre la versión móvil del usuario:
+  - Medidas nuevas: `Cobertura individual` y `Cobertura individual con entidad seleccionada`.
+  - Tabla nueva `Indicador cobertura` (parámetro de campo con 7 indicadores).
+  - Cobertura: una sola tarjeta 2×2. Fila 1: Cobertura individual y Provisión individual. Fila 2: Cobertura total y Provisión total.
+  - Un selector de indicador sobre la línea de tiempo.
+  - Tooltip-Mora y Tooltip-Riesgo pasan a la paleta verde.
+  - Valores esperados para COMEDAL a agosto de 2026: cobertura individual 60,28 %, provisión individual $13.962.982.499, cobertura total 107,90 %, provisión total $24.992.772.751.

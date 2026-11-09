@@ -1,0 +1,53 @@
+table 'Indicador cobertura'
+	lineageTag: fd85fc7e-915b-e91a-3d43-41a7a5f077cc
+
+	column 'Indicador cobertura'
+		lineageTag: 86cc207e-382c-155e-8f24-61e62cde3b2c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Indicador cobertura Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'Indicador cobertura Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Indicador cobertura Campos'
+		isHidden
+		lineageTag: 719de552-c93d-168c-955a-d1e678812a74
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Indicador cobertura Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Indicador cobertura Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 3566d473-3ea5-2739-11c6-214f06b18815
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Indicador cobertura' = calculated
+		mode: import
+		source =
+				{
+				    ("Cobertura total", NAMEOF('Medidas'[Cobertura cartera en riesgo con entidad seleccionada]), 0),
+				    ("Cobertura individual", NAMEOF('Medidas'[Cobertura individual con entidad seleccionada]), 1),
+				    ("Cobertura C, D y E", NAMEOF('Medidas'[Cobertura individual CDE con entidad seleccionada]), 2),
+				    ("Deterioro / cartera bruta", NAMEOF('Medidas'[Deterioro sobre cartera bruta con entidad seleccionada]), 3),
+				    ("Provisión total", NAMEOF('Medidas'[Deterioro total con entidad seleccionada]), 4),
+				    ("Provisión individual", NAMEOF('Medidas'[Deterioro individual con entidad seleccionada]), 5),
+				    ("Provisión general", NAMEOF('Medidas'[Deterioro general con entidad seleccionada]), 6)
+				}
+
+	annotation PBI_Id = 47cc60854a8899a554d61369efaebfc0
+

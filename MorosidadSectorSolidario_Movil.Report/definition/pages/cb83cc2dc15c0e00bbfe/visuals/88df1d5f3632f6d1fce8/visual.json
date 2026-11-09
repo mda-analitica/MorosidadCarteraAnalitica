@@ -3,9 +3,9 @@
   "name": "88df1d5f3632f6d1fce8",
   "position": {
     "x": 16,
-    "y": 414,
+    "y": 262,
     "z": 12000,
-    "height": 106,
+    "height": 258,
     "width": 418,
     "tabOrder": 12000
   },
@@ -23,12 +23,42 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Cobertura individual CDE con entidad seleccionada"
+                  "Property": "Cobertura individual con entidad seleccionada"
                 }
               },
-              "queryRef": "Medidas.Cobertura individual CDE con entidad seleccionada",
-              "nativeQueryRef": "Cobertura C, D y E",
-              "displayName": "Cobertura C, D y E"
+              "queryRef": "Medidas.Cobertura individual con entidad seleccionada",
+              "nativeQueryRef": "Cobertura individual",
+              "displayName": "Cobertura individual"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Deterioro individual con entidad seleccionada"
+                }
+              },
+              "queryRef": "Medidas.Deterioro individual con entidad seleccionada",
+              "nativeQueryRef": "Provisión individual",
+              "displayName": "Provisión individual"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Cobertura cartera en riesgo con entidad seleccionada"
+                }
+              },
+              "queryRef": "Medidas.Cobertura cartera en riesgo con entidad seleccionada",
+              "nativeQueryRef": "Cobertura total",
+              "displayName": "Cobertura total"
             },
             {
               "field": {
@@ -44,21 +74,6 @@
               "queryRef": "Medidas.Deterioro total con entidad seleccionada",
               "nativeQueryRef": "Provisión total",
               "displayName": "Provisión total"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Medidas"
-                    }
-                  },
-                  "Property": "Deterioro sobre cartera bruta con entidad seleccionada"
-                }
-              },
-              "queryRef": "Medidas.Deterioro sobre cartera bruta con entidad seleccionada",
-              "nativeQueryRef": "Provisión / cartera bruta",
-              "displayName": "Provisión / cartera bruta"
             }
           ]
         }
@@ -106,14 +121,14 @@
             "columnCount": {
               "expr": {
                 "Literal": {
-                  "Value": "3L"
+                  "Value": "2L"
                 }
               }
             },
             "rowCount": {
               "expr": {
                 "Literal": {
-                  "Value": "1L"
+                  "Value": "2L"
                 }
               }
             },
@@ -481,7 +496,46 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'COBERTURA Y PROVISIÓN'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#605E5C'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
                 }
               }
             }

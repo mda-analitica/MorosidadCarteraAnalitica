@@ -114,6 +114,15 @@ table Medidas
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 4aee4da7-073b-5ac0-9e22-cbfdf20fb681
 
+	/// Deterioro individual / cartera en riesgo (B a E). No incluye el deterioro general.
+	measure 'Cobertura individual' = DIVIDE([Deterioro individual], [Saldo en riesgo])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: b11d3955-55be-cbbf-41ca-09053ea5ed48
+
+	measure 'Cobertura individual con entidad seleccionada' = CALCULATE([Cobertura individual], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 3a9bedbd-1532-3372-428f-2dd190294351
+
 	/// Deterioro total / cartera bruta (fórmula del anexo técnico para la cobertura de la cartera total).
 	measure 'Deterioro sobre cartera bruta' = DIVIDE([Deterioro total], [Saldo total])
 		formatString: 0.00\ %;-0.00\ %;0.00\ %

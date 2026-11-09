@@ -3,9 +3,9 @@
   "name": "07fa3f77418db41d788b",
   "position": {
     "x": 24.375,
-    "y": 572.5,
+    "y": 610,
     "z": 16000,
-    "height": 262,
+    "height": 258,
     "width": 398,
     "tabOrder": 16000
   },
@@ -83,8 +83,24 @@
                 }
               },
               "queryRef": "Medidas.Cobertura cartera en riesgo con entidad seleccionada",
-              "nativeQueryRef": "Cobertura",
-              "displayName": "Cobertura cartera en riesgo"
+              "nativeQueryRef": "Cobertura total",
+              "displayName": "Cobertura total"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Indicador cobertura"
+                    }
+                  },
+                  "Property": "Indicador cobertura"
+                }
+              },
+              "index": 0,
+              "length": 1
             }
           ]
         }

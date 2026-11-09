@@ -23,6 +23,7 @@ ref table LocalDateTable_3eeaefe1-1d32-4f02-8144-3242f09892fb
 ref table 'Indicadores gráfico de líneas'
 ref table Parámetro
 ref table 'Parámetro 2'
+ref table 'Indicador cobertura'
 
 ref cultureInfo es-CO
 
