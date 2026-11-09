@@ -307,6 +307,25 @@ table Medidas
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 1e1293b9-07e3-5976-b940-963b6206185b
 
+	/// Último corte disponible en el modelo (independiente de los filtros del informe).
+	measure 'Fecha de corte' = CALCULATE(MAX(tb_Balance[Fecha reporte]), REMOVEFILTERS())
+		formatString: d/MM/yyyy
+		lineageTag: 371ccc61-be38-8c98-e49b-bd9f8f32b97c
+
+	measure 'Fecha de corte texto' = "Datos a " & FORMAT([Fecha de corte], "MMMM ""de"" yyyy")
+		lineageTag: 663a3447-1a38-7c24-4363-4d106ffa9f19
+
+	/// Fecha que publica la Supersolidaria en la página de entidades vigiladas que reportan información.
+	measure 'Fecha Supersolidaria texto' =
+			VAR f = MAX('Fecha Supersolidaria'[Fecha publicación])
+			RETURN
+			    IF(
+			        ISBLANK(f),
+			        "Supersolidaria: fecha de publicación no disponible",
+			        "Supersolidaria publicó el " & FORMAT(f, "d ""de"" MMMM ""de"" yyyy")
+			    )
+		lineageTag: f02a7fe4-a5b8-2ad1-2d16-83f02abf5046
+
 	partition Medidas = m
 		mode: import
 		source =

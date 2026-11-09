@@ -23,13 +23,13 @@
                       "Entity": "Calendario"
                     }
                   },
-                  "Property": "Nombre Mes"
+                  "Property": "Corte"
                 }
               },
-              "queryRef": "Calendario.Nombre Mes",
-              "nativeQueryRef": "Seleccione un mes",
+              "queryRef": "Calendario.Corte",
+              "nativeQueryRef": "Corte",
               "active": true,
-              "displayName": "Seleccione un mes"
+              "displayName": "Corte"
             }
           ]
         }
@@ -74,7 +74,7 @@
                                   "Source": "c"
                                 }
                               },
-                              "Property": "Nombre Mes"
+                              "Property": "Corte"
                             }
                           }
                         ],
@@ -82,7 +82,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Agosto'"
+                                "Value": "'Último corte'"
                               }
                             }
                           ]
@@ -267,7 +267,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'A. MES DE ANÁLISIS'"
+                  "Value": "'CORTE'"
                 }
               }
             },
@@ -322,43 +322,11 @@
       ]
     },
     "syncGroup": {
-      "groupName": "Nombre Mes",
+      "groupName": "Corte",
       "fieldChanges": true,
       "filterChanges": true
     },
     "drillFilterOtherVisuals": true
   },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "7f8f219730e82c2f5124",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Calendario"
-              }
-            },
-            "Property": "Nombre Mes"
-          }
-        },
-        "type": "Categorical",
-        "objects": {
-          "general": [
-            {
-              "properties": {
-                "isInvertedSelectionMode": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "true"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
+  "isHidden": true
 }
