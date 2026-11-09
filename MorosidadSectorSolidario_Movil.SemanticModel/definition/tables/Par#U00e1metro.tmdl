@@ -1,0 +1,53 @@
+table Parámetro
+	lineageTag: 00b074a4-3964-4722-91c7-711dc5d6f31d
+
+	column Parámetro
+		lineageTag: a2ab0352-ccd2-4212-9d33-ea1560ba673b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parámetro Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'Parámetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro Campos'
+		isHidden
+		lineageTag: 4c07b0fd-5442-405d-910b-4f053d1d8270
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parámetro Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro Orden'
+		isHidden
+		formatString: 0
+		lineageTag: c982d6fc-ffb6-4ac3-b4aa-f339e36a9459
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parámetro = calculated
+		mode: import
+		source =
+				{
+				    ("Riesgo/Mora", NAMEOF('Medidas'[Riesgo/Mora con entidad seleccionada]), 0),
+				    ("Saldo en mora", NAMEOF('Medidas'[Saldo en mora con entidad seleccionada]), 1),
+				    ("Saldo en riesgo", NAMEOF('Medidas'[Saldo en riesgo con entidad seleccionada]), 2),
+				    ("Saldo total", NAMEOF('Medidas'[Saldo total con entidad seleccionada]), 3),
+				    ("Tasa mora", NAMEOF('Medidas'[Tasa mora con entidad seleccionada]), 4),
+				    ("Tasa riesgo", NAMEOF('Medidas'[Tasa riesgo con entidad seleccionada]), 5),
+				    ("Cobertura", NAMEOF('Medidas'[Cobertura cartera en riesgo con entidad seleccionada]), 6)
+				}
+
+	annotation PBI_Id = d639e2c9c3c04ed1b0a5f04e57161955
+

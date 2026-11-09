@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "7b3b207bfaae604eaae4",
   "position": {
-    "x": 24,
-    "y": 268,
+    "x": 23.404255319148938,
+    "y": 302.12765957446811,
     "z": 12000,
-    "height": 20,
-    "width": 300,
+    "height": 29.787234042553195,
+    "width": 196.80851063829789,
     "tabOrder": 12000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "EVOLUCIÓN MENSUAL",
                     "textStyle": {
-                      "fontSize": "8pt",
-                      "color": "#605E5C",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "8pt",
+                      "color": "#605e5c"
                     }
                   }
                 ]

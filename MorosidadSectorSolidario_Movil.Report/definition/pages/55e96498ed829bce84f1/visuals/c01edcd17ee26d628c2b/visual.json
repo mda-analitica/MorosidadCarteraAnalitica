@@ -203,19 +203,6 @@
           }
         }
       ],
-      "gridlines": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "legend": [
         {
           "properties": {
@@ -283,6 +270,9 @@
               }
             ]
           }
+        },
+        {
+          "properties": {}
         }
       ]
     },

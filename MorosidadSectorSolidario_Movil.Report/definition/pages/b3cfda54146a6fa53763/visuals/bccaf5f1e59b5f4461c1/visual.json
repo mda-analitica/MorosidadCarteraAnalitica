@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "bccaf5f1e59b5f4461c1",
   "position": {
-    "x": 12,
-    "y": 1540,
+    "x": 12.5,
+    "y": 1526.25,
     "z": 20000,
-    "height": 24,
-    "width": 426,
+    "height": 37.5,
+    "width": 425,
     "tabOrder": 20000
   },
   "visual": {
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Teal: entidad seleccionada · Gris: sector. Fuente: Supersolidaria · MDA",
+                    "value": "Fuente: Supersolidaria · MDA",
                     "textStyle": {
+                      "fontFamily": "Segoe UI",
                       "fontSize": "7.5pt",
-                      "color": "#8A938F",
-                      "fontFamily": "Segoe UI"
+                      "color": "#8a938f"
                     }
                   }
                 ]

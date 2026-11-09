@@ -1,0 +1,314 @@
+table Medidas
+	lineageTag: 83f8f553-7f23-49bd-9b3a-b9ee44617fb2
+
+	/// Cartera de capital calificada en B, C, D y E (cuenta 14). Respeta los filtros de línea, modalidad, producto y altura.
+	measure 'Saldo en riesgo' =
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Riesgo" &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d2072960-139c-4534-836e-64ad45a79ee8
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	/// Capital con mora mayor a 30 días (60 en vivienda), cuenta 84. Respeta los filtros de línea, modalidad, producto y altura.
+	measure 'Saldo en mora' =
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Mora" &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d1d9bac3-7c1c-4835-b17c-265b0006f214
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	/// Cartera bruta de capital (cuenta 14, categorías A a E) de la línea o modalidad del contexto. Denominador de Tasa riesgo.
+	measure 'Saldo total' =
+			// Cartera bruta (cuenta 14, categorías A a E) de la línea, modalidad o producto del contexto.
+			// Quita los demás filtros de dm_Cuentas (Tipo, Estado, Altura) para que funcione como denominador.
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto]),
+			    dm_Cuentas[Tipo] = "Riesgo"
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 672bd395-8f50-48a6-99d7-d7533acda709
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	/// Capital total de la cuenta 84 (todas las franjas de mora) de la línea o modalidad del contexto. Denominador de Tasa mora.
+	measure 'Cartera total cuenta 84' =
+			// Total de capital reportado por altura de mora (cuenta 84, todas las franjas)
+			// de la línea, modalidad o producto del contexto. Denominador de Tasa mora.
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto]),
+			    dm_Cuentas[Tipo] = "Mora"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ffb238bc-ca6f-5d2a-a645-f341bb66c39e
+
+	/// Indicador de cartera por mora: Saldo en mora / Cartera total cuenta 84, de la misma línea o modalidad. Queda en blanco si la entidad no reportó la cuenta 84 o si no hay saldo para esa franja (así el tooltip por altura solo muestra las franjas de la línea).
+	measure 'Tasa mora' =
+			VAR Base = [Cartera total cuenta 84]
+			RETURN
+			    IF(NOT ISBLANK(Base) && Base <> 0, DIVIDE([Saldo en mora], Base))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: fdc7223e-ff9d-4192-99c3-f916614670d7
+
+	/// Indicador de calidad por riesgo: cartera B a E / cartera bruta (cuenta 14), de la misma línea o modalidad.
+	measure 'Tasa riesgo' =
+			VAR Base = [Saldo total]
+			RETURN
+			    IF(NOT ISBLANK(Base) && Base <> 0, DIVIDE([Saldo en riesgo], Base))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 66b4a2bf-7a9a-4c40-816f-08c7a018ea26
+
+	/// Relación entre el indicador por riesgo y el indicador por mora (anexo técnico del Título V). Mayor que 1: hay más cartera calificada en riesgo que en mora.
+	measure Riesgo/Mora = DIVIDE([Tasa riesgo], [Tasa mora])
+		formatString: 0.00
+		lineageTag: 4ccb0327-fb85-4946-a84f-84df5e95ce98
+
+	/// Deterioro individual de capital de la modalidad del contexto.
+	measure 'Deterioro individual' =
+			// Deterioro individual de capital (1408, 1445, 1451, 1458, 1465, 1471, 1479).
+			// Consumo no se puede separar entre con y sin libranza: su deterioro solo aparece por Modalidad.
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto]),
+			    dm_Cuentas[Tipo] = "Deterioro"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 081c6243-97f3-5c08-b08f-1afdf265bb1e
+
+	/// Deterioro general de cartera (1468). Solo se suma en el total de la entidad o del sector.
+	measure 'Deterioro general' =
+			// Deterioro general (1468). No pertenece a ninguna línea: queda en blanco
+			// cuando el contexto filtra una línea, modalidad o producto.
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto]),
+			    dm_Cuentas[Tipo] = "Deterioro general"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: abd1ef4b-bb00-52f2-a3cb-ebefa3fb23d0
+
+	/// Deterioro individual más deterioro general (este último solo cuando no hay filtro de línea o modalidad).
+	measure 'Deterioro total' = [Deterioro individual] + [Deterioro general]
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 960ad8ec-1700-5760-a0be-8350194caa07
+
+	/// Indicador de cobertura de la cartera en riesgo: deterioro / cartera calificada en B, C, D y E. Por modalidad usa solo el deterioro individual; en el total suma también el deterioro general.
+	measure 'Cobertura cartera en riesgo' = DIVIDE([Deterioro total], [Saldo en riesgo])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 4aee4da7-073b-5ac0-9e22-cbfdf20fb681
+
+	/// Deterioro total / cartera bruta (fórmula del anexo técnico para la cobertura de la cartera total).
+	measure 'Deterioro sobre cartera bruta' = DIVIDE([Deterioro total], [Saldo total])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: efe84633-727d-5bf9-b2eb-c7665d94b2e1
+
+	/// Deterioro individual de las categorías C, D y E / cartera calificada en C, D y E.
+	measure 'Cobertura individual CDE' =
+			// Indicador de cobertura individual de la cartera improductiva (anexo técnico del Título V):
+			// deterioro individual de las categorías C, D y E / cartera calificada en C, D y E.
+			VAR DeterioroCDE =
+			    CALCULATE(
+			        SUM(tb_Balance[VALOR EN PESOS]),
+			        ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto]),
+			        dm_Cuentas[Tipo] = "Deterioro",
+			        dm_Cuentas[Altura] IN { "C", "D", "E" }
+			    )
+			VAR CarteraCDE =
+			    CALCULATE(
+			        SUM(tb_Balance[VALOR EN PESOS]),
+			        ALLEXCEPT(dm_Cuentas, dm_Cuentas[Línea], dm_Cuentas[Modalidad], dm_Cuentas[Producto]),
+			        dm_Cuentas[Tipo] = "Riesgo",
+			        dm_Cuentas[Altura] IN { "C", "D", "E" }
+			    )
+			RETURN
+			    DIVIDE(DeterioroCDE, CarteraCDE)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 64e22482-150e-577d-9b86-460d51ac28d9
+
+	measure 'Ranking Mora' = RANKX(ALL(dm_Entidades[SIGLA]), [Tasa mora])
+		formatString: 0
+		lineageTag: 2e9adb90-4fba-4519-a19c-1bdfbb4994a7
+
+	measure 'Color barra seleccionada' =
+			IF(SELECTEDVALUE(dm_Entidades[SIGLA]) = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]), "#FF8C42",  // Amarillo
+			    "#1E88E5") //Azul
+		lineageTag: 5bdabf19-95f4-438b-b656-c8e64f87d506
+
+	measure 'Color barra seleccionada móvil' =
+			IF(SELECTEDVALUE(dm_Entidades[SIGLA]) = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]), "#008282",  // teal de marca
+			    "#2A7560") // verde 2
+		lineageTag: 6f1c2a4e-3b7d-4c59-9a61-0d8e5b7c1f23
+
+	measure 'Tasa mora sin filtros' = CALCULATE([Tasa mora], ALL(dm_Entidades[SIGLA]), dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 2c4bc232-4d6d-4d21-ae66-940a5094d23e
+
+	/// Igual a Saldo en mora (no quita filtros). Sin uso en visuales.
+	measure 'Saldo en mora sin filtros' =
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Mora" &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 30066e1a-8168-40ae-a6f2-98f0eaee70e4
+
+	/// Igual a Riesgo/Mora (no quita filtros). Se conserva porque lo usan visuales existentes.
+	measure 'Riesgo/Mora sin filtros' = [Riesgo/Mora]
+		formatString: 0.00
+		lineageTag: c0b84c4a-2925-4e22-85ec-540918f37c17
+
+	measure 'Tasa riesgo sin filtros' =
+			CALCULATE(
+			    [Tasa riesgo],
+			        ALL(dm_Entidades[SIGLA]),
+			        dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			        )
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 214f37fb-1760-4db6-a253-8b9e7b3dfde1
+
+	measure 'Saldo en riesgo sin filtros' =
+			CALCULATE(
+			    SUM(tb_Balance[VALOR EN PESOS]),
+			    FILTER(
+			        dm_Cuentas,
+			        NOT(ISBLANK(dm_Cuentas[Línea])) &&
+			        dm_Cuentas[Tipo] = "Riesgo"  &&
+			        dm_Cuentas[Estado] = "VERDADERO"
+			    ),
+			    dm_Entidades[SIGLA] = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			)
+		formatString: 0
+		lineageTag: 838caf5c-c1be-4344-b173-f19b60cd7ab2
+
+	/// Sin uso: el informe es público y no hay usuario autenticado.
+	measure 'Saludo de bienvenida' =
+			VAR Hour = HOUR(NOW())
+			VAR Greeting =
+			    SWITCH(
+			        TRUE(),
+			        Hour >= 0 && Hour < 5, "Buenas noches",
+			        Hour >= 5 && Hour < 12, "Buenos días",
+			        Hour >= 12 && Hour < 18, "Buenas tardes",
+			        Hour >= 18 && Hour < 24, "Buenas noches"
+			    )
+			RETURN
+			    Greeting & " - " & [Nombre de usuario]
+		lineageTag: 031bd601-d882-41e3-9db7-94905fc5584e
+
+	/// Sin uso: el informe es público y no hay usuario autenticado.
+	measure 'Nombre de usuario' =
+			VAR FullUserName = USERNAME()
+			VAR CleanName = LEFT(FullUserName, FIND("\", FullUserName) - 1)
+			VAR CapitalizedName = UPPER(LEFT(CleanName, 1)) & LOWER(MID(CleanName, 2, LEN(CleanName) - 1))
+			RETURN CapitalizedName
+		lineageTag: eefe523f-778f-4f53-8f63-a654592a24fc
+
+	measure Saldo = CALCULATE(SUM(tb_Balance[VALOR EN PESOS]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 3deb1b1f-69ba-4bf0-9a0d-7661fc6e9846
+
+	measure 'Cantidad de entidades' = DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD])
+		formatString: 0
+		lineageTag: cf1fa73f-4738-4937-a5f5-4dd080c68f22
+
+	/// Saldo en mora de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Saldo en mora con entidad seleccionada' = CALCULATE([Saldo en mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 912a2da5-8af3-4a6a-bcd0-810bc972ca4c
+
+	/// Saldo en riesgo de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Saldo en riesgo con entidad seleccionada' = CALCULATE([Saldo en riesgo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 7241d9b9-bee5-4f30-a959-2229849342bb
+
+	/// Saldo total de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Saldo total con entidad seleccionada' = CALCULATE([Saldo total], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ee2fa52c-4f20-4f5e-8a3a-29fee87084f8
+
+	/// Cartera total cuenta 84 de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Cartera total cuenta 84 con entidad seleccionada' = CALCULATE([Cartera total cuenta 84], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 8993baf4-411b-5d63-9032-624380530426
+
+	/// Tasa mora de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Tasa mora con entidad seleccionada' = CALCULATE([Tasa mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 917b990d-18ae-4e01-bd65-9c63d16b3212
+
+	/// Tasa riesgo de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Tasa riesgo con entidad seleccionada' = CALCULATE([Tasa riesgo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 827052ce-af0e-4c3f-a5ac-271f1e65a3e2
+
+	/// Riesgo/Mora de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Riesgo/Mora con entidad seleccionada' = CALCULATE([Riesgo/Mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00
+		lineageTag: 726ea9c7-66e4-4b47-b62e-c4b003fe8664
+
+	/// Deterioro individual de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Deterioro individual con entidad seleccionada' = CALCULATE([Deterioro individual], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: f6015d22-aa41-55e2-a0a3-c3b824aac388
+
+	/// Deterioro general de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Deterioro general con entidad seleccionada' = CALCULATE([Deterioro general], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: f71b29f9-9472-5cf3-887e-880c5a6a9d59
+
+	/// Deterioro total de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Deterioro total con entidad seleccionada' = CALCULATE([Deterioro total], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 0325a4a8-2adc-5958-8e48-e42d17ace57b
+
+	/// Cobertura cartera en riesgo de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Cobertura cartera en riesgo con entidad seleccionada' = CALCULATE([Cobertura cartera en riesgo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 6e60c9e6-6e37-52a3-a3e5-1788c6d06e23
+
+	/// Deterioro sobre cartera bruta de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Deterioro sobre cartera bruta con entidad seleccionada' = CALCULATE([Deterioro sobre cartera bruta], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 3545155e-0104-5d04-b807-e1b1b06fade2
+
+	/// Cobertura individual CDE de las entidades elegidas en el segmentador de entidad seleccionada.
+	measure 'Cobertura individual CDE con entidad seleccionada' = CALCULATE([Cobertura individual CDE], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 1e1293b9-07e3-5976-b940-963b6206185b
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Columna1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

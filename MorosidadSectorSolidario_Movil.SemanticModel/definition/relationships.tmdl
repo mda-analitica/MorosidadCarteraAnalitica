@@ -1,0 +1,21 @@
+relationship bbf5bf43-f23c-e405-bf24-44ebcf949b52
+	fromColumn: tb_Balance.'CODIGO ENTIDAD'
+	toColumn: dm_Entidades.'CODIGO ENTIDAD'
+
+relationship 375d20a0-7807-7159-d20a-0e8f138ad51b
+	fromColumn: tb_Balance.CODRENGLON
+	toColumn: dm_Cuentas.CODRENGLON
+
+relationship 10611c35-58c0-efac-1c11-60be345b3005
+	fromColumn: dm_EntidadSeleccionada.'CODIGO ENTIDAD'
+	toColumn: dm_Entidades.'CODIGO ENTIDAD'
+
+relationship a5c75afc-474c-4dfb-9f42-81f8fba6128e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Fecha
+	toColumn: LocalDateTable_3eeaefe1-1d32-4f02-8144-3242f09892fb.Date
+
+relationship d734631d-f2a9-0fb9-33b3-f0429bf0f9c8
+	fromColumn: tb_Balance.'Fecha reporte'
+	toColumn: Calendario.Fecha
+

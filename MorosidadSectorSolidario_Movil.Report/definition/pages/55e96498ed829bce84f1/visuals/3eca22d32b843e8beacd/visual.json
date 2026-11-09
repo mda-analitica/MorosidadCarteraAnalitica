@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "3eca22d32b843e8beacd",
   "position": {
-    "x": 22,
-    "y": 56,
+    "x": 21.851851851851851,
+    "y": 45.925925925925924,
     "z": 6000,
-    "height": 22,
+    "height": 32.222222222222221,
     "width": 400,
     "tabOrder": 6000
   },
@@ -21,10 +21,10 @@
                   {
                     "value": "BENCHMARKING · RESUMEN EJECUTIVO",
                     "textStyle": {
-                      "fontSize": "8pt",
-                      "color": "#49CAA5",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "8pt",
+                      "color": "#49caa5"
                     }
                   }
                 ]

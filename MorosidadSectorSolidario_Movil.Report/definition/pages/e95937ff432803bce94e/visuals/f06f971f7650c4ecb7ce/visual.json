@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f06f971f7650c4ecb7ce",
   "position": {
-    "x": 30,
-    "y": 334,
+    "x": 29.411764705882355,
+    "y": 452.35294117647061,
     "z": 12000,
-    "height": 54,
+    "height": 57.647058823529413,
     "width": 390,
-    "tabOrder": 12000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "slicer",
@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COMEDAL'"
+                                "Value": "'COOPANTEX'"
                               }
                             }
                           ]
@@ -278,7 +278,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'SU ENTIDAD COOPERATIVA'"
+                  "Value": "'C. SU ENTIDAD COOPERATIVA'"
                 }
               }
             },

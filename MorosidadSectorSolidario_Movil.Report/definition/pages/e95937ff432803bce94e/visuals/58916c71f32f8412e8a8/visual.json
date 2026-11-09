@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "58916c71f32f8412e8a8",
   "position": {
-    "x": 12,
-    "y": 196,
+    "x": 11.764705882352942,
+    "y": 185.29411764705884,
     "z": 8000,
-    "height": 24,
-    "width": 426,
-    "tabOrder": 8000
+    "height": 34.705882352941174,
+    "width": 426.47058823529414,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,9 +21,9 @@
                   {
                     "value": "Cartera, riesgo y cobertura por cooperativa y por sector",
                     "textStyle": {
+                      "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
-                      "color": "#DDF6EC",
-                      "fontFamily": "Segoe UI"
+                      "color": "#ddf6ec"
                     }
                   }
                 ]

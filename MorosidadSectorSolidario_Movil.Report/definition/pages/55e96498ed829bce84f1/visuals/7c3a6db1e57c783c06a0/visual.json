@@ -21,10 +21,10 @@
                   {
                     "value": "Morosidad por cooperativas de ahorro y crédito",
                     "textStyle": {
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "12pt",
+                      "color": "#ffffff"
                     }
                   }
                 ]

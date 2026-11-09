@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "c672935761f57da9423d",
   "position": {
-    "x": 12,
-    "y": 474,
+    "x": 18.235294117647058,
+    "y": 515.29411764705878,
     "z": 14000,
-    "height": 26,
+    "height": 31.176470588235293,
     "width": 420,
-    "tabOrder": 14000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,12 +19,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "2  Ir a un informe",
+                    "value": "2  Seleccione donde quiere ir",
                     "textStyle": {
-                      "fontSize": "10pt",
-                      "color": "#1B4B3D",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "10pt",
+                      "color": "#1b4b3d"
                     }
                   }
                 ]

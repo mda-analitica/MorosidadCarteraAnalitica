@@ -1,0 +1,72 @@
+table dm_Entidades
+	lineageTag: 348e349f-f881-42e5-99ce-5acb08102fbb
+
+	column 'CODIGO ENTIDAD'
+		dataType: string
+		lineageTag: 825f544e-f328-45aa-a6c4-4adb069cd3e3
+		summarizeBy: none
+		sourceColumn: CODIGO ENTIDAD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TIPO ENTIDAD SOLIDARIA'
+		dataType: string
+		lineageTag: 32adb61e-c16c-4057-99f2-47b768a128de
+		summarizeBy: none
+		sourceColumn: TIPO ENTIDAD SOLIDARIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MUNICIPIO
+		dataType: string
+		lineageTag: d76180d3-5c4d-4fcb-98be-1fb360a68b8e
+		summarizeBy: none
+		sourceColumn: MUNICIPIO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTAMENTO
+		dataType: string
+		lineageTag: 68f9da46-075b-4da9-af2b-ff033e0d948f
+		summarizeBy: none
+		sourceColumn: DEPARTAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIGLA
+		dataType: string
+		lineageTag: 04e7f6d4-d1db-418b-bfd2-35e864d92685
+		summarizeBy: none
+		sourceColumn: SIGLA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Filtros todos' = "Sin filtros"
+		lineageTag: 62c7e854-77cc-4f9f-beea-d1ade31ad8a6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dm_Entidades = m
+		mode: import
+		source =
+				let
+				    Origen = PowerPlatform.Dataflows(null),
+				    Workspaces = Origen{[Id="Workspaces"]}[Data],
+				    #"ca53e802-ef7f-4429-b643-fe316dbbff4b" = Workspaces{[workspaceId="ca53e802-ef7f-4429-b643-fe316dbbff4b"]}[Data],
+				    #"cc8c038e-23dd-4a57-97cd-4bfe5e79b796" = #"ca53e802-ef7f-4429-b643-fe316dbbff4b"{[dataflowId="cc8c038e-23dd-4a57-97cd-4bfe5e79b796"]}[Data],
+				    Entidades_PUC_ = #"cc8c038e-23dd-4a57-97cd-4bfe5e79b796"{[entity="Entidades_PUC",version=""]}[Data],
+				    #"Filas filtradas" = Table.SelectRows(Entidades_PUC_, each ([TIPO ENTIDAD SOLIDARIA] = "ESPECIALIZADA DE AHORRO Y CREDITO" or [TIPO ENTIDAD SOLIDARIA] = "Especializada de ahorro y credito" or [TIPO ENTIDAD SOLIDARIA] = "Integral con ahorro y credito" or [TIPO ENTIDAD SOLIDARIA] = "Multiactiva con ahorro y credito")),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Filas filtradas",{"Código_Dep", "Código_Mun", "Periodicidad reporte", "Código_Dep.1", "Tipo", "LATITUD", "LONGITUD", "Departamento_", "Municipios_", "NIVEL DE SUPERVISION", "NIT"}),
+				    #"Columna condicional agregada" = Table.AddColumn(#"Columnas quitadas", "Personalizado", each if [SIGLA] = "" then [NOMBREENTIDAD] else [SIGLA]),
+				    #"Columnas quitadas1" = Table.RemoveColumns(#"Columna condicional agregada",{"SIGLA"}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Columnas quitadas1",{{"Personalizado", "SIGLA"}}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"SIGLA", type text}}),
+				    #"Columnas quitadas2" = Table.RemoveColumns(#"Tipo cambiado",{"NOMBREENTIDAD"})
+				in
+				    #"Columnas quitadas2"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

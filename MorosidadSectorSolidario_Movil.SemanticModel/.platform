@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "MorosidadSectorSolidario_Movil"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d1891d88-fdb0-44da-9202-d521a06f890c"
+  }
+}

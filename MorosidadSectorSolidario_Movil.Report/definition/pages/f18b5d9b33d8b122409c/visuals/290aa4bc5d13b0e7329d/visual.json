@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "290aa4bc5d13b0e7329d",
   "position": {
-    "x": 12,
-    "y": 1702,
+    "x": 4.5454545454545432,
+    "y": 1691.8933475245926,
     "z": 24000,
-    "height": 24,
-    "width": 426,
+    "height": 36.36363636363636,
+    "width": 426.36363636363632,
     "tabOrder": 24000
   },
   "visual": {
@@ -19,11 +19,28 @@
               {
                 "textRuns": [
                   {
-                    "value": "Fuente: Supersolidaria · MDA · Meta Data Analítica",
+                    "value": "Fuente: ",
                     "textStyle": {
+                      "fontFamily": "Segoe UI",
                       "fontSize": "7.5pt",
-                      "color": "#8A938F",
-                      "fontFamily": "Segoe UI"
+                      "color": "#8a938f"
+                    }
+                  },
+                  {
+                    "value": "Supersolidaria ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "7.5pt",
+                      "color": "#8a938f"
+                    },
+                    "url": "https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion"
+                  },
+                  {
+                    "value": "· MDA · Meta Data Analítica",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "7.5pt",
+                      "color": "#8a938f"
                     }
                   }
                 ]

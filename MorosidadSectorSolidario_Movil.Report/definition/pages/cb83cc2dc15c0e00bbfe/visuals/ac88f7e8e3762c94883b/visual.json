@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "ac88f7e8e3762c94883b",
   "position": {
-    "x": 12,
-    "y": 76,
+    "x": 11.875,
+    "y": 73.125,
     "z": 7000,
-    "height": 54,
-    "width": 426,
+    "height": 70,
+    "width": 426.36363636363632,
     "tabOrder": 7000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "Cobertura de la cartera de créditos en riesgo por cooperativa",
                     "textStyle": {
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "15pt",
+                      "color": "#ffffff"
                     }
                   }
                 ]

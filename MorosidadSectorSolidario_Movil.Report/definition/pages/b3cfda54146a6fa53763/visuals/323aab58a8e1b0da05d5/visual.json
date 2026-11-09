@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "323aab58a8e1b0da05d5",
   "position": {
-    "x": 12,
-    "y": 76,
+    "x": 12.5,
+    "y": 76.25,
     "z": 7000,
-    "height": 54,
-    "width": 426,
+    "height": 60,
+    "width": 425,
     "tabOrder": 7000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "Situación de la cartera de créditos por cooperativa",
                     "textStyle": {
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "14pt",
+                      "color": "#ffffff"
                     }
                   }
                 ]

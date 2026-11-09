@@ -179,13 +179,13 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "hdr_pagina.png",
-          "path": "hdr_pagina.png",
+          "name": "hdr_inicio.png",
+          "path": "hdr_inicio.png",
           "type": "Image"
         },
         {
-          "name": "hdr_inicio.png",
-          "path": "hdr_inicio.png",
+          "name": "hdr_pagina.png",
+          "path": "hdr_pagina.png",
           "type": "Image"
         },
         {

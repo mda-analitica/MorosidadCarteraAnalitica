@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f7010beda2f478ae561d",
   "position": {
-    "x": 12,
-    "y": 744,
+    "x": 14.117647058823529,
+    "y": 738.23529411764707,
     "z": 19000,
     "height": 36,
     "width": 426,
-    "tabOrder": 19000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,11 +19,28 @@
               {
                 "textRuns": [
                   {
-                    "value": "Tip: en «Entidades a comparar» toca varias para elegirlas. Fuente: Supersolidaria.",
+                    "value": "Fuente de los datos: ",
                     "textStyle": {
+                      "fontFamily": "Segoe UI",
                       "fontSize": "8pt",
-                      "color": "#605E5C",
-                      "fontFamily": "Segoe UI"
+                      "color": "#605e5c"
+                    }
+                  },
+                  {
+                    "value": "Supersolidaria",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8pt",
+                      "color": "#605e5c"
+                    },
+                    "url": "https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion"
+                  },
+                  {
+                    "value": ".",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8pt",
+                      "color": "#605e5c"
                     }
                   }
                 ]

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "80c2493d6b34fbe0f138",
   "position": {
-    "x": 12,
-    "y": 76,
+    "x": 11.666666666666666,
+    "y": 61.666666666666664,
     "z": 7000,
-    "height": 54,
-    "width": 426,
+    "height": 68.333333333333329,
+    "width": 426.66666666666663,
     "tabOrder": 7000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "Situación de la cartera de créditos por el sector cooperativo",
                     "textStyle": {
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "15pt",
+                      "color": "#ffffff"
                     }
                   }
                 ]

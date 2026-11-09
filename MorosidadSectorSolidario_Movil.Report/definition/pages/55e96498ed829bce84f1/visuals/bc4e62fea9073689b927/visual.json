@@ -74,7 +74,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'← Inicio'"
+                  "Value": "'Inicio'"
                 }
               }
             },

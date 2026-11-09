@@ -3,7 +3,7 @@
   "name": "b8f77afb4906330e72ab",
   "position": {
     "x": 16,
-    "y": 656,
+    "y": 651.33333333333337,
     "z": 15000,
     "height": 190,
     "width": 418,
@@ -46,7 +46,8 @@
                   "Property": "Tasa mora"
                 }
               },
-              "queryRef": "Medidas.Tasa mora"
+              "queryRef": "Medidas.Tasa mora",
+              "nativeQueryRef": "Tasa mora"
             }
           ]
         }
@@ -194,19 +195,6 @@
           }
         }
       ],
-      "gridlines": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "legend": [
         {
           "properties": {
@@ -274,6 +262,9 @@
               }
             ]
           }
+        },
+        {
+          "properties": {}
         }
       ]
     },

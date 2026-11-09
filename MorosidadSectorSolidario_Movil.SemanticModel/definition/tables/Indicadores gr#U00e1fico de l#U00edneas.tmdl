@@ -1,0 +1,53 @@
+table 'Indicadores gráfico de líneas'
+	lineageTag: 01fef8ff-6234-4a16-b6b0-e285b97877a7
+
+	column Parámetro
+		lineageTag: 997953aa-76dd-44c9-8edd-af2b1ca5e876
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parámetro Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'Parámetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro Campos'
+		isHidden
+		lineageTag: af5c0cc6-8912-4dac-a892-65d7499c8760
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parámetro Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 28085bf1-d62d-4d33-a764-c460a895c4cc
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Indicadores gráfico de líneas' = calculated
+		mode: import
+		source =
+				{
+				    ("Saldo en mora", NAMEOF('Medidas'[Saldo en mora]), 0),
+				    ("Saldo en riesgo", NAMEOF('Medidas'[Saldo en riesgo]), 1),
+				    ("Saldo total", NAMEOF('Medidas'[Saldo total]), 2),
+				    ("Tasa mora", NAMEOF('Medidas'[Tasa mora]), 3),
+				    ("Tasa riesgo", NAMEOF('Medidas'[Tasa riesgo]), 4),
+				    ("Riesgo/Mora", NAMEOF('Medidas'[Riesgo/Mora]), 5),
+				    ("Cobertura", NAMEOF('Medidas'[Cobertura cartera en riesgo]), 6)
+				}
+
+	annotation PBI_Id = 6b2cd78f69644bc39e0b9064efb61e76
+

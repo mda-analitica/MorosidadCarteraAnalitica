@@ -1,0 +1,28 @@
+model Model
+	culture: es-CO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["tb_Balance","dm_Entidades","Medidas","dm_Cuentas","dm_EntidadSeleccionada","Calendario"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table tb_Balance
+ref table DateTableTemplate_173785aa-52f0-4fb9-8526-dc20340c740e
+ref table dm_Entidades
+ref table Medidas
+ref table dm_Cuentas
+ref table dm_EntidadSeleccionada
+ref table Calendario
+ref table LocalDateTable_3eeaefe1-1d32-4f02-8144-3242f09892fb
+ref table 'Indicadores gráfico de líneas'
+ref table Parámetro
+ref table 'Parámetro 2'
+
+ref cultureInfo es-CO
+

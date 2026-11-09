@@ -194,19 +194,6 @@
           }
         }
       ],
-      "gridlines": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "legend": [
         {
           "properties": {
@@ -262,6 +249,21 @@
           },
           "selector": {
             "metadata": "Medidas.Riesgo/Mora con entidad seleccionada"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A7560'"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       ]

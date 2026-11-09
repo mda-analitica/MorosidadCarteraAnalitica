@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "24a6ad0fb672194c7113",
   "position": {
-    "x": 12,
-    "y": 1432,
+    "x": 11.875,
+    "y": 1421.875,
     "z": 20000,
-    "height": 24,
-    "width": 426,
+    "height": 34.375,
+    "width": 426.25,
     "tabOrder": 20000
   },
   "visual": {
@@ -19,11 +19,28 @@
               {
                 "textRuns": [
                   {
-                    "value": "Cobertura = deterioro ÷ cartera en riesgo (B a E). Fuente: Supersolidaria · MDA",
+                    "value": "Cobertura = Provisión ÷ cartera en riesgo (B a E). Fuente: ",
                     "textStyle": {
+                      "fontFamily": "Segoe UI",
                       "fontSize": "7.5pt",
-                      "color": "#8A938F",
-                      "fontFamily": "Segoe UI"
+                      "color": "#8a938f"
+                    }
+                  },
+                  {
+                    "value": "Supersolidaria ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "7.5pt",
+                      "color": "#8a938f"
+                    },
+                    "url": "https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion"
+                  },
+                  {
+                    "value": "· MDA",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "7.5pt",
+                      "color": "#8a938f"
                     }
                   }
                 ]

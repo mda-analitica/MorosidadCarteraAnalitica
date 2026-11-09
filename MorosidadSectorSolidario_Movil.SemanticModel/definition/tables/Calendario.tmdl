@@ -1,0 +1,66 @@
+table Calendario
+	lineageTag: 70c93c43-734b-46ac-b3b5-c3c90c81b879
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7452997c-f5d2-4c3a-8d26-8479ef294a04
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: a5c75afc-474c-4dfb-9f42-81f8fba6128e
+			defaultHierarchy: LocalDateTable_3eeaefe1-1d32-4f02-8144-3242f09892fb.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Año
+		dataType: string
+		lineageTag: 38d7a085-8521-4dce-a95f-8e3631e161c1
+		summarizeBy: none
+		sourceColumn: Año
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: int64
+		formatString: 0
+		lineageTag: 87079467-bb70-4314-be0d-e96e01fcdd45
+		summarizeBy: sum
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre Mes'
+		dataType: string
+		lineageTag: 291401b5-2d10-4706-a764-3ab3ec38e47e
+		summarizeBy: none
+		sourceColumn: Nombre Mes
+		sortByColumn: Mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = m
+		mode: import
+		source =
+				let
+				    Origen = PowerPlatform.Dataflows(null),
+				    Workspaces = Origen{[Id="Workspaces"]}[Data],
+				    #"7d7a12b8-9d3c-48ad-ab9b-018ceb413f07" = Workspaces{[workspaceId="7d7a12b8-9d3c-48ad-ab9b-018ceb413f07"]}[Data],
+				    #"3103eda1-7a05-4d3d-8016-d3dcdd60938c" = #"7d7a12b8-9d3c-48ad-ab9b-018ceb413f07"{[dataflowId="3103eda1-7a05-4d3d-8016-d3dcdd60938c"]}[Data],
+				    Calendario_ = #"3103eda1-7a05-4d3d-8016-d3dcdd60938c"{[entity="Calendario",version=""]}[Data],
+				    #"Filas filtradas" = Table.SelectRows(Calendario_, each [Fecha] >= #date(2025, 10, 1)),
+				    #"Otras columnas quitadas" = Table.SelectColumns(#"Filas filtradas",{"Fecha", "Año", "Mes", "Nombre Mes"}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Otras columnas quitadas",{{"Año", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

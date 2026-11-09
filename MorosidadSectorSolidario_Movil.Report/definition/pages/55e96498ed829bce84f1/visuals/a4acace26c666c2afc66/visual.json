@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "a4acace26c666c2afc66",
   "position": {
-    "x": 30,
-    "y": 288,
+    "x": 29.999999999999996,
+    "y": 294.5454545454545,
     "z": 13000,
     "height": 54,
     "width": 390,
@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COMEDAL'"
+                                "Value": "'COOPANTEX'"
                               }
                             }
                           ]
@@ -122,6 +122,44 @@
                 "Literal": {
                   "Value": "1D"
                 }
+              }
+            },
+            "selfFilter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "d",
+                    "Entity": "dm_EntidadSeleccionada",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Contains": {
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "SIGLA"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'co'"
+                          }
+                        }
+                      }
+                    },
+                    "Annotations": {
+                      "PowerBI.MParameterBehavior": 1
+                    }
+                  }
+                ]
               }
             }
           }
@@ -286,7 +324,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'ENTIDADES A COMPARAR'"
+                  "Value": "'SU ENTIDAD COOPERATIVA'"
                 }
               }
             },

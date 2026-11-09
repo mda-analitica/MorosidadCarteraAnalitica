@@ -3,14 +3,14 @@
   "name": "87f8e42aae17365596f0",
   "position": {
     "x": 30,
-    "y": 392,
+    "y": 340,
     "z": 13000,
-    "height": 54,
-    "width": 390,
-    "tabOrder": 13000
+    "height": 108.18181818181817,
+    "width": 389.99999999999994,
+    "tabOrder": 11000
   },
   "visual": {
-    "visualType": "slicer",
+    "visualType": "listSlicer",
     "query": {
       "queryState": {
         "Values": {
@@ -38,21 +38,20 @@
     "objects": {
       "data": [
         {
-          "properties": {
-            "mode": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Dropdown'"
-                }
-              }
-            }
-          }
+          "properties": {}
         }
       ],
       "selection": [
         {
           "properties": {
             "strictSingleSelect": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "singleSelect": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -95,28 +94,14 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'ALCALICOOP'"
+                                "Value": "'TELEPOSTAL'"
                               }
                             }
                           ],
                           [
                             {
                               "Literal": {
-                                "Value": "'AYC COLANTA'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'COOPRUDEA'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'COMEDAL'"
+                                "Value": "'UNIMOS'"
                               }
                             }
                           ]
@@ -126,133 +111,31 @@
                   }
                 ]
               }
-            },
-            "selfFilter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "d",
-                    "Entity": "dm_Entidades",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "Contains": {
-                        "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "d"
-                              }
-                            },
-                            "Property": "SIGLA"
-                          }
-                        },
-                        "Right": {
-                          "Literal": {
-                            "Value": "'comedal'"
-                          }
-                        }
-                      }
-                    },
-                    "Annotations": {
-                      "PowerBI.MParameterBehavior": 1
-                    }
-                  }
-                ]
-              }
-            },
-            "outlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#E1E5E3'"
-                    }
-                  }
-                }
-              }
-            },
-            "outlineWeight": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
             }
           }
         }
       ],
-      "items": [
+      "layout": [
         {
           "properties": {
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#252423'"
-                    }
-                  }
-                }
-              }
-            },
-            "background": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "textSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "header": [
-        {
-          "properties": {
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "bold": {
+            "showFixedSize": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fixedHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "20L"
+                }
+              }
+            },
+            "reverseIndentation": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -326,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'ENTIDADES A COMPARAR'"
+                  "Value": "'B. SELECCIONA 2 O MÁS ENTIDADES'"
                 }
               }
             },

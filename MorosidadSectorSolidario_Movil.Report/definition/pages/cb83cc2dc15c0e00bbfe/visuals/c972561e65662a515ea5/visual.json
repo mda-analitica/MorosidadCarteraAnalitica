@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "c972561e65662a515ea5",
   "position": {
-    "x": 190,
+    "x": 29.999999999999996,
     "y": 160,
     "z": 10000,
-    "height": 54,
-    "width": 230,
+    "height": 53.636363636363633,
+    "width": 389.99999999999994,
     "tabOrder": 10000
   },
   "visual": {
@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COMEDAL'"
+                                "Value": "'COOPANTEX'"
                               }
                             }
                           ]

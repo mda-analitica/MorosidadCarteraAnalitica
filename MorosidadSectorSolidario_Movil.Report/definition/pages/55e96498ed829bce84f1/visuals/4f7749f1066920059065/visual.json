@@ -45,7 +45,8 @@
                   "Property": "Tasa riesgo"
                 }
               },
-              "queryRef": "Medidas.Tasa riesgo"
+              "queryRef": "Medidas.Tasa riesgo",
+              "nativeQueryRef": "Tasa riesgo"
             }
           ]
         }
@@ -193,19 +194,6 @@
           }
         }
       ],
-      "gridlines": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "legend": [
         {
           "properties": {
@@ -273,6 +261,9 @@
               }
             ]
           }
+        },
+        {
+          "properties": {}
         }
       ]
     },

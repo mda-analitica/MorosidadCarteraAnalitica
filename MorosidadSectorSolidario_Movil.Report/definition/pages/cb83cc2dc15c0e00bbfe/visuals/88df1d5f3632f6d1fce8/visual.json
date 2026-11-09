@@ -42,8 +42,8 @@
                 }
               },
               "queryRef": "Medidas.Deterioro total con entidad seleccionada",
-              "nativeQueryRef": "Deterioro total",
-              "displayName": "Deterioro total"
+              "nativeQueryRef": "Provisión total",
+              "displayName": "Provisión total"
             },
             {
               "field": {
@@ -57,8 +57,8 @@
                 }
               },
               "queryRef": "Medidas.Deterioro sobre cartera bruta con entidad seleccionada",
-              "nativeQueryRef": "Deterioro / cartera bruta",
-              "displayName": "Deterioro / cartera bruta"
+              "nativeQueryRef": "Provisión / cartera bruta",
+              "displayName": "Provisión / cartera bruta"
             }
           ]
         }
