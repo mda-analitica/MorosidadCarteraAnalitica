@@ -138,3 +138,15 @@ Escala de 1 (bajo) a 5 (alto).
 ### Fuera de alcance por ahora
 - **#8** bitácora de actualizaciones.
 - La unificación de los modelos de escritorio y móvil.
+
+## Decisiones del usuario (9 nov. 2026, segunda ronda)
+- **Cobertura (#9 y #5):**
+  - Cuadrícula de 2 por fila, sin tarjeta oscura: Cobertura total, Cobertura individual, Deterioro / cartera bruta y Deterioro total.
+  - La línea de tiempo usa un parámetro de campo nuevo con todos los indicadores de cobertura, incluido Deterioro total en pesos, como el parámetro de Por entidad (que mezcla pesos y tasas).
+  - Pendiente: decidir si Cobertura C, D y E sigue en las tarjetas o queda solo en el selector.
+- **Ranking (#4):**
+  - Solo en la página Por entidades (Benchmarking); no en Por sector.
+  - El universo son las entidades que cumplen los filtros activos de la página. Por ejemplo, con Departamento = Antioquia, el ranking es entre las cooperativas de Antioquia, no del total. En DAX, `RANKX` sobre `ALLSELECTED(dm_Entidades[SIGLA])` en lugar de `ALL`.
+  - En las tasas, el puesto 1 es la de menor valor (la mejor). En los saldos, el puesto 1 es la de mayor valor.
+  - No se excluye ninguna entidad (tampoco COOTRAUNION): cuando la entidad corrija su reporte, no habrá que deshacer una regla.
+- **Fecha de la Supersolidaria (#7):** se toma de https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion, el enlace que ya está en el informe. Desde este entorno no se pudo abrir la página: el proxy rechaza el dominio. Hay que confirmar en Power BI Desktop dónde aparece la fecha y si Power Query la puede leer.
