@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
-  "name": "87f8e42aae17365596f0",
+  "name": "b67e5937a6786a7aabca",
   "position": {
     "x": 30,
-    "y": 340,
-    "z": 13000,
-    "height": 108.18181818181817,
-    "width": 389.99999999999994,
-    "tabOrder": 11000
+    "y": 206,
+    "z": 15000,
+    "height": 150,
+    "width": 390,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "listSlicer",
@@ -56,60 +56,6 @@
                 "Literal": {
                   "Value": "false"
                 }
-              }
-            }
-          }
-        }
-      ],
-      "general": [
-        {
-          "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "d",
-                    "Entity": "dm_Entidades",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "In": {
-                        "Expressions": [
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Source": "d"
-                                }
-                              },
-                              "Property": "SIGLA"
-                            }
-                          }
-                        ],
-                        "Values": [
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'TELEPOSTAL'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'UNIMOS'"
-                              }
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  }
-                ]
               }
             }
           }

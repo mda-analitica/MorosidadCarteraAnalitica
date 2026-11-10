@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
-  "name": "c672935761f57da9423d",
+  "name": "65eb7c9f560306878711",
   "position": {
-    "x": 18.235294117647058,
-    "y": 515.29411764705878,
-    "z": 14000,
-    "height": 31.176470588235293,
-    "width": 420,
-    "tabOrder": 12000
+    "x": 30,
+    "y": 458,
+    "z": 9000,
+    "height": 40,
+    "width": 390,
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,12 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "2  Seleccione donde quiere ir",
+                    "value": "No aplica en este informe   🔒",
                     "textStyle": {
-                      "fontWeight": "bold",
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
-                      "color": "#1b4b3d"
+                      "fontSize": "11pt",
+                      "color": "#605E5C"
                     }
                   }
                 ]
@@ -38,23 +36,21 @@
       "background": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ECEFED'"
+                    }
+                  }
                 }
               }
-            }
-          }
-        }
-      ],
-      "border": [
-        {
-          "properties": {
-            "show": {
+            },
+            "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "0D"
                 }
               }
             }

@@ -168,3 +168,13 @@ Se unieron los 4 agentes en la rama y se aplicaron las decisiones finales:
 - Botones "i" regenerados: uno por gráfica, recolocados tras mover Por entidades (ranking) y Por entidad (detalle).
 Validado: JSON correcto, sin visuales fuera de página, sin interacciones rotas, 65 medidas sin duplicados.
 Pendientes: #1 filtros ocultos en Inicio; #7 fecha de la Supersolidaria (consulta lista, falta validar en vivo); #8 fuera de alcance.
+
+## #1 Filtros ocultos en Inicio (11 nov. 2026)
+Implementado con páginas de filtro separadas (navegación por botones), no con marcadores, por ser más confiable en el enlace publicado.
+- Inicio: se quitan los segmentadores visibles; quedan el encabezado (con fecha de corte y Supersolidaria) y 4 botones.
+- "Indicadores por sector" navega directo a Por sector (no necesita filtros).
+- "Benchmarking", "Informe por entidad" y "Cobertura" abren cada uno su página de filtros (oculta en el informe publicado), con botón "Volver".
+- Benchmarking-filtros: paso 1 "Entidades a comparar" (lista, selección múltiple) y paso 2 "Su entidad" (lista, selección única) limitada a las elegidas en el paso 1 mediante la medida `Entidad está en comparadas`.
+- Entidad-filtros y Cobertura-filtros: solo "Su entidad" (lista); "Entidades a comparar" aparece como recuadro bloqueado "No aplica en este informe".
+- Los dos filtros de entidad usan el mismo estilo de lista (listSlicer). Sincronizados: Su entidad (grupo SIGLA), Comparar (grupo SIGLA1), por lo que la selección viaja a las páginas de informe.
+- Por revisar en Desktop: activar "Buscar" en cada lista; que la selección única se vea bien en el listSlicer; y, sobre todo, que el filtro del paso 2 (subconjunto del paso 1) funcione.

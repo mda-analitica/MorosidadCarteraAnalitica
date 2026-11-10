@@ -586,6 +586,13 @@ table Medidas
 	measure 'Mensaje detalle riesgo' = IF([Hay línea seleccionada], "Riesgo de " & SELECTEDVALUE(dm_Cuentas[Línea]) & " por calificación", "Toca una línea de crédito en la gráfica de arriba para ver el detalle")
 		lineageTag: 552e2c3a-cedd-5022-652f-8bf1e3efaeb7
 
+	/// 1 si la entidad (Su entidad) está entre las elegidas en «Entidades a comparar». Filtra la lista del paso 2.
+	measure 'Entidad está en comparadas' =
+			VAR s = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			RETURN INT(NOT ISEMPTY(FILTER(VALUES(dm_Entidades[SIGLA]), dm_Entidades[SIGLA] = s)))
+		formatString: 0
+		lineageTag: 8b1e4d2a-77c0-4e51-9a3e-21d9f0c4ab77
+
 	partition Medidas = m
 		mode: import
 		source =
