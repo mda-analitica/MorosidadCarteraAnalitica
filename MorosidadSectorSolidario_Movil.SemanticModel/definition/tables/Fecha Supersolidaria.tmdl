@@ -1,0 +1,63 @@
+table 'Fecha Supersolidaria'
+	lineageTag: 6c3f5016-9eb7-96a5-ef22-15154fb08b47
+
+	column 'Fecha publicación'
+		dataType: dateTime
+		formatString: d/MM/yyyy
+		lineageTag: 50ceccf4-32cd-f468-7c64-40d1cb2d2493
+		summarizeBy: none
+		sourceColumn: Fecha publicación
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Texto encontrado'
+		dataType: string
+		lineageTag: 24dded8d-71c0-7cab-00db-f2e2b308827c
+		summarizeBy: none
+		sourceColumn: Texto encontrado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha consulta'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8fe55dd7-c71b-6a85-0131-fb4e0dd458c1
+		summarizeBy: none
+		sourceColumn: Fecha consulta
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fecha Supersolidaria' = m
+		mode: import
+		source =
+				let
+				    // Página pública de la Supersolidaria con la fecha de la última actualización de datos.
+				    // IMPORTANTE: el texto exacto alrededor de la fecha debe confirmarse en Power BI Desktop.
+				    Url = "https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion",
+				    Html = try Text.FromBinary(Web.Contents(Url), TextEncoding.Utf8) otherwise null,
+				    SinEtiquetas = if Html = null then null else Text.Combine(List.Transform(Text.Split(Html, "<"), each if Text.Contains(_, ">") then Text.AfterDelimiter(_, ">") else _), " "),
+				    Plano = if SinEtiquetas = null then null else Text.Combine(List.Select(Text.SplitAny(SinEtiquetas, " #(tab)#(cr)#(lf)"), each _ <> "" and _ <> "&nbsp;"), " "),
+				    Posicion = if Plano = null then -1 else Text.PositionOf(Text.Lower(Plano), "actualiza"),
+				    Fragmento = if Posicion < 0 then null else Text.Middle(Plano, Posicion, 160),
+				    Palabras = if Fragmento = null then {} else List.Select(List.Transform(Text.SplitAny(Fragmento, " ,;:()"), Text.Lower), each _ <> ""),
+				    Meses = {"enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"},
+				    // Formato 1: dd/mm/aaaa o dd-mm-aaaa
+				    ConBarra = List.First(List.Select(Palabras, each Text.Length(Text.Select(_, {"0".."9"})) >= 6 and (Text.Contains(_, "/") or Text.Contains(_, "-"))), null),
+				    FechaBarra = if ConBarra = null then null else try Date.FromText(Text.Replace(Text.TrimEnd(ConBarra, "."), "-", "/"), [Format = "d/M/yyyy"]) otherwise null,
+				    // Formato 2: "5 de noviembre de 2026"
+				    PosMes = List.PositionOfAny(Palabras, Meses),
+				    FechaLarga = if PosMes < 2 then null else try #date(
+				        Number.FromText(Text.Select(Palabras{PosMes + 2}, {"0".."9"})),
+				        List.PositionOf(Meses, Palabras{PosMes}) + 1,
+				        Number.FromText(Text.Select(Palabras{PosMes - 2}, {"0".."9"}))) otherwise null,
+				    Fecha = if FechaBarra <> null then FechaBarra else FechaLarga,
+				    Resultado = #table(
+				        type table [#"Fecha publicación" = nullable date, #"Texto encontrado" = nullable text, #"Fecha consulta" = datetime],
+				        {{Fecha, Fragmento, DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.UtcNow(), -5))}})
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table
+

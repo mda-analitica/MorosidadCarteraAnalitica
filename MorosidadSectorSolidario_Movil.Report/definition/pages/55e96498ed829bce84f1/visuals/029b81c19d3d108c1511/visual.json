@@ -3,7 +3,7 @@
   "name": "029b81c19d3d108c1511",
   "position": {
     "x": 29.999999999999996,
-    "y": 171.81818181818181,
+    "y": 171.8181818181818,
     "z": 11000,
     "height": 54.54545454545454,
     "width": 389.99999999999994,
@@ -277,7 +277,12 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "syncGroup": {
+      "groupName": "Linea",
+      "fieldChanges": true,
+      "filterChanges": true
+    }
   },
   "filterConfig": {
     "filters": [

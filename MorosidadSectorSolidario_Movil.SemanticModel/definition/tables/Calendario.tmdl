@@ -45,6 +45,13 @@ table Calendario
 
 		annotation SummarizationSetBy = Automatic
 
+	column Corte = IF(YEAR(Calendario[Fecha]) = YEAR(MAX(tb_Balance[Fecha reporte])) && MONTH(Calendario[Fecha]) = MONTH(MAX(tb_Balance[Fecha reporte])), "Último corte", "Histórico")
+		dataType: string
+		lineageTag: 50e9fcec-a688-3636-db0a-3e0c8366a73d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Calendario = m
 		mode: import
 		source =

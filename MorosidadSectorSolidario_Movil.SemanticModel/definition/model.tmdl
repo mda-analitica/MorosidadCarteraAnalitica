@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["tb_Balance","dm_Entidades","Medidas","dm_Cuentas","dm_EntidadSeleccionada","Calendario"]
+annotation PBI_QueryOrder = ["tb_Balance","dm_Entidades","Medidas","dm_Cuentas","dm_EntidadSeleccionada","Calendario","Fecha Supersolidaria"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -24,6 +24,7 @@ ref table 'Indicadores gráfico de líneas'
 ref table Parámetro
 ref table 'Parámetro 2'
 ref table 'Indicador cobertura'
+ref table 'Fecha Supersolidaria'
 
 ref cultureInfo es-CO
 
