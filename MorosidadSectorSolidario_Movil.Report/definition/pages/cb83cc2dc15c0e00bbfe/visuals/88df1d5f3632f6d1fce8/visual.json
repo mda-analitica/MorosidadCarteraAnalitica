@@ -5,7 +5,7 @@
     "x": 16,
     "y": 262,
     "z": 12000,
-    "height": 258,
+    "height": 276,
     "width": 418,
     "tabOrder": 12000
   },
@@ -23,12 +23,57 @@
                       "Entity": "Medidas"
                     }
                   },
+                  "Property": "Cobertura cartera en riesgo con entidad seleccionada"
+                }
+              },
+              "queryRef": "Medidas.Cobertura cartera en riesgo con entidad seleccionada",
+              "nativeQueryRef": "Cobertura total",
+              "displayName": "Cobertura total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
                   "Property": "Cobertura individual con entidad seleccionada"
                 }
               },
               "queryRef": "Medidas.Cobertura individual con entidad seleccionada",
               "nativeQueryRef": "Cobertura individual",
               "displayName": "Cobertura individual"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Cobertura individual CDE con entidad seleccionada"
+                }
+              },
+              "queryRef": "Medidas.Cobertura individual CDE con entidad seleccionada",
+              "nativeQueryRef": "Cobertura C, D y E",
+              "displayName": "Cobertura C, D y E"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Deterioro sobre cartera bruta con entidad seleccionada"
+                }
+              },
+              "queryRef": "Medidas.Deterioro sobre cartera bruta con entidad seleccionada",
+              "nativeQueryRef": "Deterioro / cartera bruta",
+              "displayName": "Deterioro / cartera bruta"
             },
             {
               "field": {
@@ -53,27 +98,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Cobertura cartera en riesgo con entidad seleccionada"
+                  "Property": "Deterioro general con entidad seleccionada"
                 }
               },
-              "queryRef": "Medidas.Cobertura cartera en riesgo con entidad seleccionada",
-              "nativeQueryRef": "Cobertura total",
-              "displayName": "Cobertura total"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Medidas"
-                    }
-                  },
-                  "Property": "Deterioro total con entidad seleccionada"
-                }
-              },
-              "queryRef": "Medidas.Deterioro total con entidad seleccionada",
-              "nativeQueryRef": "Provisión total",
-              "displayName": "Provisión total"
+              "queryRef": "Medidas.Deterioro general con entidad seleccionada",
+              "nativeQueryRef": "Provisión general",
+              "displayName": "Provisión general"
             }
           ]
         }
@@ -128,7 +158,7 @@
             "rowCount": {
               "expr": {
                 "Literal": {
-                  "Value": "2L"
+                  "Value": "3L"
                 }
               }
             },
