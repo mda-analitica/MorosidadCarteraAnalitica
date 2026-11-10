@@ -159,3 +159,12 @@ Escala de 1 (bajo) a 5 (alto).
   - Un selector de indicador sobre la línea de tiempo.
   - Tooltip-Mora y Tooltip-Riesgo pasan a la paleta verde.
   - Valores esperados para COMEDAL a agosto de 2026: cobertura individual 60,28 %, provisión individual $13.962.982.499, cobertura total 107,90 %, provisión total $24.992.772.751.
+
+## Integración (10 nov. 2026)
+Se unieron los 4 agentes en la rama y se aplicaron las decisiones finales:
+- Cobertura: 7 indicadores, cada uno en su tarjeta (6 en matriz 2×3 + Provisión total a lo ancho). El selector de la línea de tiempo mantiene los 7.
+- Glosario: se dejan los ejemplos de agosto de 2026 (con nota) para poder explicarlos.
+- Ranking Riesgo/Mora: se mantiene con "1 = la más baja", como las tasas.
+- Botones "i" regenerados: uno por gráfica, recolocados tras mover Por entidades (ranking) y Por entidad (detalle).
+Validado: JSON correcto, sin visuales fuera de página, sin interacciones rotas, 65 medidas sin duplicados.
+Pendientes: #1 filtros ocultos en Inicio; #7 fecha de la Supersolidaria (consulta lista, falta validar en vivo); #8 fuera de alcance.
