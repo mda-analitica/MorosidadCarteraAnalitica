@@ -3,7 +3,7 @@
   "name": "dd6dd06b9b722444f995",
   "position": {
     "x": 16,
-    "y": 1086,
+    "y": 1296,
     "z": 18000,
     "height": 214,
     "width": 418,
@@ -272,10 +272,10 @@
       "visualTooltip": [
         {
           "properties": {
-            "section": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "'f37d073b3d29f68ca814'"
+                  "Value": "false"
                 }
               }
             }

@@ -554,6 +554,37 @@ table Medidas
 			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en saldo en mora (1 = la de mayor saldo)."
 			    )
 		lineageTag: b72c72e7-e705-aaa4-be07-fe7193d87697
+	/// Verdadero cuando el usuario tocó una sola línea de crédito en una gráfica de barras (filtro cruzado sobre dm_Cuentas[Línea]).
+	measure 'Hay línea seleccionada' = ISFILTERED(dm_Cuentas[Línea]) && HASONEVALUE(dm_Cuentas[Línea])
+		lineageTag: 33e8d8ad-b179-03cd-2f95-09bfbf536c37
+
+	/// Saldo en mora de la entidad seleccionada; vacío si no hay una línea seleccionada.
+	measure 'Detalle saldo en mora' = IF([Hay línea seleccionada], [Saldo en mora con entidad seleccionada])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: c03097f0-416c-aa7f-c6ae-4806846aa1e5
+
+	/// Tasa de mora de la entidad seleccionada; vacía si no hay una línea seleccionada.
+	measure 'Detalle tasa mora' = IF([Hay línea seleccionada], [Tasa mora con entidad seleccionada])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: abe8c827-3e0b-9aa9-dd5a-bb3d203c51eb
+
+	/// Saldo en riesgo (B a E) de la entidad seleccionada; vacío si no hay una línea seleccionada.
+	measure 'Detalle saldo en riesgo' = IF([Hay línea seleccionada], [Saldo en riesgo con entidad seleccionada])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: b0aa7729-4939-57cc-25cf-b58c622ab53c
+
+	/// Tasa de riesgo de la entidad seleccionada; vacía si no hay una línea seleccionada.
+	measure 'Detalle tasa riesgo' = IF([Hay línea seleccionada], [Tasa riesgo con entidad seleccionada])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 1aa80ec5-333e-e60d-5061-8031a8a30b19
+
+	/// Título del detalle de mora, o la invitación a tocar una línea cuando no hay selección.
+	measure 'Mensaje detalle mora' = IF([Hay línea seleccionada], "Mora de " & SELECTEDVALUE(dm_Cuentas[Línea]) & " por días de vencimiento", "Toca una línea de crédito en la gráfica de arriba para ver el detalle")
+		lineageTag: feba3d6b-c097-c922-51ef-16ba15022489
+
+	/// Título del detalle de riesgo, o la invitación a tocar una línea cuando no hay selección.
+	measure 'Mensaje detalle riesgo' = IF([Hay línea seleccionada], "Riesgo de " & SELECTEDVALUE(dm_Cuentas[Línea]) & " por calificación", "Toca una línea de crédito en la gráfica de arriba para ver el detalle")
+		lineageTag: 552e2c3a-cedd-5022-652f-8bf1e3efaeb7
 
 	partition Medidas = m
 		mode: import

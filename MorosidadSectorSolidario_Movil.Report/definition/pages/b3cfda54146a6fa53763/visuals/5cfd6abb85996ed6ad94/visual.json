@@ -339,10 +339,10 @@
       "visualTooltip": [
         {
           "properties": {
-            "section": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "'5849a7101d8b824365e3'"
+                  "Value": "false"
                 }
               }
             }
