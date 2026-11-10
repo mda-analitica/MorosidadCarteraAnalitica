@@ -325,6 +325,235 @@ table Medidas
 			        "Supersolidaria publicó el " & FORMAT(f, "d ""de"" MMMM ""de"" yyyy")
 			    )
 		lineageTag: f02a7fe4-a5b8-2ad1-2d16-83f02abf5046
+	/// Posición de la entidad de «Su entidad cooperativa» en tasa de mora (1 = la más baja).
+	/// Universo: entidades con dato que cumplen los filtros de la página, sin el filtro de «Entidades a comparar».
+	measure 'Ranking tasa mora' =
+			VAR Sel = SELECTEDVALUE(dm_EntidadSeleccionada[CODIGO ENTIDAD])
+			VAR ValorSel = CALCULATE([Tasa mora], REMOVEFILTERS(dm_Entidades[SIGLA]), dm_Entidades[CODIGO ENTIDAD] = Sel)
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Tasa mora]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    IF(NOT ISBLANK(Sel) && NOT ISBLANK(ValorSel), COUNTROWS(FILTER(Universo, [@v] < ValorSel)) + 1)
+		formatString: 0
+		lineageTag: 5ef14f1b-9f00-fc3a-94f9-8ff38e99afba
+
+	/// Número de entidades con dato en tasa de mora que cumplen los filtros de la página (sin «Entidades a comparar»).
+	measure 'Entidades ranking tasa mora' =
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Tasa mora]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    COUNTROWS(Universo)
+		formatString: 0
+		lineageTag: 5ddcb5bb-fdb3-224c-2ec3-c3f482b1b851
+
+	measure 'Texto ranking tasa mora' =
+			VAR Nombre = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			VAR Pos = [Ranking tasa mora]
+			VAR Total = [Entidades ranking tasa mora]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Nombre), "Elige tu entidad en «Su entidad cooperativa» para ver su posición.",
+			        ISBLANK(Pos), Nombre & " no tiene dato o no cumple los filtros de esta página.",
+			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en tasa de mora (1 = la más baja)."
+			    )
+		lineageTag: 8742b1a6-a2d5-a58b-1bdb-4ca442373a37
+
+	/// Posición de la entidad de «Su entidad cooperativa» en tasa de riesgo (1 = la más baja).
+	/// Universo: entidades con dato que cumplen los filtros de la página, sin el filtro de «Entidades a comparar».
+	measure 'Ranking tasa riesgo' =
+			VAR Sel = SELECTEDVALUE(dm_EntidadSeleccionada[CODIGO ENTIDAD])
+			VAR ValorSel = CALCULATE([Tasa riesgo], REMOVEFILTERS(dm_Entidades[SIGLA]), dm_Entidades[CODIGO ENTIDAD] = Sel)
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Tasa riesgo]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    IF(NOT ISBLANK(Sel) && NOT ISBLANK(ValorSel), COUNTROWS(FILTER(Universo, [@v] < ValorSel)) + 1)
+		formatString: 0
+		lineageTag: e5e1fe2a-893f-ddcd-372d-b8e8cb7b7dfe
+
+	/// Número de entidades con dato en tasa de riesgo que cumplen los filtros de la página (sin «Entidades a comparar»).
+	measure 'Entidades ranking tasa riesgo' =
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Tasa riesgo]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    COUNTROWS(Universo)
+		formatString: 0
+		lineageTag: 5ebabf24-181e-044a-4893-968d9785a111
+
+	measure 'Texto ranking tasa riesgo' =
+			VAR Nombre = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			VAR Pos = [Ranking tasa riesgo]
+			VAR Total = [Entidades ranking tasa riesgo]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Nombre), "Elige tu entidad en «Su entidad cooperativa» para ver su posición.",
+			        ISBLANK(Pos), Nombre & " no tiene dato o no cumple los filtros de esta página.",
+			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en tasa de riesgo (1 = la más baja)."
+			    )
+		lineageTag: b72c2759-d57d-bb29-6205-4ad7b0542a51
+
+	/// Posición de la entidad de «Su entidad cooperativa» en riesgo/mora (1 = la más baja).
+	/// Universo: entidades con dato que cumplen los filtros de la página, sin el filtro de «Entidades a comparar».
+	measure 'Ranking riesgo/mora' =
+			VAR Sel = SELECTEDVALUE(dm_EntidadSeleccionada[CODIGO ENTIDAD])
+			VAR ValorSel = CALCULATE([Riesgo/Mora], REMOVEFILTERS(dm_Entidades[SIGLA]), dm_Entidades[CODIGO ENTIDAD] = Sel)
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Riesgo/Mora]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    IF(NOT ISBLANK(Sel) && NOT ISBLANK(ValorSel), COUNTROWS(FILTER(Universo, [@v] < ValorSel)) + 1)
+		formatString: 0
+		lineageTag: ccef737e-a561-cacb-b6e5-2414afd8af9e
+
+	/// Número de entidades con dato en riesgo/mora que cumplen los filtros de la página (sin «Entidades a comparar»).
+	measure 'Entidades ranking riesgo/mora' =
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Riesgo/Mora]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    COUNTROWS(Universo)
+		formatString: 0
+		lineageTag: cb1ab43e-67c0-1c69-1cdb-30acffa284e6
+
+	measure 'Texto ranking riesgo/mora' =
+			VAR Nombre = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			VAR Pos = [Ranking riesgo/mora]
+			VAR Total = [Entidades ranking riesgo/mora]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Nombre), "Elige tu entidad en «Su entidad cooperativa» para ver su posición.",
+			        ISBLANK(Pos), Nombre & " no tiene dato o no cumple los filtros de esta página.",
+			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en riesgo/mora (1 = la más baja)."
+			    )
+		lineageTag: 0d2fb648-4f0a-2b9c-5257-85ab513b6658
+
+	/// Posición de la entidad de «Su entidad cooperativa» en saldo de cartera total (1 = la de mayor saldo).
+	/// Universo: entidades con dato que cumplen los filtros de la página, sin el filtro de «Entidades a comparar».
+	measure 'Ranking saldo total' =
+			VAR Sel = SELECTEDVALUE(dm_EntidadSeleccionada[CODIGO ENTIDAD])
+			VAR ValorSel = CALCULATE([Saldo total], REMOVEFILTERS(dm_Entidades[SIGLA]), dm_Entidades[CODIGO ENTIDAD] = Sel)
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Saldo total]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    IF(NOT ISBLANK(Sel) && NOT ISBLANK(ValorSel), COUNTROWS(FILTER(Universo, [@v] > ValorSel)) + 1)
+		formatString: 0
+		lineageTag: 8712628a-3330-a17f-4e68-d1d88a6ec898
+
+	/// Número de entidades con dato en saldo de cartera total que cumplen los filtros de la página (sin «Entidades a comparar»).
+	measure 'Entidades ranking saldo total' =
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Saldo total]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    COUNTROWS(Universo)
+		formatString: 0
+		lineageTag: cc61a979-592e-11d4-6c97-b11e55447793
+
+	measure 'Texto ranking saldo total' =
+			VAR Nombre = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			VAR Pos = [Ranking saldo total]
+			VAR Total = [Entidades ranking saldo total]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Nombre), "Elige tu entidad en «Su entidad cooperativa» para ver su posición.",
+			        ISBLANK(Pos), Nombre & " no tiene dato o no cumple los filtros de esta página.",
+			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en saldo de cartera total (1 = la de mayor saldo)."
+			    )
+		lineageTag: f1ed7fc7-371e-a440-b27d-3f717fdef67a
+
+	/// Posición de la entidad de «Su entidad cooperativa» en saldo en mora (1 = la de mayor saldo).
+	/// Universo: entidades con dato que cumplen los filtros de la página, sin el filtro de «Entidades a comparar».
+	measure 'Ranking saldo en mora' =
+			VAR Sel = SELECTEDVALUE(dm_EntidadSeleccionada[CODIGO ENTIDAD])
+			VAR ValorSel = CALCULATE([Saldo en mora], REMOVEFILTERS(dm_Entidades[SIGLA]), dm_Entidades[CODIGO ENTIDAD] = Sel)
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Saldo en mora]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    IF(NOT ISBLANK(Sel) && NOT ISBLANK(ValorSel), COUNTROWS(FILTER(Universo, [@v] > ValorSel)) + 1)
+		formatString: 0
+		lineageTag: 7e087e8d-36f1-6811-d765-70cfbe8de438
+
+	/// Número de entidades con dato en saldo en mora que cumplen los filtros de la página (sin «Entidades a comparar»).
+	measure 'Entidades ranking saldo en mora' =
+			VAR Universo =
+			    FILTER(
+			        CALCULATETABLE(
+			            ADDCOLUMNS(VALUES(dm_Entidades[CODIGO ENTIDAD]), "@v", [Saldo en mora]),
+			            REMOVEFILTERS(dm_Entidades[SIGLA])
+			        ),
+			        NOT ISBLANK([@v])
+			    )
+			RETURN
+			    COUNTROWS(Universo)
+		formatString: 0
+		lineageTag: 988ae8f0-0183-41a1-85f3-eb1ddb7a1f5e
+
+	measure 'Texto ranking saldo en mora' =
+			VAR Nombre = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			VAR Pos = [Ranking saldo en mora]
+			VAR Total = [Entidades ranking saldo en mora]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Nombre), "Elige tu entidad en «Su entidad cooperativa» para ver su posición.",
+			        ISBLANK(Pos), Nombre & " no tiene dato o no cumple los filtros de esta página.",
+			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en saldo en mora (1 = la de mayor saldo)."
+			    )
+		lineageTag: b72c72e7-e705-aaa4-be07-fe7193d87697
 
 	partition Medidas = m
 		mode: import
