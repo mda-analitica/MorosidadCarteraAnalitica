@@ -3,11 +3,11 @@
   "name": "c709423b684aa4cb96b5",
   "position": {
     "x": 16,
-    "y": 560,
-    "z": 20000,
-    "height": 42,
-    "width": 418,
-    "tabOrder": 20000
+    "y": 16,
+    "z": 21000,
+    "height": 44,
+    "width": 92,
+    "tabOrder": 21000
   },
   "visual": {
     "visualType": "actionButton",
@@ -56,7 +56,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
                 }
               }
             }
@@ -72,9 +72,16 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F3F5F4'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "88D"
                 }
               }
             }
@@ -101,7 +108,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'← Volver'"
+                  "Value": "'‹  Menú'"
                 }
               }
             },
@@ -110,7 +117,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B4B3D'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -119,7 +126,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "11D"
                 }
               }
             },
@@ -147,7 +154,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'← Volver'"
+                  "Value": "'‹  Menú'"
                 }
               }
             },
@@ -156,7 +163,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B4B3D'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -165,7 +172,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "11D"
                 }
               }
             },
@@ -208,7 +215,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#008282'"
+                      "Value": "'#4F8A79'"
                     }
                   }
                 }
@@ -225,6 +232,31 @@
           "selector": {
             "id": "default"
           }
+        },
+        {
+          "properties": {
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#49CAA5'"
+                    }
+                  }
+                }
+              }
+            },
+            "weight": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "hover"
+          }
         }
       ],
       "shape": [
@@ -240,24 +272,10 @@
             "rectangleRoundedCurve": {
               "expr": {
                 "Literal": {
-                  "Value": "14L"
+                  "Value": "10L"
                 }
               }
             }
-          }
-        },
-        {
-          "properties": {
-            "tileShape": {
-              "expr": {
-                "Literal": {
-                  "Value": "'rectangleRounded'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
@@ -296,7 +314,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Informe por entidad'"
+                  "Value": "'Volver al menú'"
                 }
               }
             }

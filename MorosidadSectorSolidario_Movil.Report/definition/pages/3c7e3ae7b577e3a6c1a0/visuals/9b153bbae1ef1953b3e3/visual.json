@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "9b153bbae1ef1953b3e3",
   "position": {
-    "x": 30,
-    "y": 512,
+    "x": 16,
+    "y": 724,
     "z": 20000,
-    "height": 46,
-    "width": 390,
+    "height": 56,
+    "width": 418,
     "tabOrder": 20000
   },
   "visual": {
@@ -47,7 +47,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#008282'"
+                      "Value": "'#1F6B67'"
                     }
                   }
                 }
@@ -72,9 +72,16 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B4B3D'"
+                      "Value": "'#195C58'"
                     }
                   }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -100,8 +107,13 @@
           "properties": {
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Ver informe por entidad  →'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Texto botón ver informe"
                 }
               }
             },
@@ -119,7 +131,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "12.75D"
                 }
               }
             },
@@ -146,8 +158,13 @@
           "properties": {
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'Ver informe por entidad  →'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Texto botón ver informe"
                 }
               }
             },
@@ -165,7 +182,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "12.75D"
                 }
               }
             },
@@ -240,24 +257,10 @@
             "rectangleRoundedCurve": {
               "expr": {
                 "Literal": {
-                  "Value": "14L"
+                  "Value": "12L"
                 }
               }
             }
-          }
-        },
-        {
-          "properties": {
-            "tileShape": {
-              "expr": {
-                "Literal": {
-                  "Value": "'rectangleRounded'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]

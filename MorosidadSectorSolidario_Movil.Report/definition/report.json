@@ -227,6 +227,11 @@
           "name": "hdr_bench.png",
           "path": "hdr_bench.png",
           "type": "Image"
+        },
+        {
+          "name": "ico_buscar.png",
+          "path": "ico_buscar.png",
+          "type": "Image"
         }
       ]
     },

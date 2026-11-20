@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "0b68cddb576bb012b97a",
   "position": {
-    "x": 30,
-    "y": 182,
+    "x": 12,
+    "y": 164,
     "z": 9000,
-    "height": 20,
-    "width": 390,
+    "height": 26,
+    "width": 426,
     "tabOrder": 9000
   },
   "visual": {
@@ -19,10 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "SU ENTIDAD COOPERATIVA",
+                    "value": "Busca por nombre",
                     "textStyle": {
-                      "fontSize": "10pt",
-                      "color": "#1B4B3D",
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10.5pt",
+                      "color": "#183A30",
                       "fontWeight": "bold"
                     }
                   }

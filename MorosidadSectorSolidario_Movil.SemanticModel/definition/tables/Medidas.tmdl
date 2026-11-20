@@ -618,6 +618,16 @@ table Medidas
 			RETURN SWITCH(TRUE(), n = 0, "Ninguna seleccionada", n = 1, "1 seleccionada (elige al menos 2)", n & " seleccionadas")
 		lineageTag: 4c030f99-1479-56e2-9eb2-f4b5018b75f9
 
+	/// Texto bajo el buscador de la página Entidad · filtros (ej. 167 cooperativas, en orden alfabético).
+	measure 'Cooperativas en lista texto' = [Cooperativas reportantes] & " cooperativas, en orden alfabético"
+		lineageTag: 7b38abf8-3d93-5902-9cff-16bd659cfe23
+
+	/// Texto dinámico del botón 'Ver informe de …' en la página Entidad · filtros.
+	measure 'Texto botón ver informe' = 
+			VAR s = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
+			RETURN IF(ISBLANK(s), "Elige una cooperativa", "Ver informe de " & s)
+		lineageTag: cced7e4e-8ba5-556f-8d4e-aa1e2efc40bc
+
 	partition Medidas = m
 		mode: import
 		source =
