@@ -90,6 +90,32 @@ table dm_Cuentas
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Altura de mora o calificación sin el prefijo de orden (ej. De 31 a 60 días, B).
+	column 'Altura etiqueta' = 
+			VAR a = dm_Cuentas[Altura]
+			VAR b = IF(MID(a, 2, 2) = ". ", MID(a, 4, 100), a)
+			RETURN IF(dm_Cuentas[Tipo] = "Mora" && a <> "", b & " días", b)
+		lineageTag: 34cd5f3a-5b46-5009-8757-2ca1045da208
+		summarizeBy: none
+		sortByColumn: 'Altura orden'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Orden de Altura etiqueta: días de mora iniciales o código de la letra de calificación.
+	column 'Altura orden' = 
+			VAR a = dm_Cuentas[Altura]
+			VAR b = IF(MID(a, 2, 2) = ". ", MID(a, 4, 100), a)
+			RETURN SWITCH(TRUE(),
+			    a = "", 0,
+			    dm_Cuentas[Tipo] = "Mora", IF(LEFT(b, 5) = "Hasta", 1, INT(VALUE(MID(b, 4, SEARCH(" ", b, 4, LEN(b) + 1) - 4)))),
+			    UNICODE(a & " "))
+		isHidden
+		formatString: 0
+		lineageTag: b40d59ea-089a-55c4-870e-4ee8052e698c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dm_Cuentas = m
 		mode: import
 		source =

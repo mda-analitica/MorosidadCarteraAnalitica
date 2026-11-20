@@ -40,13 +40,10 @@ table 'Indicadores gráfico de líneas'
 		mode: import
 		source =
 				{
-				    ("Saldo en mora", NAMEOF('Medidas'[Saldo en mora]), 0),
-				    ("Saldo en riesgo", NAMEOF('Medidas'[Saldo en riesgo]), 1),
-				    ("Saldo total", NAMEOF('Medidas'[Saldo total]), 2),
-				    ("Tasa mora", NAMEOF('Medidas'[Tasa mora]), 3),
-				    ("Tasa riesgo", NAMEOF('Medidas'[Tasa riesgo]), 4),
-				    ("Riesgo/Mora", NAMEOF('Medidas'[Riesgo/Mora]), 5),
-				    ("Cobertura", NAMEOF('Medidas'[Cobertura cartera en riesgo]), 6)
+				    ("Tasa de riesgo", NAMEOF('Medidas'[Tasa riesgo]), 0),
+				    ("Tasa de mora", NAMEOF('Medidas'[Tasa mora]), 1),
+				    ("Saldo de cartera", NAMEOF('Medidas'[Saldo total]), 2),
+				    ("Saldo en mora", NAMEOF('Medidas'[Saldo en mora]), 3)
 				}
 
 	annotation PBI_Id = 6b2cd78f69644bc39e0b9064efb61e76

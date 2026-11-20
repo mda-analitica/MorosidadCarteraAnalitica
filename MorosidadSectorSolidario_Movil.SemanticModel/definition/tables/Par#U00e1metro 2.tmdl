@@ -40,10 +40,10 @@ table 'Parámetro 2'
 		mode: import
 		source =
 				{
-				    ("Departamento", NAMEOF('dm_Entidades'[DEPARTAMENTO]), 0),
-				    ("Municipio", NAMEOF('dm_Entidades'[MUNICIPIO]), 1),
-				    ("Tipo de entidad", NAMEOF('dm_Entidades'[TIPO ENTIDAD SOLIDARIA]), 2),
-				    ("Sin filtros", NAMEOF('dm_Entidades'[Filtros todos]), 3)
+				    ("Total sector", NAMEOF('dm_Entidades'[Filtros todos]), 0),
+				    ("Departamento", NAMEOF('dm_Entidades'[DEPARTAMENTO]), 1),
+				    ("Municipio", NAMEOF('dm_Entidades'[MUNICIPIO]), 2),
+				    ("Tipo de entidad", NAMEOF('dm_Entidades'[TIPO ENTIDAD SOLIDARIA]), 3)
 				}
 
 	annotation PBI_Id = afc921ed1c284e9bbbbb6c1abf761d9c

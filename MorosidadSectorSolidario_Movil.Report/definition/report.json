@@ -232,6 +232,16 @@
           "name": "ico_buscar.png",
           "path": "ico_buscar.png",
           "type": "Image"
+        },
+        {
+          "name": "hdr_sector.png",
+          "path": "hdr_sector.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_filtro.png",
+          "path": "ico_filtro.png",
+          "type": "Image"
         }
       ]
     },

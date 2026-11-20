@@ -52,6 +52,21 @@ table Calendario
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Mes clave' = YEAR(Calendario[Fecha]) * 100 + MONTH(Calendario[Fecha])
+		isHidden
+		formatString: 0
+		lineageTag: ecf4a9bd-ed04-5283-a6b4-54b309d0ed9c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes corto' = LEFT(FORMAT(Calendario[Fecha], "MMMM"), 3) & " " & RIGHT(YEAR(Calendario[Fecha]), 2)
+		lineageTag: 47dcd9bd-933d-5be3-9388-f9c5c69d03d6
+		summarizeBy: none
+		sortByColumn: 'Mes clave'
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Calendario = m
 		mode: import
 		source =

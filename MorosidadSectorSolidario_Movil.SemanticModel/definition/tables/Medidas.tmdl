@@ -628,6 +628,251 @@ table Medidas
 			RETURN IF(ISBLANK(s), "Elige una cooperativa", "Ver informe de " & s)
 		lineageTag: cced7e4e-8ba5-556f-8d4e-aa1e2efc40bc
 
+	/// Corte inmediatamente anterior al último (para comparar mes contra mes).
+	measure 'Fecha corte anterior' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE(MAX(tb_Balance[Fecha reporte]), REMOVEFILTERS(), tb_Balance[Fecha reporte] < f)
+		formatString: General Date
+		lineageTag: e8a506f5-be24-5ae2-8737-13b938e87e73
+
+	/// Mes del corte anterior, ej. jul 2026.
+	measure 'Mes corte anterior texto' = 
+			VAR d = [Fecha corte anterior]
+			RETURN LEFT(FORMAT(d, "MMMM"), 3) & " " & YEAR(d)
+		lineageTag: 4a2b9c33-c32b-55b4-b5e5-4b5707ca1ed8
+
+	/// Línea bajo el título de Por sector.
+	measure 'Corte encabezado texto' = "Datos con corte a " & FORMAT([Fecha de corte], "MMMM ""de"" yyyy")
+		lineageTag: e291225f-eef8-5ccd-b58b-b2008652bbf0
+
+	/// Título de la sección de indicadores de Por sector.
+	measure 'Resumen corte título' = "Resumen de " & FORMAT([Fecha de corte], "MMMM")
+		lineageTag: 2a077cc9-3084-5689-991f-3eb0db0b9f15
+
+	/// Tasa de riesgo en el último corte, con los filtros de entidad.
+	measure 'Tasa riesgo corte' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 1e75caf1-1738-5216-ac64-979f97f76e0a
+
+	/// Tasa de mora en el último corte, con los filtros de entidad.
+	measure 'Tasa mora corte' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 5e3eddef-23ea-584b-b90b-5b269848faa9
+
+	/// Cartera bruta en el último corte.
+	measure 'Saldo total corte' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 5c4d7eff-9f14-5368-8668-5f52d3b762ad
+
+	/// Saldo en mora en el último corte.
+	measure 'Saldo en mora corte' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 91dd66aa-2cf6-5015-b23a-c6c938c70b73
+
+	/// Saldo en riesgo (B a E) en el último corte.
+	measure 'Saldo en riesgo corte' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE([Saldo en riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 1984855a-c102-5e5c-b672-636522400ff8
+
+	/// Denominador de la tasa de mora en el último corte.
+	measure 'Cartera total cuenta 84 corte' = 
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE([Cartera total cuenta 84], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 9cd22011-8df5-522f-ab87-67a9c4a14982
+
+	/// Tasa de riesgo en el corte anterior.
+	measure 'Tasa riesgo corte anterior' = 
+			VAR f = [Fecha corte anterior]
+			RETURN CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 4cc09bea-22cc-5501-be15-7e61e44422e9
+
+	/// Tasa de mora en el corte anterior.
+	measure 'Tasa mora corte anterior' = 
+			VAR f = [Fecha corte anterior]
+			RETURN CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 735c7a64-6c10-505d-9c9f-266803e23cdf
+
+	/// Cartera bruta en el corte anterior.
+	measure 'Saldo total corte anterior' = 
+			VAR f = [Fecha corte anterior]
+			RETURN CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: eee52898-ffa1-5c50-a2c4-8fa22a421b2e
+
+	/// Saldo en mora en el corte anterior.
+	measure 'Saldo en mora corte anterior' = 
+			VAR f = [Fecha corte anterior]
+			RETURN CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: dac84738-6bae-578b-8514-33955317b4f5
+
+	/// Tarjeta de Por sector.
+	measure 'KPI tasa riesgo' = IF(ISBLANK([Tasa riesgo corte]), "Sin dato", FORMAT([Tasa riesgo corte], "0.00 %"))
+		lineageTag: ad9e87bb-52cd-5471-b19b-b255d0da613e
+
+	/// Tarjeta de Por sector.
+	measure 'KPI tasa mora' = IF(ISBLANK([Tasa mora corte]), "Sin dato", FORMAT([Tasa mora corte], "0.00 %"))
+		lineageTag: e449476e-8368-5ecd-8c37-9e292484e86a
+
+	/// Tarjeta de Por sector.
+	measure 'KPI saldo cartera' = 
+			VAR v = [Saldo total corte]
+			RETURN IF(ISBLANK(v), "Sin dato", IF(ABS(v) >= 1E12, "$" & FORMAT(v / 1E12, IF(ABS(v) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v / 1E9, "#,0") & " mil millones"))
+		lineageTag: 287f3252-3e18-587f-9cd8-5475cc65b326
+
+	/// Tarjeta de Por sector.
+	measure 'KPI saldo en mora' = 
+			VAR v = [Saldo en mora corte]
+			RETURN IF(ISBLANK(v), "Sin dato", IF(ABS(v) >= 1E12, "$" & FORMAT(v / 1E12, IF(ABS(v) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v / 1E9, "#,0") & " mil millones"))
+		lineageTag: 22cb4a12-a098-5884-afb9-3310f57ff192
+
+	/// Cambio en puntos porcentuales frente al corte anterior.
+	measure 'KPI tasa riesgo variación' = 
+			VAR a = [Tasa riesgo corte]
+			VAR b = [Tasa riesgo corte anterior]
+			VAR d = (a - b) * 100
+			RETURN IF(ISBLANK(a) || ISBLANK(b), "", IF(d < 0, "▼ ", IF(d > 0, "▲ ", "= ")) & FORMAT(ABS(d), "0.00") & " pp " & IF(d < 0, "menos", IF(d > 0, "más", "igual")) & " que en " & [Mes corte anterior texto])
+		lineageTag: 6cb8af5f-9884-541d-94b6-4bfc1ba8a4f3
+
+	/// Cambio en puntos porcentuales frente al corte anterior.
+	measure 'KPI tasa mora variación' = 
+			VAR a = [Tasa mora corte]
+			VAR b = [Tasa mora corte anterior]
+			VAR d = (a - b) * 100
+			RETURN IF(ISBLANK(a) || ISBLANK(b), "", IF(d < 0, "▼ ", IF(d > 0, "▲ ", "= ")) & FORMAT(ABS(d), "0.00") & " pp " & IF(d < 0, "menos", IF(d > 0, "más", "igual")) & " que en " & [Mes corte anterior texto])
+		lineageTag: c2022773-16d6-5216-9363-52713e239b78
+
+	/// Cambio porcentual frente al corte anterior.
+	measure 'KPI saldo cartera variación' = 
+			VAR a = [Saldo total corte]
+			VAR b = [Saldo total corte anterior]
+			VAR d = DIVIDE(a, b) - 1
+			RETURN IF(ISBLANK(a) || ISBLANK(b), "", IF(d < 0, "▼ ", IF(d > 0, "▲ ", "= ")) & FORMAT(ABS(d) * 100, "0.0") & " % " & IF(d < 0, "menos", IF(d > 0, "más", "igual")) & " que en " & [Mes corte anterior texto])
+		lineageTag: 88da7af5-76f9-531a-819e-d0bb4e0186c4
+
+	/// Cambio porcentual frente al corte anterior.
+	measure 'KPI saldo en mora variación' = 
+			VAR a = [Saldo en mora corte]
+			VAR b = [Saldo en mora corte anterior]
+			VAR d = DIVIDE(a, b) - 1
+			RETURN IF(ISBLANK(a) || ISBLANK(b), "", IF(d < 0, "▼ ", IF(d > 0, "▲ ", "= ")) & FORMAT(ABS(d) * 100, "0.0") & " % " & IF(d < 0, "menos", IF(d > 0, "más", "igual")) & " que en " & [Mes corte anterior texto])
+		lineageTag: 036fc8e8-6264-551c-984e-afb7eb92c41b
+
+	/// Resumen de los filtros de la página Sector · filtros.
+	measure 'Filtros aplicados texto' = 
+			VAR nt = COUNTROWS(VALUES(dm_Entidades[TIPO ENTIDAD SOLIDARIA]))
+			VAR nd = COUNTROWS(VALUES(dm_Entidades[DEPARTAMENTO]))
+			VAR nm = COUNTROWS(VALUES(dm_Entidades[MUNICIPIO]))
+			VAR t = IF(ISFILTERED(dm_Entidades[TIPO ENTIDAD SOLIDARIA]), IF(nt = 1, SELECTEDVALUE(dm_Entidades[TIPO ENTIDAD SOLIDARIA]), nt & " tipos de entidad"), "Todas las entidades")
+			VAR g = SWITCH(TRUE(),
+			    ISFILTERED(dm_Entidades[MUNICIPIO]), IF(nm = 1, SELECTEDVALUE(dm_Entidades[MUNICIPIO]), nm & " municipios"),
+			    ISFILTERED(dm_Entidades[DEPARTAMENTO]), IF(nd = 1, SELECTEDVALUE(dm_Entidades[DEPARTAMENTO]), nd & " departamentos"),
+			    "todo el país")
+			RETURN t & ", " & g
+		lineageTag: 8c20c45a-3672-58bd-934d-77a1b3406178
+
+	/// Título de la gráfica de evolución según el indicador elegido.
+	measure 'Evolución título' = 
+			VAR i = SELECTEDVALUE('Indicadores gráfico de líneas'[Parámetro], "Tasa de riesgo")
+			VAR f0 = CALCULATE(MIN(tb_Balance[Fecha reporte]), REMOVEFILTERS())
+			VAR f1 = [Fecha de corte]
+			RETURN i & ", " & LEFT(FORMAT(f0, "MMMM"), 3) & " " & YEAR(f0) & " a " & LEFT(FORMAT(f1, "MMMM"), 3) & " " & YEAR(f1)
+		lineageTag: 1ee65a04-7b67-5260-ae63-3d79eaf6b772
+
+	/// Subtítulo de la gráfica de evolución: valor inicial y final.
+	measure 'Evolución subtítulo' = 
+			VAR i = SELECTEDVALUE('Indicadores gráfico de líneas'[Parámetro], "Tasa de riesgo")
+			VAR f0 = CALCULATE(MIN(tb_Balance[Fecha reporte]), REMOVEFILTERS())
+			VAR f1 = [Fecha de corte]
+			VAR v0 = SWITCH(i, "Tasa de mora", CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0), "Saldo de cartera", CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0), "Saldo en mora", CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0), CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0))
+			VAR v1 = SWITCH(i, "Tasa de mora", CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f1), "Saldo de cartera", CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f1), "Saldo en mora", CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f1), CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f1))
+			VAR esTasa = i IN {"Tasa de riesgo", "Tasa de mora"}
+			VAR t0 = IF(esTasa, FORMAT(v0, "0.00 %"), IF(ISBLANK(v0), "Sin dato", IF(ABS(v0) >= 1E12, "$" & FORMAT(v0 / 1E12, IF(ABS(v0) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v0 / 1E9, "#,0") & " mil millones")))
+			VAR t1 = IF(esTasa, FORMAT(v1, "0.00 %"), IF(ISBLANK(v1), "Sin dato", IF(ABS(v1) >= 1E12, "$" & FORMAT(v1 / 1E12, IF(ABS(v1) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v1 / 1E9, "#,0") & " mil millones")))
+			RETURN IF(ISBLANK(v0) || ISBLANK(v1), "", IF(v1 < v0, "Bajó", IF(v1 > v0, "Subió", "Se mantuvo")) & " de " & t0 & " a " & t1 & " (total con los filtros aplicados)")
+		lineageTag: c09460ab-91e2-51a6-920b-8d5d4339dec8
+
+	/// Participación de cada línea en el saldo en mora del último corte.
+	measure 'Participación saldo en mora' = DIVIDE([Saldo en mora corte], CALCULATE([Saldo en mora corte], REMOVEFILTERS(dm_Cuentas[Línea])))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 3bc8f126-75c0-5636-a968-66a4e053ba4f
+
+	/// Referencia del sector bajo la gráfica de tasas por línea.
+	measure 'Tasas del sector texto' = "Mora del sector " & FORMAT(CALCULATE([Tasa mora corte], REMOVEFILTERS(dm_Cuentas[Línea])), "0.00 %") & "   ·   Riesgo del sector " & FORMAT(CALCULATE([Tasa riesgo corte], REMOVEFILTERS(dm_Cuentas[Línea])), "0.00 %")
+		lineageTag: 439e8655-dd94-5207-83c4-0b4c7ca09184
+
+	/// Título de la tabla de mora por altura.
+	measure 'Detalle mora título' = IF([Hay línea seleccionada], SELECTEDVALUE(dm_Cuentas[Línea]) & ": mora por altura de mora", "Toca una línea en la gráfica de arriba para ver su detalle")
+		lineageTag: 185c0422-5664-528b-9f90-509be07e58d6
+
+	/// Título de la tabla de riesgo por calificación.
+	measure 'Detalle riesgo título' = IF([Hay línea seleccionada], SELECTEDVALUE(dm_Cuentas[Línea]) & ": riesgo por calificación", "")
+		lineageTag: c399feea-4b82-578f-8c2f-74658f55a4cb
+
+	/// Subtítulo de las tablas de detalle.
+	measure 'Detalle saldo línea texto' = IF([Hay línea seleccionada], "Saldo de la línea: " & IF(ISBLANK([Saldo total corte]), "Sin dato", IF(ABS([Saldo total corte]) >= 1E12, "$" & FORMAT([Saldo total corte] / 1E12, IF(ABS([Saldo total corte]) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT([Saldo total corte] / 1E9, "#,0") & " mil millones")), "")
+		lineageTag: a7437ada-024e-525d-8f10-f6adc01e516c
+
+	/// Saldo en mora por altura de la línea seleccionada (millones).
+	measure 'Detalle mora saldo' = IF([Hay línea seleccionada], [Saldo en mora corte])
+		formatString: \$#,0,,\ \M;(\$#,0,,\ \M);\$#,0,,\ \M
+		lineageTag: 79793a10-f4c5-504c-8696-8cf8c9c4644a
+
+	/// Aporte de cada altura a la tasa de mora de la línea. La suma es la tasa de mora de la línea.
+	measure 'Detalle mora aporte' = IF([Hay línea seleccionada], DIVIDE([Saldo en mora corte], [Cartera total cuenta 84 corte]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 5678590a-993a-572c-abfc-b87c053935ec
+
+	/// Saldo en riesgo por calificación de la línea seleccionada (millones).
+	measure 'Detalle riesgo saldo' = IF([Hay línea seleccionada], [Saldo en riesgo corte])
+		formatString: \$#,0,,\ \M;(\$#,0,,\ \M);\$#,0,,\ \M
+		lineageTag: 03d41f95-da85-56b9-9716-74655941af5b
+
+	/// Aporte de cada calificación a la tasa de riesgo de la línea. La suma es la tasa de riesgo de la línea.
+	measure 'Detalle riesgo aporte' = IF([Hay línea seleccionada], DIVIDE([Saldo en riesgo corte], [Saldo total corte]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 420414c9-26be-5b76-8f9d-9eebde92f8f2
+
+	/// Puesto de la cooperativa por saldo de cartera (solo las 5 primeras).
+	measure 'Top 5 posición' = 
+			VAR r = RANKX(ALLSELECTED(dm_Entidades[SIGLA]), [Saldo total corte], , DESC, Dense)
+			RETURN IF(NOT ISBLANK([Saldo total corte]) && HASONEVALUE(dm_Entidades[SIGLA]) && r <= 5, r)
+		formatString: 0
+		lineageTag: 1bf884f1-4015-5740-93f8-babc3cab1ff5
+
+	/// Saldo de cartera en billones, solo top 5.
+	measure 'Top 5 saldo' = IF(NOT ISBLANK([Top 5 posición]), [Saldo total corte] / 1E12)
+		formatString: \$#,0.00\ \b\i\l\l\.
+		lineageTag: c881ce59-0b70-5461-882b-4ba070d0c89e
+
+	/// Participación en la cartera del sector, solo top 5.
+	measure 'Top 5 participación' = IF(NOT ISBLANK([Top 5 posición]), DIVIDE([Saldo total corte], CALCULATE([Saldo total corte], ALLSELECTED(dm_Entidades[SIGLA]))))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: cd731908-2d0a-5ddc-94ef-06ec871badac
+
+	/// Tasa de mora, solo top 5.
+	measure 'Top 5 tasa mora' = IF(NOT ISBLANK([Top 5 posición]), [Tasa mora corte])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 0f339b1e-7588-5e0b-9d8f-298a3d1bb853
+
+	/// Tasa de riesgo, solo top 5.
+	measure 'Top 5 tasa riesgo' = IF(NOT ISBLANK([Top 5 posición]), [Tasa riesgo corte])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: bf3f67b9-a2fd-56c4-a5cf-e1409d3b2a15
+
 	partition Medidas = m
 		mode: import
 		source =
