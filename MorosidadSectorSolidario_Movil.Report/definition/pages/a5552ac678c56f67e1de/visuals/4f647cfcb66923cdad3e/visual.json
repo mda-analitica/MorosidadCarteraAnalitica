@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "4f647cfcb66923cdad3e",
+  "position": {
+    "x": 12,
+    "y": 132,
+    "z": 9010,
+    "height": 26,
+    "width": 426,
+    "tabOrder": 9010
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Elige tu entidad y el grupo con el que quieres compararla",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "9.75pt",
+                      "color": "#B8D4CC"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

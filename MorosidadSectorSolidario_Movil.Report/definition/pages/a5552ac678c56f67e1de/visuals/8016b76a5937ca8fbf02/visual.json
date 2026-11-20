@@ -5,7 +5,7 @@
     "x": 0,
     "y": 0,
     "z": 1000,
-    "height": 150,
+    "height": 178,
     "width": 450,
     "tabOrder": 1000
   },
@@ -20,7 +20,7 @@
                 "ResourcePackageItem": {
                   "PackageName": "RegisteredResources",
                   "PackageType": 1,
-                  "ItemName": "hdr_inicio.png"
+                  "ItemName": "hdr_bench.png"
                 }
               }
             }

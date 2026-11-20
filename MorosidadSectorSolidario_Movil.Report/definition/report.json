@@ -222,6 +222,11 @@
           "name": "ico_chevron.png",
           "path": "ico_chevron.png",
           "type": "Image"
+        },
+        {
+          "name": "hdr_bench.png",
+          "path": "hdr_bench.png",
+          "type": "Image"
         }
       ]
     },

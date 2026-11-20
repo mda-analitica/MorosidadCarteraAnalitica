@@ -612,6 +612,12 @@ table Medidas
 		formatString: 0
 		lineageTag: 13dfb6de-97c6-5c95-b550-ca1e078dc5c6
 
+	/// Texto con cuántas entidades hay marcadas en 'Entidades a comparar' (página Benchmarking · filtros).
+	measure 'Entidades seleccionadas texto' =
+			VAR n = IF(ISFILTERED(dm_Entidades[SIGLA]), COUNTROWS(VALUES(dm_Entidades[SIGLA])), 0)
+			RETURN SWITCH(TRUE(), n = 0, "Ninguna seleccionada", n = 1, "1 seleccionada (elige al menos 2)", n & " seleccionadas")
+		lineageTag: 4c030f99-1479-56e2-9eb2-f4b5018b75f9
+
 	partition Medidas = m
 		mode: import
 		source =
