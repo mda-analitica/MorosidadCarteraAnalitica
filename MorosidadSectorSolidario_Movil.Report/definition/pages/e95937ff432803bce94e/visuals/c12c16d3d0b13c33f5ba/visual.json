@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "c12c16d3d0b13c33f5ba",
   "position": {
-    "x": 160,
-    "y": 18,
-    "z": 30000,
-    "height": 40,
-    "width": 274,
-    "tabOrder": 30000
+    "x": 165,
+    "y": 190,
+    "z": 2801,
+    "height": 24,
+    "width": 119,
+    "tabOrder": 2801
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Fecha Supersolidaria texto"
+                  "Property": "Fecha Supersolidaria corta"
                 }
               },
-              "queryRef": "Medidas.Fecha Supersolidaria texto",
-              "nativeQueryRef": "Fecha Supersolidaria texto"
+              "queryRef": "Medidas.Fecha Supersolidaria corta",
+              "nativeQueryRef": "Fecha Supersolidaria corta"
             }
           ]
         }
@@ -40,7 +40,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10.5D"
                 }
               }
             },
@@ -49,7 +49,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDF6EC'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -58,7 +58,7 @@
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -72,7 +72,7 @@
             "horizontalAlignment": {
               "expr": {
                 "Literal": {
-                  "Value": "'right'"
+                  "Value": "'left'"
                 }
               }
             }

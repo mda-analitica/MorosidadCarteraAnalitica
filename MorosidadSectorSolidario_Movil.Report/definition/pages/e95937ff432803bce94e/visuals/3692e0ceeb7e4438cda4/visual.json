@@ -3,11 +3,11 @@
   "name": "3692e0ceeb7e4438cda4",
   "position": {
     "x": 12,
-    "y": 94,
+    "y": 64,
     "z": 6000,
-    "height": 96,
+    "height": 66,
     "width": 426,
-    "tabOrder": 5000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,7 +21,7 @@
                   {
                     "value": "Situación del ",
                     "textStyle": {
-                      "fontSize": "18.5pt",
+                      "fontSize": "18pt",
                       "color": "#FFFFFF",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
@@ -30,7 +30,7 @@
                   {
                     "value": "riesgo de crédito",
                     "textStyle": {
-                      "fontSize": "18.5pt",
+                      "fontSize": "18pt",
                       "color": "#49CAA5",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
@@ -39,7 +39,7 @@
                   {
                     "value": " para cooperativas de ahorro y crédito",
                     "textStyle": {
-                      "fontSize": "18.5pt",
+                      "fontSize": "18pt",
                       "color": "#FFFFFF",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

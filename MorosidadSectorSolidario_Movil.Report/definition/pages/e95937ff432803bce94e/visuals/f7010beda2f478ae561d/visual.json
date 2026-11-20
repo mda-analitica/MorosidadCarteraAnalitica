@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f7010beda2f478ae561d",
   "position": {
-    "x": 14.117647058823529,
-    "y": 738.23529411764707,
+    "x": 12,
+    "y": 756,
     "z": 19000,
-    "height": 36,
-    "width": 426,
-    "tabOrder": 13000
+    "height": 28,
+    "width": 260,
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,16 +22,16 @@
                     "value": "Fuente de los datos: ",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "8pt",
-                      "color": "#605e5c"
+                      "fontSize": "8.25pt",
+                      "color": "#3F5A54"
                     }
                   },
                   {
                     "value": "Supersolidaria",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "8pt",
-                      "color": "#605e5c"
+                      "fontSize": "8.25pt",
+                      "color": "#1F6B67"
                     },
                     "url": "https://www.supersolidaria.gov.co/es/content/entidades-vigiladas-que-reportan-informacion"
                   },
@@ -39,8 +39,8 @@
                     "value": ".",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "8pt",
-                      "color": "#605e5c"
+                      "fontSize": "8.25pt",
+                      "color": "#3F5A54"
                     }
                   }
                 ]

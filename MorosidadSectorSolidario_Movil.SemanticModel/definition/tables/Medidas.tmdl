@@ -593,6 +593,25 @@ table Medidas
 		formatString: 0
 		lineageTag: 8b1e4d2a-77c0-4e51-9a3e-21d9f0c4ab77
 
+	/// Mes y año del último corte, con mayúscula inicial (ej. Agosto 2026). Para la franja de Inicio.
+	measure 'Corte texto corto' =
+			VAR t = FORMAT([Fecha de corte], "MMMM yyyy")
+			RETURN UPPER(LEFT(t, 1)) & MID(t, 2, 50)
+		lineageTag: b5068064-98bf-5301-a551-4a095fab27d2
+
+	/// Fecha de publicación de la Supersolidaria en formato dd/mm/aaaa. Para la franja de Inicio.
+	measure 'Fecha Supersolidaria corta' =
+			VAR f = MAX('Fecha Supersolidaria'[Fecha publicación])
+			RETURN IF(ISBLANK(f), "No disponible", FORMAT(f, "dd/MM/yyyy"))
+		lineageTag: bd44a948-3d52-5dc4-bf49-d936e38ce2c9
+
+	/// Número de entidades que reportaron en el último corte. Para la franja de Inicio.
+	measure 'Cooperativas reportantes' =
+			VAR f = [Fecha de corte]
+			RETURN CALCULATE(DISTINCTCOUNT(tb_Balance[CODIGO ENTIDAD]), REMOVEFILTERS(), tb_Balance[Fecha reporte] = f)
+		formatString: 0
+		lineageTag: 13dfb6de-97c6-5c95-b550-ca1e078dc5c6
+
 	partition Medidas = m
 		mode: import
 		source =

@@ -192,6 +192,36 @@
           "name": "logo_recortado.png",
           "path": "logo_recortado.png",
           "type": "Image"
+        },
+        {
+          "name": "hdr_inicio_v2.png",
+          "path": "hdr_inicio_v2.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_sector.png",
+          "path": "ico_sector.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_cobertura.png",
+          "path": "ico_cobertura.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_bench.png",
+          "path": "ico_bench.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_entidad.png",
+          "path": "ico_entidad.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_chevron.png",
+          "path": "ico_chevron.png",
+          "type": "Image"
         }
       ]
     },

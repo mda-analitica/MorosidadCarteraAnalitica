@@ -5,9 +5,9 @@
     "x": 16,
     "y": 16,
     "z": 2000,
-    "height": 44,
-    "width": 136,
-    "tabOrder": 1000
+    "height": 40,
+    "width": 108,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "textbox",
@@ -84,7 +84,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "8D"
                 }
               }
             }
