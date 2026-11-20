@@ -873,6 +873,27 @@ table Medidas
 		formatString: 0.0\ %;-0.0\ %;0.0\ %
 		lineageTag: bf3f67b9-a2fd-56c4-a5cf-e1409d3b2a15
 
+	/// Verde si la tasa de riesgo bajó frente al corte anterior, rojo si subió.
+	measure 'Color variación tasa riesgo' = 
+			VAR a = [Tasa riesgo corte]
+			VAR b = [Tasa riesgo corte anterior]
+			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")
+		lineageTag: f519117b-2a5a-5e23-8faf-492c59ecf440
+
+	/// Verde si la tasa de mora bajó frente al corte anterior, rojo si subió.
+	measure 'Color variación tasa mora' = 
+			VAR a = [Tasa mora corte]
+			VAR b = [Tasa mora corte anterior]
+			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")
+		lineageTag: 2b844358-43ff-508b-8fb4-a3d3a9bcf3d8
+
+	/// Verde si el saldo en mora bajó frente al corte anterior, rojo si subió.
+	measure 'Color variación saldo en mora' = 
+			VAR a = [Saldo en mora corte]
+			VAR b = [Saldo en mora corte anterior]
+			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")
+		lineageTag: 09ea665c-6649-5a66-add8-2c78728ac24a
+
 	partition Medidas = m
 		mode: import
 		source =
