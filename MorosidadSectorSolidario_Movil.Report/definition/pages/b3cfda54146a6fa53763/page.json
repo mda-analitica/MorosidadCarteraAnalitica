@@ -62,7 +62,7 @@
     {
       "source": "5cfd6abb85996ed6ad94",
       "target": "30dbbdf60995124b3521",
-      "type": "Filter"
+      "type": "DataFilter"
     },
     {
       "source": "dd6dd06b9b722444f995",
@@ -72,7 +72,7 @@
     {
       "source": "5cfd6abb85996ed6ad94",
       "target": "faa705050d3698c096c1",
-      "type": "Filter"
+      "type": "DataFilter"
     },
     {
       "source": "dd6dd06b9b722444f995",
@@ -82,7 +82,7 @@
     {
       "source": "dd6dd06b9b722444f995",
       "target": "f244d7be31ced22a72cc",
-      "type": "Filter"
+      "type": "DataFilter"
     },
     {
       "source": "5cfd6abb85996ed6ad94",
@@ -92,7 +92,7 @@
     {
       "source": "dd6dd06b9b722444f995",
       "target": "2db8853559a059ad0d7c",
-      "type": "Filter"
+      "type": "DataFilter"
     },
     {
       "source": "5cfd6abb85996ed6ad94",
