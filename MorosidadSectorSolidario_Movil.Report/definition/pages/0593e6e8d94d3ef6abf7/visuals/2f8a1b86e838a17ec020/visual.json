@@ -3,11 +3,11 @@
   "name": "2f8a1b86e838a17ec020",
   "position": {
     "x": 30,
-    "y": 206,
-    "z": 15000,
-    "height": 220,
+    "y": 206.15384615384616,
+    "z": 10000,
+    "height": 284.61538461538458,
     "width": 390,
-    "tabOrder": 15000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "listSlicer",
@@ -87,6 +87,53 @@
             }
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "d",
+                    "Entity": "dm_EntidadSeleccionada",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "d"
+                                }
+                              },
+                              "Property": "SIGLA"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'AFROAMERICANA'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -155,7 +202,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'B. SELECCIONA 2 O MÁS ENTIDADES'"
+                  "Value": "'SELECCIONA 1 ENTIDAD'"
                 }
               }
             },

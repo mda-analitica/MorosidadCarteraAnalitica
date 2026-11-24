@@ -4,10 +4,10 @@
   "position": {
     "x": 30,
     "y": 1852,
-    "z": 6500,
+    "z": 54000,
     "height": 22,
     "width": 390,
-    "tabOrder": 6500
+    "tabOrder": 54000
   },
   "visual": {
     "visualType": "card",
@@ -66,13 +66,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
-                }
-              }
-            },
-            "horizontalAlignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'left'"
                 }
               }
             }

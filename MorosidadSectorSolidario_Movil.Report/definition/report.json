@@ -179,6 +179,16 @@
       "type": "RegisteredResources",
       "items": [
         {
+          "name": "hdr_bench.png",
+          "path": "hdr_bench.png",
+          "type": "Image"
+        },
+        {
+          "name": "hdr_inicio_v2.png",
+          "path": "hdr_inicio_v2.png",
+          "type": "Image"
+        },
+        {
           "name": "hdr_inicio.png",
           "path": "hdr_inicio.png",
           "type": "Image"
@@ -189,23 +199,8 @@
           "type": "Image"
         },
         {
-          "name": "logo_recortado.png",
-          "path": "logo_recortado.png",
-          "type": "Image"
-        },
-        {
-          "name": "hdr_inicio_v2.png",
-          "path": "hdr_inicio_v2.png",
-          "type": "Image"
-        },
-        {
-          "name": "ico_sector.png",
-          "path": "ico_sector.png",
-          "type": "Image"
-        },
-        {
-          "name": "ico_cobertura.png",
-          "path": "ico_cobertura.png",
+          "name": "hdr_sector.png",
+          "path": "hdr_sector.png",
           "type": "Image"
         },
         {
@@ -214,8 +209,8 @@
           "type": "Image"
         },
         {
-          "name": "ico_entidad.png",
-          "path": "ico_entidad.png",
+          "name": "ico_buscar.png",
+          "path": "ico_buscar.png",
           "type": "Image"
         },
         {
@@ -224,23 +219,28 @@
           "type": "Image"
         },
         {
-          "name": "hdr_bench.png",
-          "path": "hdr_bench.png",
+          "name": "ico_cobertura.png",
+          "path": "ico_cobertura.png",
           "type": "Image"
         },
         {
-          "name": "ico_buscar.png",
-          "path": "ico_buscar.png",
-          "type": "Image"
-        },
-        {
-          "name": "hdr_sector.png",
-          "path": "hdr_sector.png",
+          "name": "ico_entidad.png",
+          "path": "ico_entidad.png",
           "type": "Image"
         },
         {
           "name": "ico_filtro.png",
           "path": "ico_filtro.png",
+          "type": "Image"
+        },
+        {
+          "name": "ico_sector.png",
+          "path": "ico_sector.png",
+          "type": "Image"
+        },
+        {
+          "name": "logo_recortado.png",
+          "path": "logo_recortado.png",
           "type": "Image"
         }
       ]

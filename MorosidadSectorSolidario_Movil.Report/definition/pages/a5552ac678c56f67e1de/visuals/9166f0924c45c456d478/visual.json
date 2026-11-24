@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "9166f0924c45c456d478",
   "position": {
-    "x": 28,
-    "y": 500,
-    "z": 9000,
-    "height": 22,
-    "width": 394,
-    "tabOrder": 9000
+    "x": 27.69230769230769,
+    "y": 493.84615384615381,
+    "z": 7000,
+    "height": 28.46153846153846,
+    "width": 394.61538461538458,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,10 +21,10 @@
                   {
                     "value": "2  SU ENTIDAD (ENTRE LAS ELEGIDAS)",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8.25pt",
-                      "color": "#1F6B67",
-                      "fontWeight": "bold"
+                      "color": "#1f6b67"
                     }
                   }
                 ]

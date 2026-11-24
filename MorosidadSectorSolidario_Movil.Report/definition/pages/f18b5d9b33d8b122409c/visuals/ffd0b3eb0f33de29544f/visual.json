@@ -4,10 +4,10 @@
   "position": {
     "x": 24,
     "y": 1268,
-    "z": 5800,
+    "z": 47000,
     "height": 258,
     "width": 402,
-    "tabOrder": 5800
+    "tabOrder": 47000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -237,7 +237,7 @@
             "position": {
               "expr": {
                 "Literal": {
-                  "Value": "'TopLeft'"
+                  "Value": "'Top'"
                 }
               }
             },

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "fc39a5f2d17fc9f0c5f3",
   "position": {
-    "x": 136,
-    "y": 26,
-    "z": 5000,
-    "height": 20,
-    "width": 298,
-    "tabOrder": 5000
+    "x": 135.71428571428572,
+    "y": 10.714285714285715,
+    "z": 13000,
+    "height": 35,
+    "width": 298.57142857142861,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,12 +19,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "●  CARTERA DE CRÉDITO · SECTOR SOLIDARIO",
+                    "value": "● SECTOR SOLIDARIO",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8.25pt",
-                      "color": "#49CAA5",
-                      "fontWeight": "bold"
+                      "color": "#49caa5"
                     }
                   }
                 ],

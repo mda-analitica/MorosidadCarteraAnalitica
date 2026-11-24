@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "c39a59879ab13a557ce0",
   "position": {
-    "x": 12,
-    "y": 284,
-    "z": 9100,
-    "height": 22,
-    "width": 426,
-    "tabOrder": 9100
+    "x": 12.307692307692307,
+    "y": 272.30769230769232,
+    "z": 17000,
+    "height": 33.846153846153847,
+    "width": 425.38461538461536,
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,10 +21,10 @@
                   {
                     "value": "VISTA SECTORIAL",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8.25pt",
-                      "color": "#1F6B67",
-                      "fontWeight": "bold"
+                      "color": "#1f6b67"
                     }
                   }
                 ]

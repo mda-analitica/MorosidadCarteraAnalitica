@@ -4,10 +4,10 @@
   "position": {
     "x": 16,
     "y": 86,
-    "z": 9000,
+    "z": 5000,
     "height": 54,
     "width": 418,
-    "tabOrder": 9000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,9 +21,9 @@
                   {
                     "value": "¿Qué cooperativa quieres ver?",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontSize": "16pt",
-                      "color": "#FFFFFF",
-                      "fontWeight": "bold"
+                      "color": "#ffffff"
                     }
                   }
                 ]

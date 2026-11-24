@@ -4,10 +4,10 @@
   "position": {
     "x": 16,
     "y": 540,
-    "z": 4300,
+    "z": 32000,
     "height": 332,
     "width": 418,
-    "tabOrder": 4300
+    "tabOrder": 32000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "1pt",
-                      "color": "#FFFFFF"
+                      "color": "#ffffff"
                     }
                   }
                 ]

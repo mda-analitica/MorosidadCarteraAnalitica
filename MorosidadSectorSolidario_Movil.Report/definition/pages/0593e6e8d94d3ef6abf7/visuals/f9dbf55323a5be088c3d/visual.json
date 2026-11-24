@@ -3,9 +3,9 @@
   "name": "f9dbf55323a5be088c3d",
   "position": {
     "x": 30,
-    "y": 182,
+    "y": 172.30769230769229,
     "z": 9000,
-    "height": 20,
+    "height": 30,
     "width": 390,
     "tabOrder": 9000
   },
@@ -21,9 +21,9 @@
                   {
                     "value": "SU ENTIDAD COOPERATIVA",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontSize": "10pt",
-                      "color": "#1B4B3D",
-                      "fontWeight": "bold"
+                      "color": "#1b4b3d"
                     }
                   }
                 ]

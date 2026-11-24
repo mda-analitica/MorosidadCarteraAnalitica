@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "256fb5a7c428950a1b8d",
   "position": {
-    "x": 30,
-    "y": 414,
-    "z": 3400,
-    "height": 16,
-    "width": 95,
-    "tabOrder": 3400
+    "x": 29.919137466307276,
+    "y": 409.43396226415092,
+    "z": 24000,
+    "height": 20.485175202156334,
+    "width": 97.03504043126685,
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "8.25pt",
-                      "color": "#5E6E69"
+                      "color": "#5e6e69"
                     }
                   }
                 ]

@@ -4,10 +4,10 @@
   "position": {
     "x": 30,
     "y": 332,
-    "z": 20002,
+    "z": 9000,
     "height": 62,
     "width": 390,
-    "tabOrder": 20002
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "slicer",
@@ -279,11 +279,11 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
     "syncGroup": {
       "groupName": "Municipio",
       "fieldChanges": true,
       "filterChanges": true
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

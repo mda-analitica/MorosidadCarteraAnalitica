@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "9d9033547699151e5960",
   "position": {
-    "x": 16,
-    "y": 1760,
+    "x": 16.153846153846153,
+    "y": 1753.0769230769231,
     "z": 22000,
-    "height": 24,
-    "width": 418,
+    "height": 30.769230769230766,
+    "width": 417.69230769230768,
     "tabOrder": 22000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "PROVISIÓN (DETERIORO)",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8pt",
-                      "color": "#2A7560",
-                      "fontWeight": "bold"
+                      "color": "#2a7560"
                     }
                   }
                 ]

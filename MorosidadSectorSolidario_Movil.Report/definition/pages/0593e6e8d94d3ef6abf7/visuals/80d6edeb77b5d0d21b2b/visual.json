@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 0,
-    "z": 1000,
+    "z": 0,
     "height": 150,
     "width": 450,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "image",
@@ -21,6 +21,19 @@
                   "PackageName": "RegisteredResources",
                   "PackageType": 1,
                   "ItemName": "hdr_inicio.png"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "image": [
+        {
+          "properties": {
+            "fit": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Stretch'"
                 }
               }
             }

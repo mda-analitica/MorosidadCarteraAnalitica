@@ -11,7 +11,7 @@
         {
           "location": {
             "x": 361.02756016018742,
-            "y": 1304.2914294139364
+            "y": 1633.3571945045076
           },
           "nodeIndex": "tb_Balance",
           "nodeLineageTag": "0d4e1046-bcea-458e-8a8e-5fe672c3b36a",
@@ -24,7 +24,7 @@
         {
           "location": {
             "x": 1018.6991610870693,
-            "y": 1404.7219148962693
+            "y": 1733.7876799868404
           },
           "nodeIndex": "Medidas",
           "nodeLineageTag": "83f8f553-7f23-49bd-9b3a-b9ee44617fb2",
@@ -37,7 +37,7 @@
         {
           "location": {
             "x": 619.53566101037939,
-            "y": 1124.3037356011721
+            "y": 1453.3695006917433
           },
           "nodeIndex": "dm_Cuentas",
           "nodeLineageTag": "e3cbd082-f36b-4228-bd6d-1c991c4db57e",
@@ -50,7 +50,7 @@
         {
           "location": {
             "x": 676.71529858155031,
-            "y": 1614.0955976410655
+            "y": 1943.1613627316367
           },
           "nodeIndex": "dm_EntidadSeleccionada",
           "nodeLineageTag": "01bd4da6-5980-46fa-960f-c11e8bf73ff8",
@@ -63,7 +63,7 @@
         {
           "location": {
             "x": 353.80707887868806,
-            "y": 1589.9731767799758
+            "y": 1919.038941870547
           },
           "nodeIndex": "dm_Entidades",
           "size": {
@@ -75,7 +75,7 @@
         {
           "location": {
             "x": 45.49694657039106,
-            "y": 1106.24054453353
+            "y": 1435.3063096241012
           },
           "nodeIndex": "Calendario",
           "nodeLineageTag": "70c93c43-734b-46ac-b3b5-c3c90c81b879",
@@ -88,7 +88,7 @@
         {
           "location": {
             "x": 995.48965547824332,
-            "y": 1037.1303492530733
+            "y": 1366.1961143436445
           },
           "nodeIndex": "Indicadores gráfico de líneas",
           "nodeLineageTag": "01fef8ff-6234-4a16-b6b0-e285b97877a7",
@@ -101,7 +101,7 @@
         {
           "location": {
             "x": 997.79974181606372,
-            "y": 1208.5119330277214
+            "y": 1537.5776981182926
           },
           "nodeIndex": "Parámetro",
           "nodeLineageTag": "00b074a4-3964-4722-91c7-711dc5d6f31d",
@@ -114,10 +114,36 @@
         {
           "location": {
             "x": 1307.4170685442141,
-            "y": 658.13153018114235
+            "y": 987.19729527171353
           },
           "nodeIndex": "Parámetro 2",
           "nodeLineageTag": "fd826511-c404-4520-9d72-a792ca669736",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1545.9201219738229,
+            "y": 830.9865883899879
+          },
+          "nodeIndex": "Fecha Supersolidaria",
+          "nodeLineageTag": "6c3f5016-9eb7-96a5-ef22-15154fb08b47",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1829.9201219738229,
+            "y": 830.9865883899879
+          },
+          "nodeIndex": "Indicador cobertura",
+          "nodeLineageTag": "fd85fc7e-915b-e91a-3d43-41a7a5f077cc",
           "size": {
             "height": 152,
             "width": 234

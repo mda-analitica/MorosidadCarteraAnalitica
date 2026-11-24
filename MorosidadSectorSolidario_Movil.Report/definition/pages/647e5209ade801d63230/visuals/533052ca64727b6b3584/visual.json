@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 0,
-    "z": 7500,
+    "z": 0,
     "height": 150,
     "width": 450,
-    "tabOrder": 7500
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "image",
@@ -21,6 +21,19 @@
                   "PackageName": "RegisteredResources",
                   "PackageType": 1,
                   "ItemName": "hdr_sector.png"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "image": [
+        {
+          "properties": {
+            "fit": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Stretch'"
                 }
               }
             }

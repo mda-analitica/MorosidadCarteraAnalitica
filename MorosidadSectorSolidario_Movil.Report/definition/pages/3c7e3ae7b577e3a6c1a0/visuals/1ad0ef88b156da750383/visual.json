@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "1ad0ef88b156da750383",
   "position": {
-    "x": 12,
-    "y": 70,
-    "z": 9000,
-    "height": 24,
-    "width": 426,
-    "tabOrder": 9000
+    "x": 12.307692307692307,
+    "y": 60,
+    "z": 5000,
+    "height": 33.846153846153847,
+    "width": 425.38461538461536,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,10 +21,10 @@
                   {
                     "value": "Informe por entidad",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "9.75pt",
-                      "color": "#49CAA5",
-                      "fontWeight": "bold"
+                      "color": "#49caa5"
                     }
                   }
                 ]

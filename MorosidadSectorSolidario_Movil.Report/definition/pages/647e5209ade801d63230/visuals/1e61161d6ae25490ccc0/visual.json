@@ -4,10 +4,10 @@
   "position": {
     "x": 30,
     "y": 258,
-    "z": 20001,
+    "z": 8000,
     "height": 62,
     "width": 390,
-    "tabOrder": 20001
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "slicer",
@@ -279,11 +279,11 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
     "syncGroup": {
       "groupName": "Departamento",
       "fieldChanges": true,
       "filterChanges": true
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

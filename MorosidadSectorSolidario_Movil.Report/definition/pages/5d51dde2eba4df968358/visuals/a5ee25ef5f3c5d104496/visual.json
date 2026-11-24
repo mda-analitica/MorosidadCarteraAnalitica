@@ -21,10 +21,10 @@
                   {
                     "value": "Saldo en mora",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "11pt",
-                      "color": "#1B4B3D",
-                      "fontWeight": "bold"
+                      "color": "#1b4b3d"
                     }
                   }
                 ]
@@ -34,10 +34,10 @@
                   {
                     "value": "Qué mide: ",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
-                      "color": "#252423",
-                      "fontWeight": "bold"
+                      "color": "#252423"
                     }
                   },
                   {
@@ -55,10 +55,10 @@
                   {
                     "value": "Fórmula: ",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
-                      "color": "#2A7560",
-                      "fontWeight": "bold"
+                      "color": "#2a7560"
                     }
                   },
                   {
@@ -74,21 +74,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Ejemplo: ",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#605E5C",
-                      "fontWeight": "bold"
-                    }
-                  },
-                  {
-                    "value": "$18,0 mil millones.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#605E5C"
-                    }
+                    "value": ""
                   }
                 ]
               }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "ea12571c3184a57e8503",
   "position": {
-    "x": 22,
-    "y": 658,
-    "z": 4800,
-    "height": 206,
-    "width": 404,
-    "tabOrder": 4800
+    "x": 16.923076923076923,
+    "y": 622.30769230769226,
+    "z": 37000,
+    "height": 229.23076923076923,
+    "width": 412.30769230769232,
+    "tabOrder": 37000
   },
   "visual": {
     "visualType": "lineChart",
@@ -17,17 +17,54 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "HierarchyLevel": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Calendario"
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Calendario"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "Fecha"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
                     }
                   },
-                  "Property": "Mes corto"
+                  "Level": "Año"
                 }
               },
-              "queryRef": "Calendario.Mes corto",
-              "nativeQueryRef": "Mes corto",
+              "queryRef": "Calendario.Fecha.Variación.Jerarquía de fechas.Año",
+              "nativeQueryRef": "Fecha Año",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Calendario"
+                            }
+                          },
+                          "Name": "Variación",
+                          "Property": "Fecha"
+                        }
+                      },
+                      "Hierarchy": "Jerarquía de fechas"
+                    }
+                  },
+                  "Level": "Mes"
+                }
+              },
+              "queryRef": "Calendario.Fecha.Variación.Jerarquía de fechas.Mes",
+              "nativeQueryRef": "Fecha Mes",
               "active": true
             }
           ]
@@ -102,24 +139,6 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Calendario"
-                  }
-                },
-                "Property": "Mes corto"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -136,36 +155,9 @@
           }
         }
       ],
-      "dataPoint": [
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#1F5C8A'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
       "lineStyles": [
         {
           "properties": {
-            "strokeWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "2D"
-                }
-              }
-            },
             "showMarker": {
               "expr": {
                 "Literal": {
@@ -186,42 +178,17 @@
       "categoryAxis": [
         {
           "properties": {
-            "show": {
+            "outerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "0L"
                 }
               }
             },
-            "showAxisTitle": {
+            "preferredCategoryWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            },
-            "labelColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#8A938F'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                  "Value": "180D"
                 }
               }
             }
@@ -335,10 +302,8 @@
             }
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "visualHeader": [
+      ],
+      "zoom": [
         {
           "properties": {
             "show": {
@@ -350,21 +315,16 @@
             }
           }
         }
-      ],
-      "padding": [
+      ]
+    },
+    "visualContainerObjects": {
+      "visualHeader": [
         {
           "properties": {
-            "top": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
+                  "Value": "false"
                 }
               }
             }

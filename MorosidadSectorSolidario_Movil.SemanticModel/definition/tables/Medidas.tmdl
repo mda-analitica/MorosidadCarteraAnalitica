@@ -325,6 +325,7 @@ table Medidas
 			        "Supersolidaria publicó el " & FORMAT(f, "d ""de"" MMMM ""de"" yyyy")
 			    )
 		lineageTag: f02a7fe4-a5b8-2ad1-2d16-83f02abf5046
+
 	/// Posición de la entidad de «Su entidad cooperativa» en tasa de mora (1 = la más baja).
 	/// Universo: entidades con dato que cumplen los filtros de la página, sin el filtro de «Entidades a comparar».
 	measure 'Ranking tasa mora' =
@@ -554,6 +555,7 @@ table Medidas
 			        Nombre & " es la número " & Pos & " entre " & Total & " entidades en saldo en mora (1 = la de mayor saldo)."
 			    )
 		lineageTag: b72c72e7-e705-aaa4-be07-fe7193d87697
+
 	/// Verdadero cuando el usuario tocó una sola línea de crédito en una gráfica de barras (filtro cruzado sobre dm_Cuentas[Línea]).
 	measure 'Hay línea seleccionada' = ISFILTERED(dm_Cuentas[Línea]) && HASONEVALUE(dm_Cuentas[Línea])
 		lineageTag: 33e8d8ad-b179-03cd-2f95-09bfbf536c37
@@ -623,20 +625,20 @@ table Medidas
 		lineageTag: 7b38abf8-3d93-5902-9cff-16bd659cfe23
 
 	/// Texto dinámico del botón 'Ver informe de …' en la página Entidad · filtros.
-	measure 'Texto botón ver informe' = 
+	measure 'Texto botón ver informe' =
 			VAR s = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA])
 			RETURN IF(ISBLANK(s), "Elige una cooperativa", "Ver informe de " & s)
 		lineageTag: cced7e4e-8ba5-556f-8d4e-aa1e2efc40bc
 
 	/// Corte inmediatamente anterior al último (para comparar mes contra mes).
-	measure 'Fecha corte anterior' = 
+	measure 'Fecha corte anterior' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE(MAX(tb_Balance[Fecha reporte]), REMOVEFILTERS(), tb_Balance[Fecha reporte] < f)
 		formatString: General Date
 		lineageTag: e8a506f5-be24-5ae2-8737-13b938e87e73
 
 	/// Mes del corte anterior, ej. jul 2026.
-	measure 'Mes corte anterior texto' = 
+	measure 'Mes corte anterior texto' =
 			VAR d = [Fecha corte anterior]
 			RETURN LEFT(FORMAT(d, "MMMM"), 3) & " " & YEAR(d)
 		lineageTag: 4a2b9c33-c32b-55b4-b5e5-4b5707ca1ed8
@@ -650,70 +652,70 @@ table Medidas
 		lineageTag: 2a077cc9-3084-5689-991f-3eb0db0b9f15
 
 	/// Tasa de riesgo en el último corte, con los filtros de entidad.
-	measure 'Tasa riesgo corte' = 
+	measure 'Tasa riesgo corte' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 1e75caf1-1738-5216-ac64-979f97f76e0a
 
 	/// Tasa de mora en el último corte, con los filtros de entidad.
-	measure 'Tasa mora corte' = 
+	measure 'Tasa mora corte' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 5e3eddef-23ea-584b-b90b-5b269848faa9
 
 	/// Cartera bruta en el último corte.
-	measure 'Saldo total corte' = 
+	measure 'Saldo total corte' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 5c4d7eff-9f14-5368-8668-5f52d3b762ad
 
 	/// Saldo en mora en el último corte.
-	measure 'Saldo en mora corte' = 
+	measure 'Saldo en mora corte' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 91dd66aa-2cf6-5015-b23a-c6c938c70b73
 
 	/// Saldo en riesgo (B a E) en el último corte.
-	measure 'Saldo en riesgo corte' = 
+	measure 'Saldo en riesgo corte' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE([Saldo en riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 1984855a-c102-5e5c-b672-636522400ff8
 
 	/// Denominador de la tasa de mora en el último corte.
-	measure 'Cartera total cuenta 84 corte' = 
+	measure 'Cartera total cuenta 84 corte' =
 			VAR f = [Fecha de corte]
 			RETURN CALCULATE([Cartera total cuenta 84], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 9cd22011-8df5-522f-ab87-67a9c4a14982
 
 	/// Tasa de riesgo en el corte anterior.
-	measure 'Tasa riesgo corte anterior' = 
+	measure 'Tasa riesgo corte anterior' =
 			VAR f = [Fecha corte anterior]
 			RETURN CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 4cc09bea-22cc-5501-be15-7e61e44422e9
 
 	/// Tasa de mora en el corte anterior.
-	measure 'Tasa mora corte anterior' = 
+	measure 'Tasa mora corte anterior' =
 			VAR f = [Fecha corte anterior]
 			RETURN CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		lineageTag: 735c7a64-6c10-505d-9c9f-266803e23cdf
 
 	/// Cartera bruta en el corte anterior.
-	measure 'Saldo total corte anterior' = 
+	measure 'Saldo total corte anterior' =
 			VAR f = [Fecha corte anterior]
 			RETURN CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: eee52898-ffa1-5c50-a2c4-8fa22a421b2e
 
 	/// Saldo en mora en el corte anterior.
-	measure 'Saldo en mora corte anterior' = 
+	measure 'Saldo en mora corte anterior' =
 			VAR f = [Fecha corte anterior]
 			RETURN CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f)
 		formatString: \$#,0;(\$#,0);\$#,0
@@ -728,19 +730,19 @@ table Medidas
 		lineageTag: e449476e-8368-5ecd-8c37-9e292484e86a
 
 	/// Tarjeta de Por sector.
-	measure 'KPI saldo cartera' = 
+	measure 'KPI saldo cartera' =
 			VAR v = [Saldo total corte]
 			RETURN IF(ISBLANK(v), "Sin dato", IF(ABS(v) >= 1E12, "$" & FORMAT(v / 1E12, IF(ABS(v) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v / 1E9, "#,0") & " mil millones"))
 		lineageTag: 287f3252-3e18-587f-9cd8-5475cc65b326
 
 	/// Tarjeta de Por sector.
-	measure 'KPI saldo en mora' = 
+	measure 'KPI saldo en mora' =
 			VAR v = [Saldo en mora corte]
 			RETURN IF(ISBLANK(v), "Sin dato", IF(ABS(v) >= 1E12, "$" & FORMAT(v / 1E12, IF(ABS(v) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v / 1E9, "#,0") & " mil millones"))
 		lineageTag: 22cb4a12-a098-5884-afb9-3310f57ff192
 
 	/// Cambio en puntos porcentuales frente al corte anterior.
-	measure 'KPI tasa riesgo variación' = 
+	measure 'KPI tasa riesgo variación' =
 			VAR a = [Tasa riesgo corte]
 			VAR b = [Tasa riesgo corte anterior]
 			VAR d = (a - b) * 100
@@ -748,7 +750,7 @@ table Medidas
 		lineageTag: 6cb8af5f-9884-541d-94b6-4bfc1ba8a4f3
 
 	/// Cambio en puntos porcentuales frente al corte anterior.
-	measure 'KPI tasa mora variación' = 
+	measure 'KPI tasa mora variación' =
 			VAR a = [Tasa mora corte]
 			VAR b = [Tasa mora corte anterior]
 			VAR d = (a - b) * 100
@@ -756,7 +758,7 @@ table Medidas
 		lineageTag: c2022773-16d6-5216-9363-52713e239b78
 
 	/// Cambio porcentual frente al corte anterior.
-	measure 'KPI saldo cartera variación' = 
+	measure 'KPI saldo cartera variación' =
 			VAR a = [Saldo total corte]
 			VAR b = [Saldo total corte anterior]
 			VAR d = DIVIDE(a, b) - 1
@@ -764,7 +766,7 @@ table Medidas
 		lineageTag: 88da7af5-76f9-531a-819e-d0bb4e0186c4
 
 	/// Cambio porcentual frente al corte anterior.
-	measure 'KPI saldo en mora variación' = 
+	measure 'KPI saldo en mora variación' =
 			VAR a = [Saldo en mora corte]
 			VAR b = [Saldo en mora corte anterior]
 			VAR d = DIVIDE(a, b) - 1
@@ -772,7 +774,7 @@ table Medidas
 		lineageTag: 036fc8e8-6264-551c-984e-afb7eb92c41b
 
 	/// Resumen de los filtros de la página Sector · filtros.
-	measure 'Filtros aplicados texto' = 
+	measure 'Filtros aplicados texto' =
 			VAR nt = COUNTROWS(VALUES(dm_Entidades[TIPO ENTIDAD SOLIDARIA]))
 			VAR nd = COUNTROWS(VALUES(dm_Entidades[DEPARTAMENTO]))
 			VAR nm = COUNTROWS(VALUES(dm_Entidades[MUNICIPIO]))
@@ -785,16 +787,18 @@ table Medidas
 		lineageTag: 8c20c45a-3672-58bd-934d-77a1b3406178
 
 	/// Título de la gráfica de evolución según el indicador elegido.
-	measure 'Evolución título' = 
-			VAR i = SELECTEDVALUE('Indicadores gráfico de líneas'[Parámetro], "Tasa de riesgo")
+	measure 'Evolución título' =
+			VAR o = SELECTEDVALUE('Indicadores gráfico de líneas'[Parámetro Orden], 0)
+			VAR i = SWITCH(o, 1, "Tasa de mora", 2, "Saldo de cartera", 3, "Saldo en mora", "Tasa de riesgo")
 			VAR f0 = CALCULATE(MIN(tb_Balance[Fecha reporte]), REMOVEFILTERS())
 			VAR f1 = [Fecha de corte]
 			RETURN i & ", " & LEFT(FORMAT(f0, "MMMM"), 3) & " " & YEAR(f0) & " a " & LEFT(FORMAT(f1, "MMMM"), 3) & " " & YEAR(f1)
 		lineageTag: 1ee65a04-7b67-5260-ae63-3d79eaf6b772
 
 	/// Subtítulo de la gráfica de evolución: valor inicial y final.
-	measure 'Evolución subtítulo' = 
-			VAR i = SELECTEDVALUE('Indicadores gráfico de líneas'[Parámetro], "Tasa de riesgo")
+	measure 'Evolución subtítulo' =
+			VAR o = SELECTEDVALUE('Indicadores gráfico de líneas'[Parámetro Orden], 0)
+			VAR i = SWITCH(o, 1, "Tasa de mora", 2, "Saldo de cartera", 3, "Saldo en mora", "Tasa de riesgo")
 			VAR f0 = CALCULATE(MIN(tb_Balance[Fecha reporte]), REMOVEFILTERS())
 			VAR f1 = [Fecha de corte]
 			VAR v0 = SWITCH(i, "Tasa de mora", CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0), "Saldo de cartera", CALCULATE([Saldo total], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0), "Saldo en mora", CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0), CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), tb_Balance[Fecha reporte] = f0))
@@ -847,7 +851,7 @@ table Medidas
 		lineageTag: 420414c9-26be-5b76-8f9d-9eebde92f8f2
 
 	/// Puesto de la cooperativa por saldo de cartera (solo las 5 primeras).
-	measure 'Top 5 posición' = 
+	measure 'Top 5 posición' =
 			VAR r = RANKX(ALLSELECTED(dm_Entidades[SIGLA]), [Saldo total corte], , DESC, Dense)
 			RETURN IF(NOT ISBLANK([Saldo total corte]) && HASONEVALUE(dm_Entidades[SIGLA]) && r <= 5, r)
 		formatString: 0
@@ -874,21 +878,21 @@ table Medidas
 		lineageTag: bf3f67b9-a2fd-56c4-a5cf-e1409d3b2a15
 
 	/// Verde si la tasa de riesgo bajó frente al corte anterior, rojo si subió.
-	measure 'Color variación tasa riesgo' = 
+	measure 'Color variación tasa riesgo' =
 			VAR a = [Tasa riesgo corte]
 			VAR b = [Tasa riesgo corte anterior]
 			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")
 		lineageTag: f519117b-2a5a-5e23-8faf-492c59ecf440
 
 	/// Verde si la tasa de mora bajó frente al corte anterior, rojo si subió.
-	measure 'Color variación tasa mora' = 
+	measure 'Color variación tasa mora' =
 			VAR a = [Tasa mora corte]
 			VAR b = [Tasa mora corte anterior]
 			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")
 		lineageTag: 2b844358-43ff-508b-8fb4-a3d3a9bcf3d8
 
 	/// Verde si el saldo en mora bajó frente al corte anterior, rojo si subió.
-	measure 'Color variación saldo en mora' = 
+	measure 'Color variación saldo en mora' =
 			VAR a = [Saldo en mora corte]
 			VAR b = [Saldo en mora corte anterior]
 			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")

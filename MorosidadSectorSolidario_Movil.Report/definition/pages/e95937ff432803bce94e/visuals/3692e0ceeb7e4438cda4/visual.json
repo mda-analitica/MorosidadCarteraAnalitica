@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "3692e0ceeb7e4438cda4",
   "position": {
-    "x": 12,
-    "y": 64,
-    "z": 6000,
-    "height": 66,
-    "width": 426,
-    "tabOrder": 6000
+    "x": 12.142857142857144,
+    "y": 55.714285714285715,
+    "z": 14000,
+    "height": 74.285714285714292,
+    "width": 425.71428571428572,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,28 +21,28 @@
                   {
                     "value": "Situación del ",
                     "textStyle": {
-                      "fontSize": "18pt",
-                      "color": "#FFFFFF",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "18pt",
+                      "color": "#ffffff"
                     }
                   },
                   {
                     "value": "riesgo de crédito",
                     "textStyle": {
-                      "fontSize": "18pt",
-                      "color": "#49CAA5",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "18pt",
+                      "color": "#49caa5"
                     }
                   },
                   {
                     "value": " para cooperativas de ahorro y crédito",
                     "textStyle": {
-                      "fontSize": "18pt",
-                      "color": "#FFFFFF",
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
+                      "fontSize": "18pt",
+                      "color": "#ffffff"
                     }
                   }
                 ]

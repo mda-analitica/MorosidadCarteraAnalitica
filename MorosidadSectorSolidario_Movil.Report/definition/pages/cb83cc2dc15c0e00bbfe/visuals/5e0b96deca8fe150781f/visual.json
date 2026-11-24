@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
-  "name": "c972561e65662a515ea5",
+  "name": "5e0b96deca8fe150781f",
   "position": {
-    "x": 29.999999999999996,
+    "x": 26.153846153846153,
     "y": 160,
-    "z": 10000,
-    "height": 53.636363636363633,
-    "width": 389.99999999999994,
-    "tabOrder": 10000
+    "z": 25001,
+    "height": 53.846153846153847,
+    "width": 393.84615384615381,
+    "tabOrder": 25001
   },
   "visual": {
     "visualType": "slicer",
@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COOPANTEX'"
+                                "Value": "'COBELEN'"
                               }
                             }
                           ]
@@ -132,7 +132,7 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "'comedal'"
+                            "Value": "'cobelen'"
                           }
                         }
                       }

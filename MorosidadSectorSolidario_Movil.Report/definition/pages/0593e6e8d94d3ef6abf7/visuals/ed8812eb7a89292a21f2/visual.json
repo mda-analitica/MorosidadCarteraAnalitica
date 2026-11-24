@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "ed8812eb7a89292a21f2",
   "position": {
-    "x": 24,
-    "y": 66,
-    "z": 9000,
-    "height": 20,
+    "x": 23.846153846153847,
+    "y": 53.846153846153847,
+    "z": 8000,
+    "height": 32.307692307692307,
     "width": 410,
-    "tabOrder": 9000
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,9 +21,9 @@
                   {
                     "value": "COBERTURA DE CARTERA",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontSize": "9pt",
-                      "color": "#49CAA5",
-                      "fontWeight": "bold"
+                      "color": "#49caa5"
                     }
                   }
                 ]

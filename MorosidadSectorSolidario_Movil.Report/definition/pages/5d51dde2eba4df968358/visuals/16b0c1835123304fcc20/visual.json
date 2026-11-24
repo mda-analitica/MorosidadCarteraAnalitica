@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "16b0c1835123304fcc20",
   "position": {
-    "x": 16,
-    "y": 2214,
+    "x": 16.153846153846153,
+    "y": 2208.4615384615386,
     "z": 26000,
-    "height": 24,
-    "width": 418,
+    "height": 29.23076923076923,
+    "width": 417.69230769230768,
     "tabOrder": 26000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "RANKING",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8pt",
-                      "color": "#2A7560",
-                      "fontWeight": "bold"
+                      "color": "#2a7560"
                     }
                   }
                 ]

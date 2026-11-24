@@ -4,10 +4,10 @@
   "position": {
     "x": 29.999999999999996,
     "y": 294.5454545454545,
-    "z": 13000,
+    "z": 15000,
     "height": 54,
     "width": 390,
-    "tabOrder": 13000
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "slicer",
@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COOPANTEX'"
+                                "Value": "'COBELEN'"
                               }
                             }
                           ]

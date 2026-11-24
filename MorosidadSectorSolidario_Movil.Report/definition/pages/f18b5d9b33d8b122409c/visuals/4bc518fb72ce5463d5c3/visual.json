@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "4bc518fb72ce5463d5c3",
   "position": {
-    "x": 26,
-    "y": 1898,
-    "z": 6700,
-    "height": 150,
-    "width": 398,
-    "tabOrder": 6700
+    "x": 25.833333333333336,
+    "y": 1898.3333333333335,
+    "z": 56000,
+    "height": 173.33333333333334,
+    "width": 398.33333333333337,
+    "tabOrder": 56000
   },
   "visual": {
     "visualType": "tableEx",
@@ -320,7 +320,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "150D"
+                  "Value": "136.66667005750782D"
                 }
               }
             }
@@ -355,6 +355,71 @@
           },
           "selector": {
             "metadata": "Medidas.Detalle riesgo aporte"
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "dataBars": {
+              "positiveColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'maxColor'"
+                      }
+                    }
+                  }
+                }
+              },
+              "negativeColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'minColor'"
+                      }
+                    }
+                  }
+                }
+              },
+              "axisColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'foreground'"
+                      }
+                    }
+                  }
+                }
+              },
+              "reverseDirection": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "hideText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "totalMatchingOption": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1L"
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.Detalle riesgo saldo"
           }
         }
       ]

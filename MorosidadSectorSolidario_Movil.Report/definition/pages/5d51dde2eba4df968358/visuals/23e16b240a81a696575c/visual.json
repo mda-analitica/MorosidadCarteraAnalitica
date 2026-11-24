@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "23e16b240a81a696575c",
   "position": {
-    "x": 16,
-    "y": 1128,
+    "x": 16.153846153846153,
+    "y": 1119.2307692307693,
     "z": 17000,
-    "height": 24,
-    "width": 418,
+    "height": 33.076923076923073,
+    "width": 417.69230769230768,
     "tabOrder": 17000
   },
   "visual": {
@@ -21,10 +21,10 @@
                   {
                     "value": "COBERTURA",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8pt",
-                      "color": "#2A7560",
-                      "fontWeight": "bold"
+                      "color": "#2a7560"
                     }
                   }
                 ]

@@ -4,10 +4,10 @@
   "position": {
     "x": 30,
     "y": 526,
-    "z": 16100,
+    "z": 12000,
     "height": 38,
     "width": 390,
-    "tabOrder": 16100
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "textSlicer",
@@ -43,6 +43,47 @@
                 "Literal": {
                   "Value": "'Escribe el nombre de tu cooperativa…'"
                 }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "d",
+                    "Entity": "dm_EntidadSeleccionada",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Contains": {
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "SIGLA"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'coapaz'"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
               }
             }
           }

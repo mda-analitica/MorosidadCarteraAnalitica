@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "7b29cca3299a8c143be2",
   "position": {
-    "x": 12,
-    "y": 70,
-    "z": 9000,
-    "height": 22,
-    "width": 426,
-    "tabOrder": 9000
+    "x": 12.307692307692307,
+    "y": 60,
+    "z": 6000,
+    "height": 32.307692307692307,
+    "width": 425.38461538461536,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,10 +21,10 @@
                   {
                     "value": "●  BENCHMARKING DE COOPERATIVAS",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontFamily": "Segoe UI",
                       "fontSize": "8.25pt",
-                      "color": "#49CAA5",
-                      "fontWeight": "bold"
+                      "color": "#49caa5"
                     }
                   }
                 ]

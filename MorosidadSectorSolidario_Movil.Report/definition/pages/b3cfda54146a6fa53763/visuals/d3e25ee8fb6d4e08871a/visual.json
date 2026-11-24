@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "d3e25ee8fb6d4e08871a",
   "position": {
-    "x": 190,
+    "x": 26.153846153846153,
     "y": 160,
-    "z": 10000,
-    "height": 54,
-    "width": 230,
-    "tabOrder": 10000
+    "z": 9000,
+    "height": 53.846153846153847,
+    "width": 393.84615384615381,
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "slicer",
@@ -95,7 +95,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'COOPANTEX'"
+                                "Value": "'COBELEN'"
                               }
                             }
                           ]
@@ -132,7 +132,7 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "'cooprudea'"
+                            "Value": "'cobelen'"
                           }
                         }
                       }
