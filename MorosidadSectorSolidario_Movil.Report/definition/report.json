@@ -242,6 +242,11 @@
           "name": "logo_recortado.png",
           "path": "logo_recortado.png",
           "type": "Image"
+        },
+        {
+          "name": "ico_coop.png",
+          "path": "ico_coop.png",
+          "type": "Image"
         }
       ]
     },

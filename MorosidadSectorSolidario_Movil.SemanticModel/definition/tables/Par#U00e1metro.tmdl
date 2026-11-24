@@ -40,13 +40,10 @@ table Parámetro
 		mode: import
 		source =
 				{
-				    ("Riesgo/Mora", NAMEOF('Medidas'[Riesgo/Mora con entidad seleccionada]), 0),
-				    ("Saldo en mora", NAMEOF('Medidas'[Saldo en mora con entidad seleccionada]), 1),
-				    ("Saldo en riesgo", NAMEOF('Medidas'[Saldo en riesgo con entidad seleccionada]), 2),
-				    ("Saldo total", NAMEOF('Medidas'[Saldo total con entidad seleccionada]), 3),
-				    ("Tasa mora", NAMEOF('Medidas'[Tasa mora con entidad seleccionada]), 4),
-				    ("Tasa riesgo", NAMEOF('Medidas'[Tasa riesgo con entidad seleccionada]), 5),
-				    ("Cobertura", NAMEOF('Medidas'[Cobertura cartera en riesgo con entidad seleccionada]), 6)
+				    ("Tasa de riesgo", NAMEOF('Medidas'[Tasa riesgo con entidad seleccionada]), 0),
+				    ("Tasa de mora", NAMEOF('Medidas'[Tasa mora con entidad seleccionada]), 1),
+				    ("Saldo de cartera", NAMEOF('Medidas'[Saldo total con entidad seleccionada]), 2),
+				    ("Saldo en mora", NAMEOF('Medidas'[Saldo en mora con entidad seleccionada]), 3)
 				}
 
 	annotation PBI_Id = d639e2c9c3c04ed1b0a5f04e57161955

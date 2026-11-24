@@ -898,6 +898,133 @@ table Medidas
 			RETURN SWITCH(TRUE(), ISBLANK(a) || ISBLANK(b), "#5E6E69", a < b, "#2A7560", a > b, "#B3261E", "#5E6E69")
 		lineageTag: 09ea665c-6649-5a66-add8-2c78728ac24a
 
+	/// Sigla de la cooperativa elegida en Por entidad.
+	measure 'Entidad nombre' = SELECTEDVALUE(dm_EntidadSeleccionada[SIGLA], "la cooperativa")
+		lineageTag: 5cc4fb9d-fcba-5c1e-95e0-33cb12edc1ea
+
+	/// Título del encabezado de Por entidad.
+	measure 'Entidad título' = "Situación de la cartera de " & [Entidad nombre]
+		lineageTag: 7c8d3c0c-a214-5a0e-8713-edc584484d16
+
+	/// Título de la evolución en Por entidad, según el indicador elegido.
+	measure 'Evolución entidad título' = 
+			VAR o = SELECTEDVALUE('Parámetro'[Parámetro Orden], 0)
+			VAR i = SWITCH(o, 1, "Tasa de mora", 2, "Saldo de cartera", 3, "Saldo en mora", "Tasa de riesgo")
+			VAR f0 = CALCULATE(MIN(tb_Balance[Fecha reporte]), REMOVEFILTERS())
+			VAR f1 = [Fecha de corte]
+			RETURN i & " de " & [Entidad nombre] & ", " & LEFT(FORMAT(f0, "MMMM"), 3) & " " & YEAR(f0) & " a " & LEFT(FORMAT(f1, "MMMM"), 3) & " " & YEAR(f1)
+		lineageTag: 3cd4a4a6-bab0-58a1-966b-04a6ce2e4732
+
+	/// Valor inicial y final del indicador elegido para la cooperativa.
+	measure 'Evolución entidad subtítulo' = 
+			VAR o = SELECTEDVALUE('Parámetro'[Parámetro Orden], 0)
+			VAR i = SWITCH(o, 1, "Tasa de mora", 2, "Saldo de cartera", 3, "Saldo en mora", "Tasa de riesgo")
+			VAR f0 = CALCULATE(MIN(tb_Balance[Fecha reporte]), REMOVEFILTERS())
+			VAR f1 = [Fecha de corte]
+			VAR v0 = SWITCH(i, "Tasa de mora", CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f0), "Saldo de cartera", CALCULATE([Saldo total], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f0), "Saldo en mora", CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f0), CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f0))
+			VAR v1 = SWITCH(i, "Tasa de mora", CALCULATE([Tasa mora], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f1), "Saldo de cartera", CALCULATE([Saldo total], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f1), "Saldo en mora", CALCULATE([Saldo en mora], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f1), CALCULATE([Tasa riesgo], REMOVEFILTERS(Calendario), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]), tb_Balance[Fecha reporte] = f1))
+			VAR esTasa = i IN {"Tasa de riesgo", "Tasa de mora"}
+			VAR t0 = IF(esTasa, FORMAT(v0, "0.00 %"), IF(ISBLANK(v0), "Sin dato", IF(ABS(v0) >= 1E12, "$" & FORMAT(v0 / 1E12, IF(ABS(v0) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v0 / 1E9, "#,0") & " mil millones")))
+			VAR t1 = IF(esTasa, FORMAT(v1, "0.00 %"), IF(ISBLANK(v1), "Sin dato", IF(ABS(v1) >= 1E12, "$" & FORMAT(v1 / 1E12, IF(ABS(v1) >= 1E13, "#,0.0", "#,0.00")) & " billones", "$" & FORMAT(v1 / 1E9, "#,0") & " mil millones")))
+			RETURN IF(ISBLANK(v0) || ISBLANK(v1), "", IF(v1 < v0, "Bajó", IF(v1 > v0, "Subió", "Se mantuvo")) & " de " & t0 & " a " & t1 & " en el periodo")
+		lineageTag: 221f4572-0ee0-526b-beb0-e67bea2661ee
+
+	/// Subtítulo de la gráfica de participación en Por entidad.
+	measure 'Participación subtítulo entidad' = "Participación de cada línea en el saldo en mora de " & [Entidad nombre]
+		lineageTag: ee698ae5-5812-59c9-a162-fa5fd370e93b
+
+	/// Referencia de la cooperativa bajo la gráfica de tasas por línea.
+	measure 'Tasas entidad texto' = "Mora de " & [Entidad nombre] & " " & FORMAT(CALCULATE([Tasa mora corte], REMOVEFILTERS(dm_Cuentas[Línea]), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD])), "0.00 %") & "   ·   Riesgo de " & [Entidad nombre] & " " & FORMAT(CALCULATE([Tasa riesgo corte], REMOVEFILTERS(dm_Cuentas[Línea]), TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD])), "0.00 %")
+		lineageTag: 7314b1a2-c9ca-56a2-869a-8dc0ec9af74c
+
+	/// Relación riesgo/mora de la línea para la cooperativa (tooltip).
+	measure 'Riesgo/Mora entidad corte' = DIVIDE([Tasa riesgo corte entidad], [Tasa mora corte entidad])
+		formatString: 0.00
+		lineageTag: 32a74c32-434e-5098-bde4-91f2c4bc88b3
+
+	/// «KPI tasa riesgo» para la cooperativa elegida en Por entidad.
+	measure 'KPI tasa riesgo entidad' = CALCULATE([KPI tasa riesgo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: 73916c28-b3bf-534f-8e08-ff273abd0f15
+
+	/// «KPI tasa mora» para la cooperativa elegida en Por entidad.
+	measure 'KPI tasa mora entidad' = CALCULATE([KPI tasa mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: 3ca7d419-a78a-5f9b-829d-073d0918938e
+
+	/// «KPI saldo cartera» para la cooperativa elegida en Por entidad.
+	measure 'KPI saldo cartera entidad' = CALCULATE([KPI saldo cartera], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: b8d2d397-3163-5849-beb0-198c31922fba
+
+	/// «KPI saldo en mora» para la cooperativa elegida en Por entidad.
+	measure 'KPI saldo en mora entidad' = CALCULATE([KPI saldo en mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: 3858b82e-41be-5118-a64f-7673dc069bc0
+
+	/// «KPI tasa riesgo variación» para la cooperativa elegida en Por entidad.
+	measure 'KPI tasa riesgo variación entidad' = CALCULATE([KPI tasa riesgo variación], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: deabb9c3-cdfd-5e68-8087-c510045110cd
+
+	/// «KPI tasa mora variación» para la cooperativa elegida en Por entidad.
+	measure 'KPI tasa mora variación entidad' = CALCULATE([KPI tasa mora variación], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: bf82de14-e0c3-5ab7-81c4-7bd7f1224e4a
+
+	/// «KPI saldo cartera variación» para la cooperativa elegida en Por entidad.
+	measure 'KPI saldo cartera variación entidad' = CALCULATE([KPI saldo cartera variación], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: ec4d0860-e5e2-5b39-9f12-f7a03c91fa01
+
+	/// «KPI saldo en mora variación» para la cooperativa elegida en Por entidad.
+	measure 'KPI saldo en mora variación entidad' = CALCULATE([KPI saldo en mora variación], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: 36cebd45-e085-5129-8ec4-3e00fcac2352
+
+	/// «Color variación tasa riesgo» para la cooperativa elegida en Por entidad.
+	measure 'Color variación tasa riesgo entidad' = CALCULATE([Color variación tasa riesgo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: fba43634-1b1c-534d-92fc-8b1423db4cfe
+
+	/// «Color variación tasa mora» para la cooperativa elegida en Por entidad.
+	measure 'Color variación tasa mora entidad' = CALCULATE([Color variación tasa mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: 91ce1a3a-120e-5fd1-a32e-2f7dc8418776
+
+	/// «Color variación saldo en mora» para la cooperativa elegida en Por entidad.
+	measure 'Color variación saldo en mora entidad' = CALCULATE([Color variación saldo en mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: c4c250c1-c239-59c8-92fb-c6e27f6b07d8
+
+	/// «Participación saldo en mora» para la cooperativa elegida en Por entidad.
+	measure 'Participación saldo en mora entidad' = CALCULATE([Participación saldo en mora], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 6f84065f-fe21-5f1a-b8ab-e2188e6d698f
+
+	/// «Tasa mora corte» para la cooperativa elegida en Por entidad.
+	measure 'Tasa mora corte entidad' = CALCULATE([Tasa mora corte], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: bd5a16e5-4834-52bc-a19e-b2893912fdd0
+
+	/// «Tasa riesgo corte» para la cooperativa elegida en Por entidad.
+	measure 'Tasa riesgo corte entidad' = CALCULATE([Tasa riesgo corte], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: daaf2211-4565-5e88-94e0-2997db64560f
+
+	/// «Detalle saldo línea texto» para la cooperativa elegida en Por entidad.
+	measure 'Detalle saldo línea texto entidad' = CALCULATE([Detalle saldo línea texto], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		lineageTag: a99a69a3-c718-59a6-94b1-b83e1c30f0d9
+
+	/// «Detalle mora saldo» para la cooperativa elegida en Por entidad.
+	measure 'Detalle mora saldo entidad' = CALCULATE([Detalle mora saldo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0,,\ \M;(\$#,0,,\ \M);\$#,0,,\ \M
+		lineageTag: 41688002-dc55-5bf5-b0cb-894d3686edea
+
+	/// «Detalle mora aporte» para la cooperativa elegida en Por entidad.
+	measure 'Detalle mora aporte entidad' = CALCULATE([Detalle mora aporte], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 2768ccfe-114b-5a1d-ad69-42dab548cad8
+
+	/// «Detalle riesgo saldo» para la cooperativa elegida en Por entidad.
+	measure 'Detalle riesgo saldo entidad' = CALCULATE([Detalle riesgo saldo], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: \$#,0,,\ \M;(\$#,0,,\ \M);\$#,0,,\ \M
+		lineageTag: 9b9520e8-9b07-507d-8e3d-cc678e9e0632
+
+	/// «Detalle riesgo aporte» para la cooperativa elegida en Por entidad.
+	measure 'Detalle riesgo aporte entidad' = CALCULATE([Detalle riesgo aporte], TREATAS(VALUES(dm_EntidadSeleccionada[CODIGO ENTIDAD]), tb_Balance[CODIGO ENTIDAD]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 023cc90c-55f1-597f-bee2-c832f57a60f1
+
 	partition Medidas = m
 		mode: import
 		source =
